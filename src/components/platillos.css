@@ -1,0 +1,82 @@
+.platillos{
+  padding: 64px 16px;
+}
+
+.platillos .container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.platillos__container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.platillos__wrapper{
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/* Estilos estándar (Firefox y otros) */
+.platillos__wrapper {
+  user-select: none;
+  scrollbar-width: thin; /* 'auto', 'thin', 'none' */
+  scrollbar-color: #888 transparent; /* color del pulgar y color de la pista */
+}
+
+
+.platillos__types{
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.platillos__type{
+  padding: 8px 16px;
+  background-color: var(--white-transparent);
+  border-radius: 8px;
+  transition: background-color .2s, color .2s;
+  text-wrap: nowrap;
+}
+
+.platillos__type:has(input:checked){
+  background-color: var(--white);
+  color: var(--bg);
+}
+
+.platillos__type input{
+  display: none;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card img{
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card__textbox{
+  display: flex;
+  flex-direction: column;
+  gap: -5px;
+}
+
+.platillos h4{
+  font-weight: 600;
+  font-size: 1rem;
+  filter: opacity(.6);
+}

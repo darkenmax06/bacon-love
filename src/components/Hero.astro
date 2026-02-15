@@ -1,0 +1,25 @@
+---
+import './hero.css'
+const {subtitle,title1,title2,text1,text2,name, button} = Astro.props
+---
+
+
+<main class="hero" id="hero" >
+  <div class="container">
+    <div class="hero__textbox">
+      <div class="hero__titles">
+        <h2 class="hero__subtitle">{subtitle}</h2>
+        <h1 class="hero__title">
+          {title1}
+          <strong>{title2}</strong>
+        </h1>
+      </div>
+      <p>{text1} <span>{name}</span> {text2}</p>
+      <a class="hero__btn" role="button"  href="#platillos"> {button} </a>
+    </div>
+
+     <picture class="hero__imgbox">
+      <img src="/burguer.png" alt="imagen de hamburguesa sabrosa">
+    </picture>
+  </div>
+</main>

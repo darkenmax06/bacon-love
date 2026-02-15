@@ -1,0 +1,56 @@
+---
+import "./layout.css"
+import Menu from "./Menu.astro"
+import Footer from "./Footer.astro"
+
+// Definimos las propiedades que recibe el Layout
+const { 
+  title = "Bacon Love - Amor al bacon", 
+  home, about, testimonials, menu, languajes, rights, address,
+  description = "Somos un restaurante emergente que fusiona la alta cocina con platos cotidianos. Descubre una experiencia gastronómica artesanal única.",
+  lang = "es" // Recibimos el idioma por prop o lo detectamos
+} = Astro.props
+
+// Generamos la URL canonical dinámica
+const baseUrl = "https://baconlove.es"
+const canonicalURL = new URL(Astro.url.pathname, baseUrl );
+
+const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/a.png" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} >
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index,follow" >
+
+    <link rel="alternate" hreflang="es" href={`${baseUrl}/es${path}`} />
+    <link rel="alternate" hreflang="en" href={`${baseUrl}/en${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`${baseUrl}/es${path}`} />
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content="https://baconlove.es/og.png"> 
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content={canonicalURL}>
+    <meta property="twitter:title" content={title}>
+    <meta property="twitter:description" content={description}>
+    <meta property="twitter:image" content="https://baconlove.es/og.png">
+
+  </head>
+  <body>
+    <Menu languajes={languajes} home={home} about={about} testimonials={testimonials} menu={menu} />
+    <main>
+      <slot/>
+    </main>
+    <Footer rights={rights} address={address} />
+  </body>
+</html>

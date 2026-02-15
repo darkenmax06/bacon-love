@@ -1,0 +1,27 @@
+---
+import "./about.css"
+const {subtitle,title,text1,text2,text3,text4} = Astro.props
+---
+
+<section class="about" id="about" >
+  <div class="container">
+    <picture class="about__imgbox">
+      <img src="/tacos.avif" alt="imagen de hamburguesa sabrosa">
+    </picture>
+
+    <div class="about__textbox">
+        <div class="about__titles">
+          <h3 class="about__subtitle"> {subtitle} </h3>
+          <h1 class="about__title"> {title} </h1>
+        </div>
+        <p>
+          {text1} <br><br>
+          {text2} <br><br>
+          {text3} <br><br>
+          {text4} 
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>

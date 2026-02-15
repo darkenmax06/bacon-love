@@ -1,0 +1,22 @@
+---
+import Menu from "../Menu.astro"
+import Footer from "../Footer.astro"
+const {title } = Astro.props
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+	</head>
+	<body>
+    <Menu/>
+    <div class="container">
+      <slot/>
+    </div>
+		<Footer/>
+	</body>
+</html>

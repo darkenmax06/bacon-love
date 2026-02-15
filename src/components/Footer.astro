@@ -1,0 +1,62 @@
+---
+import "./footer.css"
+const size = 25
+
+const {rights,address} = Astro.props
+---
+
+<footer class="footer">
+  <div class="container">
+    <small>{rights}</small>
+    <a target="_blank" href="https://maps.app.goo.gl/62kHoXTb3MuFTTqN8"> {address} </a>
+    <ul class="footer__media">
+      <li> 
+        <a target="_blank" rel="noreferrer" href="https://www.facebook.com/profile.php?id=61584836737450">
+          <svg  width={size} height={size}>
+            <use xlink:href="/sprite.svg#facebook-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+
+      <li> 
+        <a target="_blank" rel="noreferrer" href="https://www.instagram.com/baconlove.es/">
+          <svg  width={size} height={size}>
+            <use xlink:href="/sprite.svg#instagram-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+
+      <li> 
+        <a target="_blank" rel="noreferrer" href="https://x.com/EsBaconLove">
+          <svg  width={size} height={size}>
+            <use xlink:href="/sprite.svg#x-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+
+      <li> 
+        <a target="_blank" rel="noreferrer" href="https://www.tiktok.com/@es.baconlove">
+          <svg  width={size} height={size}>
+            <use xlink:href="/sprite.svg#tiktok-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+
+      <li> 
+        <a target="_blank" rel="noreferrer" href="#">
+          <svg  width={size} height={size}>
+            <use xlink:href="/sprite.svg#whatsapp-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+
+      <li> 
+        <a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/UCYy9GuEjuek-51CRmxHPNiw">
+          <svg  width={size} height={size} >
+            <use xlink:href="/sprite.svg#youtube-icon"></use>
+          </svg> 
+        </a> 
+      </li>
+    </ul>
+  </div>
+</footer>

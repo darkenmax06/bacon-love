@@ -1,0 +1,43 @@
+---
+import "./testimonials.css"
+const {testimonials} = Astro.props
+---
+
+
+<section class="testimonials" id="testimonials" >
+  <div class="container">
+    <h2 class="testimonials__title"> Testimonios </h2>
+    <div class="testimonials__container">
+      {
+        testimonials.map(res => {
+          return (
+            <article class="testimonial" >
+              <div class="testimonial__info" >
+                <img src={res.avatar} />
+                <h4 class="testimonial__name">
+                  {res.name}
+                </h4>
+              </div>
+
+              <div class="testimonial__stars">
+                {
+                  new Array(5).fill("a").map((r,i) => {
+                    return (
+                      <svg class={i < res.starts ? "star active": "star"}  >
+                        <use xlink:href="/sprite.svg#star-icon"></use>
+                      </svg> 
+                    )
+                  })
+                }
+              </div>
+
+              <p>
+                {res.comment}
+              </p>
+            </article>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

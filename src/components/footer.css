@@ -1,0 +1,38 @@
+.footer{
+  width: 100%;
+  padding:16px;
+  margin-top: 64px;
+}
+
+.footer .container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer__media{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  color: var(--white);
+  transition: scale .3s;
+}
+
+.footer__media li{
+  transition: transform .3s;
+}
+
+.footer__media li:hover{
+  transform: scale(1.2) rotate(30deg);
+}
+
+
+@media (width <= 850px) {
+  .footer .container{
+    flex-direction: column;
+    align-items: center;
+  }
+}

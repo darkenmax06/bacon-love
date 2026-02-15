@@ -1,0 +1,95 @@
+---
+import "./menu.css"
+
+const defaultLang = Astro.params.lang
+const base = `/${defaultLang}`
+
+const {home,about,testimonials,menu,languajes} = Astro.props
+
+---
+
+<header class="menu">
+  <div class="container">
+    <a href="/" class="menu__logo">
+      <img src="/logo.png" alt="">
+    </a>
+
+    <div class="menu__right">
+      <nav>
+        <ul class="menu__list" >
+          <li><a href={`${base}/#hero`}> {home} </a></li>
+          <li><a href={`${base}/#about`}> {about} </a></li>
+          <li><a href={`${base}/#platillos`}> {menu} </a></li>
+          <li><a href={`${base}/#testimonials`}> {testimonials} </a></li>
+        </ul>
+      </nav>
+
+      <div class="menu__actions">
+        <div class="menu__languajes">
+          <span class="menu__languaje">{defaultLang}</span>
+          <ul>
+            {languajes.map(res => <li data-lang={res} class="languajes__selectors" >{res}</li>)}
+          </ul>
+        </div>
+
+        <button class="menu__btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const $menuLanguaje = document.querySelector(".menu__languajes")
+  const $menuBtn = document.querySelector(".menu__btn")
+  const $menuList = document.querySelector(".menu__list")
+  const $menuListItems = document.querySelectorAll(".menu__list li")
+  const $toggleLanguajes = $menuLanguaje?.lastElementChild
+  const $showLanguaje = $menuLanguaje?.firstElementChild
+
+  // GESTION DEL MENU RESPONSIVE
+  const toggleMenu = () => {
+    $menuList?.classList.toggle("active")
+    $menuBtn?.classList.toggle("active")
+  }
+
+  $menuBtn?.addEventListener("click", toggleMenu)
+
+  $menuListItems.forEach($element => {
+    $element.addEventListener("click", toggleMenu)
+  })
+
+  // GESTION DE LOS IDIOMAS 
+
+  const toggleLanguajes = () =>  $toggleLanguajes?.classList.toggle("active")
+  $showLanguaje?.addEventListener("click", toggleLanguajes)
+
+
+</script>
+
+<script>
+  const $lis = document.querySelectorAll(".languajes__selectors")
+
+  $lis.forEach($li => {
+    $li.addEventListener("click", () => {
+        const selectedLang = $li.getAttribute("data-lang"); // "en" o "es"
+        const currentPath = window.location.pathname;
+
+        // 1. Cambiamos el prefijo del idioma: /es/contacto -> /en/contacto
+        let newPath = currentPath.replace(/^\/(es|en)(\/|$)/, `/${selectedLang}/`);
+
+        // 2. Cambiamos el sufijo del slug: /en/contacto-es -> /en/contacto-en
+        // Esta regex busca "-es" o "-en" justo antes del final de la cadena
+        newPath = newPath.replace(/(-(es|en)\/$)|(-(es|en)$)/, `-${selectedLang}`);
+
+        // Limpieza: Eliminar barras duplicadas al final si las hubiera
+        newPath = newPath.replace(/\/$/, "");
+
+        // Redirección
+        window.location.pathname = newPath;
+      });
+  })
+</script>

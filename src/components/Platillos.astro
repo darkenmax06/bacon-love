@@ -1,0 +1,106 @@
+---
+import "./platillos.css"
+import { getCollection } from "astro:content"
+const platos = await getCollection("platos")
+
+
+const {lang} = Astro.params 
+const {title} = Astro.props
+const parsedPlatos = platos.filter(res => res.slug.endsWith(lang))
+const platosCategories = Object.groupBy(parsedPlatos, res => res.data.type)
+const categoriesNames =  Object.keys(platosCategories)
+
+const currentType = platosCategories[categoriesNames[0]]
+
+
+---
+
+<section class="platillos" id="platillos" >
+  <div class="container">
+    <h2 class="platillos__title" >{title}</h2>
+    {console.log("a")}
+    <div class="platillos__wrapper">
+      <form class="platillos__types">
+        {categoriesNames.map((res,i) => (
+            <label class="platillos__type" >
+              <input type="radio" value={res} name="type">
+              {res}
+            </label>))}
+      </form>
+    </div>
+    <div class="platillos__container">
+      {currentType.map(plato => (
+        <a class="card" href={`/${lang}/plato/${plato.slug}`} >
+          <img  loading="lazy" src={`/content/${plato.data.img}`} alt={plato.data.title}>
+          <div class="card__textbox">
+            <h4>EUR {plato.data.price}</h4>
+            <h3>{plato.data.title}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ platosCategories,lang }} is:inline>
+  const $form = document.querySelector(".platillos form")
+  const $inputs = document.querySelectorAll(".platillos__type input")  
+  const $platillosContainer = document.querySelector(".platillos__container")
+
+  $inputs[0].setAttribute("checked",true)
+
+  const renderElements = (target) => {
+    const {value} = target
+      const platos = platosCategories[value]
+      $platillosContainer.innerHTML = ""
+
+      const fragment = document.createDocumentFragment()
+
+      platos.forEach(res => {
+        const a = document.createElement("a")
+        a.classList.add("card")
+        a.setAttribute("href",`/${lang}/plato/${res.slug}`)
+
+        const img = document.createElement("img")
+        img.setAttribute("src", `/content/${res.data.img}`)
+        img.setAttribute("alt",res.data.title)
+
+        const textContainer = document.createElement("div")
+        textContainer.classList.add("card__textbox")
+
+
+        const h4 = document.createElement("h4")
+        h4.textContent = `EUR ${res.data.price} €`
+
+        const h3 = document.createElement("h3")
+        h3.textContent = res.data.title
+
+        a.appendChild(img)
+        textContainer.appendChild(h4)
+        textContainer.appendChild(h3)
+        a.appendChild(textContainer)
+
+        fragment.appendChild(a)
+        $inputs.forEach(res => res.removeAttribute("checked"))
+        target.setAttribute('checked',true)
+      })
+
+      $platillosContainer.appendChild(fragment)
+
+    }
+
+    setTimeout(()=> {
+      $inputs.forEach(res => {
+        console.log(res.checked)
+          if (res.checked) {
+             renderElements(res)
+          }
+        })
+    },200)
+
+
+
+  $inputs.forEach($input => {
+    $input.addEventListener("change", e=>  renderElements(e.target))
+  })
+</script>
