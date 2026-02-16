@@ -4,7 +4,7 @@ import "./menu.css"
 const defaultLang = Astro.params.lang
 const base = `/${defaultLang}`
 
-const {home,about,testimonials,menu,languajes} = Astro.props
+const {home,about,testimonials,menu,appointments,languajes} = Astro.props
 
 ---
 
@@ -21,6 +21,7 @@ const {home,about,testimonials,menu,languajes} = Astro.props
           <li><a href={`${base}/#about`}> {about} </a></li>
           <li><a href={`${base}/#platillos`}> {menu} </a></li>
           <li><a href={`${base}/#testimonials`}> {testimonials} </a></li>
+          <li><a href={`${base}${defaultLang === 'es' ? '/citas' : '/appointments'}`}> {appointments} </a></li>
         </ul>
       </nav>
 

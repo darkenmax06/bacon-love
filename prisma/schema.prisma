@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo de usuario administrador
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Modelo de citas/reservas
+model Appointment {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String   // Número de teléfono para WhatsApp
+  date        DateTime
+  time        String
+  guests      Int      // Número de personas/sillas
+  status      String   @default("pending") // pending, confirmed, cancelled
+  notes       String?  // Notas adicionales opcionales
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+  @@index([status])
+}
+
+// Modelo de configuración del sistema
+model Settings {
+  id                    String   @id @default("default")
+  maxSeatsTotal         Int      @default(50)  // Capacidad máxima total de sillas
+  maxSeatsPerReservation Int     @default(10)  // Máximo de sillas por reserva
+  openDays              String   // JSON string con días disponibles (ej: ["1","2","3","4","5"])
+  openTimes             String   // JSON string con horarios (ej: ["12:00","13:00","14:00"])
+  reservationDuration   Int      @default(120) // Duración en minutos
+  advanceBookingDays    Int      @default(30)  // Días de anticipación permitidos
+  updatedAt             DateTime @updatedAt
+}

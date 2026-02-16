@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'server', // Para soportar API endpoints y SSR
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
