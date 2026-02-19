@@ -1,62 +1,50 @@
 ---
 export const prerender = false;
 
-import Layout from '../../components/Layout.astro';
-import es from '../../translations/es.js';
-
-const languajes = ["es", "en"];
+import AdminLayout from '../../components/admin/AdminLayout.astro';
 ---
 
-<Layout
-  title="Admin Login - Bacon Love"
-  description="Acceso administrativo"
-  lang="es"
-  {...es.menu}
-  {...es.footer}
-  languajes={languajes}
->
-  <main class="login-page">
-    <div class="login-container">
-      <div class="login-card">
-        <div class="login-header">
-          <img src="/logo.png" alt="Bacon Love Logo" class="login-logo" />
-          <h1>Panel Administrativo</h1>
-          <p>Iniciar sesión</p>
+<AdminLayout title="Acceso Admin - Bacon Love" variant="login">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="/logo.png" alt="Bacon Love Logo" class="login-logo" />
+        <h1>Panel Administrativo</h1>
+        <p>Iniciar sesion</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email">Correo electronico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="admin@baconlove.com"
+          />
         </div>
 
-        <form id="loginForm" class="login-form">
-          <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="admin@baconlove.com"
-            />
-          </div>
+        <div class="form-group">
+          <label for="password">Contrasena</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="••••••••"
+          />
+        </div>
 
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              placeholder="••••••••"
-            />
-          </div>
+        <div id="loginMessage" class="login-message"></div>
 
-          <div id="loginMessage" class="login-message"></div>
-
-          <button type="submit" class="login-btn">
-            Iniciar sesión
-          </button>
-        </form>
-      </div>
+        <button type="submit" class="login-btn">
+          Iniciar sesion
+        </button>
+      </form>
     </div>
-  </main>
-</Layout>
+  </div>
+</AdminLayout>
 
 <script>
 const form = document.getElementById('loginForm') as HTMLFormElement;
@@ -68,7 +56,7 @@ form.addEventListener('submit', async (e) => {
   const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
   const originalText = submitBtn.textContent;
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Iniciando sesión...';
+  submitBtn.textContent = 'Iniciando sesion...';
 
   const formData = new FormData(form);
   const data = {
@@ -79,27 +67,23 @@ form.addEventListener('submit', async (e) => {
   try {
     const response = await fetch('/api/auth/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
     const result = await response.json();
 
     if (response.ok) {
-      showMessage('Inicio de sesión exitoso. Redirigiendo...', 'success');
-
-      // Redirigir al dashboard después de 1 segundo
+      showMessage('Inicio de sesion exitoso. Redirigiendo...', 'success');
       setTimeout(() => {
         window.location.href = '/admin/dashboard';
       }, 1000);
     } else {
-      showMessage(result.error || 'Credenciales inválidas', 'error');
+      showMessage(result.error || 'Credenciales invalidas', 'error');
     }
   } catch (error) {
     console.error('Error:', error);
-    showMessage('Error al iniciar sesión. Intenta nuevamente', 'error');
+    showMessage('Error al iniciar sesion. Intenta nuevamente', 'error');
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = originalText;
@@ -114,24 +98,15 @@ function showMessage(message: string, type: 'success' | 'error') {
 </script>
 
 <style>
-.login-page {
-  width: 100%;
-  min-height: calc(100dvh - 60px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 64px 16px;
-}
-
 .login-container {
   width: 100%;
-  max-width: 450px;
+  max-width: 420px;
 }
 
 .login-card {
   background-color: var(--white-transparent);
   backdrop-filter: blur(10px);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 48px;
   border: 1px solid rgba(243, 238, 238, 0.1);
 }
@@ -142,23 +117,25 @@ function showMessage(message: string, type: 'success' | 'error') {
 }
 
 .login-logo {
-  width: 120px;
+  width: 100px;
   height: auto;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  filter: invert(1);
 }
 
 .login-header h1 {
   font-family: "stella";
-  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  font-size: clamp(1.6rem, 5vw, 2rem);
   color: var(--white);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .login-header p {
   color: var(--white);
-  opacity: 0.6;
+  opacity: 0.5;
   font-family: "jost";
-  font-size: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
 .login-form {
@@ -177,7 +154,7 @@ function showMessage(message: string, type: 'success' | 'error') {
   font-family: "jost";
   font-weight: 600;
   color: var(--white);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .form-group input {
@@ -208,7 +185,7 @@ function showMessage(message: string, type: 'success' | 'error') {
   text-align: center;
   font-family: "jost";
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .login-message.success {
@@ -224,17 +201,17 @@ function showMessage(message: string, type: 'success' | 'error') {
 }
 
 .login-btn {
-  padding: 16px 32px;
+  padding: 15px 32px;
   background-color: var(--white);
   color: var(--black);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   font-family: "jost";
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s, opacity 0.3s;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .login-btn:hover:not(:disabled) {
@@ -247,17 +224,9 @@ function showMessage(message: string, type: 'success' | 'error') {
   cursor: not-allowed;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
   .login-card {
     padding: 32px 24px;
-  }
-
-  .login-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .login-page {
-    padding: 32px 16px;
   }
 }
 </style>

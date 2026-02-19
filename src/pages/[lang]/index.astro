@@ -4,6 +4,7 @@ import Hero from "../../components/Hero.astro"
 import Layout from "../../components/Layout.astro"
 import Testimonials from "../../components/Testimonials.astro"
 import Platillos from "../../components/Platillos.astro"
+import Orders from "../../components/Orders.astro"
 
 
 import es from "../../translations/es"
@@ -27,5 +28,6 @@ const languajes = Object.keys(translations)
   <Hero {...content.hero} />
   <About {...content.about} />
   <Platillos {...content.platillos}  />
+  <Orders {...content.orders} />
   <Testimonials testimonials={content.testimonials} />
 </Layout>

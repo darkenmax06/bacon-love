@@ -22,6 +22,7 @@ export const GET: APIRoute = async () => {
           ...settings,
           openDays: JSON.parse(settings.openDays),
           openTimes: JSON.parse(settings.openTimes),
+          daySchedules: settings.daySchedules ? JSON.parse(settings.daySchedules) : null,
         },
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
@@ -53,8 +54,10 @@ export const PUT: APIRoute = async ({ request, cookies }) => {
       maxSeatsPerReservation,
       openDays,
       openTimes,
+      daySchedules,
       reservationDuration,
       advanceBookingDays,
+      adminEmail,
     } = body;
 
     // Validación
@@ -75,10 +78,12 @@ export const PUT: APIRoute = async ({ request, cookies }) => {
           maxSeatsPerReservation !== undefined ? maxSeatsPerReservation : undefined,
         openDays: openDays ? JSON.stringify(openDays) : undefined,
         openTimes: openTimes ? JSON.stringify(openTimes) : undefined,
+        daySchedules: daySchedules ? JSON.stringify(daySchedules) : undefined,
         reservationDuration:
           reservationDuration !== undefined ? reservationDuration : undefined,
         advanceBookingDays:
           advanceBookingDays !== undefined ? advanceBookingDays : undefined,
+        adminEmail: adminEmail !== undefined ? adminEmail : undefined,
       },
       create: {
         id: 'default',
@@ -86,8 +91,10 @@ export const PUT: APIRoute = async ({ request, cookies }) => {
         maxSeatsPerReservation: maxSeatsPerReservation || 10,
         openDays: JSON.stringify(openDays || ['1', '2', '3', '4', '5', '6', '0']),
         openTimes: JSON.stringify(openTimes || ['12:00', '13:00', '14:00', '20:00', '21:00', '22:00']),
+        daySchedules: daySchedules ? JSON.stringify(daySchedules) : null,
         reservationDuration: reservationDuration || 120,
         advanceBookingDays: advanceBookingDays || 30,
+        adminEmail: adminEmail || "",
       },
     });
 
@@ -97,6 +104,7 @@ export const PUT: APIRoute = async ({ request, cookies }) => {
           ...settings,
           openDays: JSON.parse(settings.openDays),
           openTimes: JSON.parse(settings.openTimes),
+          daySchedules: settings.daySchedules ? JSON.parse(settings.daySchedules) : null,
         },
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }

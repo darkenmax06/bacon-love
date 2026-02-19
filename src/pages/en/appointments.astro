@@ -2,6 +2,7 @@
 export const prerender = false; // This page needs SSR for API calls
 
 import Layout from '../../components/Layout.astro';
+import DatePicker from '../../components/DatePicker.astro';
 import en from '../../translations/en.js';
 import es from '../../translations/es.js';
 
@@ -60,12 +61,12 @@ const languajes = ["es", "en"];
 
             <div class="form-group">
               <label for="date">{content.form.date} *</label>
-              <input
-                type="date"
+              <DatePicker
                 id="date"
                 name="date"
-                required
-                min={new Date().toISOString().split('T')[0]}
+                required={true}
+                lang="en"
+                placeholder="Select date"
               />
             </div>
 
@@ -135,8 +136,9 @@ async function loadSettings() {
 }
 
 // Load available times when date changes
-dateInput.addEventListener('change', async () => {
-  const selectedDate = dateInput.value;
+document.addEventListener('date-selected', async (e: Event) => {
+  const customEvent = e as CustomEvent;
+  const selectedDate = customEvent.detail.date;
 
   if (!selectedDate) return;
 
@@ -200,6 +202,15 @@ form.addEventListener('submit', async (e) => {
       showMessage('Reservation confirmed! We will contact you soon via WhatsApp', 'success');
       form.reset();
       timeSelect.innerHTML = '<option value="">Select time</option>';
+
+      // Reset DatePicker visual
+      const datepickerWrapper = dateInput.closest('.datepicker-wrapper');
+      if (datepickerWrapper) {
+        const selectedDateSpan = datepickerWrapper.querySelector('.selected-date');
+        if (selectedDateSpan) {
+          selectedDateSpan.textContent = 'Select date';
+        }
+      }
     } else {
       showMessage(result.error || 'Error processing reservation', 'error');
     }

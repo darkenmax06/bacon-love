@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // Modelo de usuario administrador
@@ -43,9 +44,21 @@ model Settings {
   id                    String   @id @default("default")
   maxSeatsTotal         Int      @default(50)  // Capacidad máxima total de sillas
   maxSeatsPerReservation Int     @default(10)  // Máximo de sillas por reserva
-  openDays              String   // JSON string con días disponibles (ej: ["1","2","3","4","5"])
-  openTimes             String   // JSON string con horarios (ej: ["12:00","13:00","14:00"])
+  openDays              String   // JSON string con días disponibles (ej: ["1","2","3","4","5"]) - LEGACY
+  openTimes             String   // JSON string con horarios (ej: ["12:00","13:00","14:00"]) - LEGACY
+  daySchedules          String?  // NEW: JSON string with per-day schedules {"0": {"enabled": true, "times": [...]}, ...}
   reservationDuration   Int      @default(120) // Duración en minutos
   advanceBookingDays    Int      @default(30)  // Días de anticipación permitidos
+  adminEmail            String   @default("") // Email del administrador para notificaciones
   updatedAt             DateTime @updatedAt
+}
+
+// Modelo de fechas cerradas (feriados, eventos especiales)
+model ClosedDate {
+  id          String   @id @default(cuid())
+  date        DateTime // Fecha cerrada (UTC midnight)
+  reason      String   // Razón del cierre (ej: "Feriado Nacional", "Evento Privado")
+  createdAt   DateTime @default(now())
+
+  @@index([date])
 }

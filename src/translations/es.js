@@ -6,6 +6,7 @@ export default {
     menu: "Carta",
     testimonials: "Testimonios",
     appointments: "Reservas",
+    orderLink: "Pedir",
   },
   hero: {
     title1: `Bacon Love`,
@@ -56,7 +57,7 @@ export default {
   ],
   appointments: {
     title: "Reserva tu mesa",
-    subtitle: "Haz tu reserva fácilmente",
+    subtitle: "Haz tu reserva facilmente",
     description: "Completa el formulario para reservar tu mesa en Bacon Love",
     form: {
       name: "Nombre completo",
@@ -79,6 +80,14 @@ export default {
       selectTime: "Por favor selecciona un horario",
       serverError: "Error al procesar la reserva. Intenta nuevamente",
     },
+  },
+  orders: {
+    label: 'Pedidos Online',
+    title: 'Pide donde quieras',
+    subtitle: 'Tu comida favorita, en tu mesa o en tu puerta',
+    description: 'Haz tu pedido usando nuestra app de delivery. Rapido, sencillo y siempre con la misma calidad artesanal que nos distingue.',
+    button: 'Hacer pedido',
+    menuLabel: 'Pedir',
   },
   footer: {
     rights: "Bacon love | Todos los derechos reservados",

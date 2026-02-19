@@ -1,0 +1,924 @@
+---
+---
+
+<form id="settingsForm" class="settings-form">
+  <h2>Configuracion del Sistema</h2>
+
+  <div class="form-group">
+    <label for="maxSeatsTotal">Capacidad Total (sillas)</label>
+    <input type="number" id="maxSeatsTotal" name="maxSeatsTotal" required min="1">
+  </div>
+
+  <div class="form-group">
+    <label for="maxSeatsPerReservation">Máximo por Reserva</label>
+    <input type="number" id="maxSeatsPerReservation" name="maxSeatsPerReservation" required min="1">
+  </div>
+
+  <div class="form-group">
+    <label for="reservationDuration">Duración Reserva (minutos)</label>
+    <input type="number" id="reservationDuration" name="reservationDuration" required min="30">
+  </div>
+
+  <div class="form-group">
+    <label for="advanceBookingDays">Días de Anticipación</label>
+    <input type="number" id="advanceBookingDays" name="advanceBookingDays" required min="1">
+  </div>
+
+  <div class="form-group full-width">
+    <label>Horarios por Día de la Semana</label>
+    <div class="day-schedules-container" id="daySchedulesContainer">
+      <!-- Day schedules will be dynamically generated here -->
+    </div>
+  </div>
+
+  <div class="form-group full-width closed-dates-section">
+    <label>Fechas Cerradas (Feriados/Eventos)</label>
+    <div class="closed-dates-form">
+      <div class="add-closed-date">
+        <input type="date" id="closedDateInput" class="filter-input" placeholder="Seleccionar fecha">
+        <input type="text" id="closedReasonInput" class="filter-input" placeholder="Razón (ej: Feriado Nacional)" maxlength="100">
+        <button type="button" id="addClosedDateBtn" class="add-btn">+ Agregar</button>
+      </div>
+    </div>
+    <div id="closedDatesList" class="closed-dates-list">
+      <div class="loading">Cargando fechas cerradas...</div>
+    </div>
+  </div>
+
+  <button type="submit" class="save-btn save-btn-full">Guardar Configuración</button>
+</form>
+
+<script>
+// Day names in Spanish
+const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+
+// Generate time slots helper
+function generateTimeSlots(startTime: string, endTime: string, intervalMinutes: number): string[] {
+  const slots: string[] = [];
+  const [startH, startM] = startTime.split(':').map(Number);
+  const [endH, endM] = endTime.split(':').map(Number);
+
+  let current = startH * 60 + startM;
+  const end = endH * 60 + endM;
+
+  if (current >= end) {
+    alert('La hora de inicio debe ser anterior a la hora de fin');
+    return [];
+  }
+
+  while (current <= end) {
+    const hours = Math.floor(current / 60);
+    const minutes = current % 60;
+    slots.push(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`);
+    current += intervalMinutes;
+  }
+
+  return slots;
+}
+
+// Render day schedules
+function renderDaySchedules(settings: any) {
+  const container = document.getElementById('daySchedulesContainer');
+  if (!container) return;
+
+  let daySchedules: any = {};
+
+  if (settings.daySchedules) {
+    daySchedules = settings.daySchedules;
+  } else {
+    for (let day = 0; day <= 6; day++) {
+      const dayStr = day.toString();
+      daySchedules[dayStr] = {
+        enabled: settings.openDays.includes(dayStr),
+        times: settings.openDays.includes(dayStr) ? settings.openTimes : []
+      };
+    }
+  }
+
+  container.innerHTML = '';
+
+  for (let day = 0; day <= 6; day++) {
+    const dayStr = day.toString();
+    const schedule = daySchedules[dayStr] || { enabled: false, times: [] };
+
+    const dayPanel = document.createElement('div');
+    dayPanel.className = 'day-schedule-panel';
+    dayPanel.dataset.day = dayStr;
+
+    const header = document.createElement('div');
+    header.className = 'day-schedule-header';
+    header.innerHTML = `
+      <button type="button" class="day-toggle-btn" data-day="${dayStr}">
+        <span class="day-name">${dayNames[day]}</span>
+        <span class="toggle-icon">▼</span>
+      </button>
+      <label class="day-enabled-toggle">
+        <input type="checkbox" class="day-enabled-checkbox" data-day="${dayStr}" ${schedule.enabled ? 'checked' : ''}>
+        <span class="toggle-track"></span>
+        <span class="toggle-label">Activo</span>
+      </label>
+    `;
+
+    const body = document.createElement('div');
+    body.className = 'day-schedule-body' + (schedule.enabled ? ' expanded' : '');
+    body.innerHTML = `
+      <div class="time-generator">
+        <h4>Generador de Horarios:</h4>
+        <div class="generator-row">
+          <div class="generator-field">
+            <label>De:</label>
+            <input type="time" class="time-input start-time" data-day="${dayStr}" value="12:00">
+          </div>
+          <div class="generator-field">
+            <label>A:</label>
+            <input type="time" class="time-input end-time" data-day="${dayStr}" value="22:00">
+          </div>
+          <div class="generator-field">
+            <label>Intervalo:</label>
+            <select class="interval-select" data-day="${dayStr}">
+              <option value="30">30 min</option>
+              <option value="60">1 hora</option>
+              <option value="90">1.5 horas</option>
+              <option value="120">2 horas</option>
+            </select>
+          </div>
+          <button type="button" class="generate-btn" data-day="${dayStr}">Generar</button>
+        </div>
+      </div>
+      <div class="time-editor">
+        <label>Horarios (uno por línea):</label>
+        <textarea class="day-times-textarea" data-day="${dayStr}" rows="6" placeholder="12:00&#10;13:00&#10;14:00">${schedule.times.join('\n')}</textarea>
+      </div>
+    `;
+
+    dayPanel.appendChild(header);
+    dayPanel.appendChild(body);
+    container.appendChild(dayPanel);
+
+    const toggleBtn = header.querySelector('.day-toggle-btn');
+    toggleBtn?.addEventListener('click', () => toggleDayPanel(dayStr));
+
+    const enabledCheckbox = header.querySelector('.day-enabled-checkbox') as HTMLInputElement;
+    enabledCheckbox?.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (target.checked) {
+        body.classList.add('expanded');
+      } else {
+        body.classList.remove('expanded');
+      }
+    });
+
+    const generateBtn = body.querySelector('.generate-btn');
+    generateBtn?.addEventListener('click', () => generateTimesForDay(dayStr));
+  }
+}
+
+function toggleDayPanel(day: string) {
+  const panel = document.querySelector(`.day-schedule-panel[data-day="${day}"]`);
+  if (!panel) return;
+
+  const body = panel.querySelector('.day-schedule-body');
+  const icon = panel.querySelector('.toggle-icon');
+
+  body?.classList.toggle('expanded');
+  if (icon) {
+    icon.textContent = body?.classList.contains('expanded') ? '▲' : '▼';
+  }
+}
+
+function generateTimesForDay(day: string) {
+  const startInput = document.querySelector(`.start-time[data-day="${day}"]`) as HTMLInputElement;
+  const endInput = document.querySelector(`.end-time[data-day="${day}"]`) as HTMLInputElement;
+  const intervalSelect = document.querySelector(`.interval-select[data-day="${day}"]`) as HTMLSelectElement;
+  const textarea = document.querySelector(`.day-times-textarea[data-day="${day}"]`) as HTMLTextAreaElement;
+
+  if (!startInput || !endInput || !intervalSelect || !textarea) return;
+
+  const start = startInput.value;
+  const end = endInput.value;
+  const interval = parseInt(intervalSelect.value);
+
+  if (!start || !end) {
+    alert('Por favor ingresa horarios de inicio y fin');
+    return;
+  }
+
+  const slots = generateTimeSlots(start, end, interval);
+  if (slots.length > 0) {
+    textarea.value = slots.join('\n');
+  }
+}
+
+// Load settings
+async function loadSettings() {
+  try {
+    const response = await fetch('/api/settings');
+    const data = await response.json();
+    const settings = data.settings;
+
+    (document.getElementById('maxSeatsTotal') as HTMLInputElement).value = settings.maxSeatsTotal;
+    (document.getElementById('maxSeatsPerReservation') as HTMLInputElement).value = settings.maxSeatsPerReservation;
+    (document.getElementById('reservationDuration') as HTMLInputElement).value = settings.reservationDuration;
+    (document.getElementById('advanceBookingDays') as HTMLInputElement).value = settings.advanceBookingDays;
+
+    renderDaySchedules(settings);
+  } catch (error) {
+    console.error('Error loading settings:', error);
+  }
+}
+
+// Save settings
+document.getElementById('settingsForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const form = e.target as HTMLFormElement;
+  const formData = new FormData(form);
+
+  const daySchedules: any = {};
+  for (let day = 0; day <= 6; day++) {
+    const dayStr = day.toString();
+    const checkbox = document.querySelector(`.day-enabled-checkbox[data-day="${dayStr}"]`) as HTMLInputElement;
+    const textarea = document.querySelector(`.day-times-textarea[data-day="${dayStr}"]`) as HTMLTextAreaElement;
+
+    if (checkbox && textarea) {
+      const times = textarea.value
+        .split('\n')
+        .map(t => t.trim())
+        .filter(t => t && /^[0-2]?[0-9]:[0-5][0-9]$/.test(t));
+
+      daySchedules[dayStr] = {
+        enabled: checkbox.checked,
+        times: times
+      };
+    }
+  }
+
+  const data = {
+    maxSeatsTotal: parseInt(formData.get('maxSeatsTotal') as string),
+    maxSeatsPerReservation: parseInt(formData.get('maxSeatsPerReservation') as string),
+    reservationDuration: parseInt(formData.get('reservationDuration') as string),
+    advanceBookingDays: parseInt(formData.get('advanceBookingDays') as string),
+    daySchedules,
+  };
+
+  try {
+    const response = await fetch('/api/settings', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert('Configuración guardada exitosamente');
+      loadSettings();
+    } else {
+      alert('Error al guardar configuración');
+    }
+  } catch (error) {
+    console.error('Error saving settings:', error);
+    alert('Error al guardar configuración');
+  }
+});
+
+// Load closed dates
+async function loadClosedDates() {
+  try {
+    const response = await fetch('/api/closed-dates');
+    const data = await response.json();
+
+    const list = document.getElementById('closedDatesList');
+    if (!list) return;
+
+    if (data.closedDates.length === 0) {
+      list.innerHTML = '<div class="no-data">(No hay fechas cerradas)</div>';
+      return;
+    }
+
+    list.innerHTML = data.closedDates.map((cd: any) => `
+      <div class="closed-date-item">
+        <span class="closed-date-info">
+          <span class="date">${formatClosedDate(cd.date)}</span>
+          <span class="separator">-</span>
+          <span class="reason">${cd.reason}</span>
+        </span>
+        <button type="button" class="delete-btn small" data-id="${cd.id}">Eliminar</button>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const target = e.target as HTMLButtonElement;
+        const id = target.dataset.id;
+        if (id && confirm('¿Eliminar esta fecha cerrada?')) {
+          await deleteClosedDate(id);
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Error loading closed dates:', error);
+  }
+}
+
+function formatClosedDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  return `${day}/${month}/${year}`;
+}
+
+async function addClosedDate(date: string, reason: string) {
+  if (!date || !reason) {
+    alert('Por favor completa todos los campos');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/closed-dates', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ date, reason }),
+    });
+
+    if (response.ok) {
+      loadClosedDates();
+      (document.getElementById('closedDateInput') as HTMLInputElement).value = '';
+      (document.getElementById('closedReasonInput') as HTMLInputElement).value = '';
+    } else {
+      const error = await response.json();
+      alert(error.error || 'Error al agregar fecha cerrada');
+    }
+  } catch (error) {
+    console.error('Error adding closed date:', error);
+    alert('Error al agregar fecha cerrada');
+  }
+}
+
+async function deleteClosedDate(id: string) {
+  try {
+    const response = await fetch(`/api/closed-dates/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      loadClosedDates();
+    } else {
+      alert('Error al eliminar fecha cerrada');
+    }
+  } catch (error) {
+    console.error('Error deleting closed date:', error);
+    alert('Error al eliminar fecha cerrada');
+  }
+}
+
+document.getElementById('addClosedDateBtn')?.addEventListener('click', () => {
+  const dateInput = document.getElementById('closedDateInput') as HTMLInputElement;
+  const reasonInput = document.getElementById('closedReasonInput') as HTMLInputElement;
+
+  if (dateInput && reasonInput) {
+    addClosedDate(dateInput.value, reasonInput.value);
+  }
+});
+
+loadSettings();
+loadClosedDates();
+</script>
+
+<style is:global>
+.settings-form {
+  background-color: var(--white-transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(243, 238, 238, 0.1);
+  border-radius: 8px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.settings-form h2 {
+  font-family: "stella";
+  color: var(--white);
+  grid-column: 1 / -1;
+  margin-bottom: 4px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-family: "jost";
+  font-weight: 600;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 14px;
+  background-color: rgba(25, 24, 24, 0.6);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: "jost";
+  font-size: 1rem;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(243, 238, 238, 0.4);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--white);
+  background-color: rgba(25, 24, 24, 0.8);
+}
+
+.form-group select option {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.save-btn {
+  padding: 14px 32px;
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  font-family: "jost";
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  margin-top: 4px;
+}
+
+.save-btn.save-btn-full {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.save-btn:hover {
+  opacity: 0.9;
+}
+
+/* Day Schedules */
+.day-schedules-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .day-schedules-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .day-schedules-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.day-schedule-panel {
+  border: 1px solid rgba(243, 238, 238, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.day-schedule-panel:has(.day-enabled-checkbox:checked) {
+  border-color: rgba(243, 238, 238, 0.28);
+}
+
+.day-schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(25, 24, 24, 0.95) 0%, rgba(8, 8, 8, 0.98) 100%);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.day-schedule-header:hover {
+  background: linear-gradient(135deg, rgba(32, 31, 31, 0.95) 0%, rgba(12, 12, 12, 0.98) 100%);
+}
+
+.day-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: "jost";
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.day-name {
+  flex: 1;
+  letter-spacing: 0.2px;
+}
+
+.toggle-icon {
+  font-size: 0.7rem;
+  opacity: 0.4;
+  transition: transform 0.25s ease;
+  margin-right: 4px;
+}
+
+.day-schedule-panel:has(.day-schedule-body.expanded) .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Toggle Switch */
+.day-enabled-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.day-enabled-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.toggle-track {
+  width: 34px;
+  height: 18px;
+  background: rgba(243, 238, 238, 0.1);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 99px;
+  position: relative;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(243, 238, 238, 0.4);
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.day-enabled-toggle input:checked + .toggle-track {
+  background: rgba(243, 238, 238, 0.2);
+  border-color: rgba(243, 238, 238, 0.5);
+}
+
+.day-enabled-toggle input:checked + .toggle-track::after {
+  transform: translateX(16px);
+  background: var(--white);
+}
+
+.toggle-label {
+  font-family: "jost";
+  font-size: 0.8rem;
+  color: rgba(243, 238, 238, 0.6);
+  font-weight: 500;
+}
+
+.day-schedule-body {
+  display: none;
+  padding: 20px;
+  gap: 16px;
+  flex-direction: column;
+  background: rgba(10, 10, 10, 0.7);
+  border-top: 1px solid rgba(243, 238, 238, 0.08);
+}
+
+.day-schedule-body.expanded {
+  display: flex;
+}
+
+.time-generator {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(243, 238, 238, 0.08);
+}
+
+.time-generator h4 {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.45);
+  margin: 0 0 14px 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.generator-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.generator-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.generator-field label {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.45);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.time-input {
+  padding: 8px 12px;
+  background-color: rgba(9, 9, 11, 0.85);
+  border: 1px solid rgba(243, 238, 238, 0.15);
+  border-radius: 6px;
+  color: var(--white);
+  font-family: "jost";
+  font-size: 0.875rem;
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.time-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.35;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 2px;
+  transition: opacity 0.15s;
+}
+
+.time-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.7;
+  background: rgba(243, 238, 238, 0.1);
+}
+
+.time-input:focus {
+  outline: none;
+  border-color: rgba(243, 238, 238, 0.5);
+  box-shadow: 0 0 0 2px rgba(243, 238, 238, 0.12);
+}
+
+.interval-select {
+  padding: 8px 32px 8px 12px;
+  background-color: rgba(9, 9, 11, 0.85);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(243,238,238,0.45)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  border: 1px solid rgba(243, 238, 238, 0.15);
+  border-radius: 6px;
+  color: var(--white);
+  font-family: "jost";
+  font-size: 0.875rem;
+  width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.interval-select:focus {
+  outline: none;
+  border-color: rgba(243, 238, 238, 0.5);
+  box-shadow: 0 0 0 2px rgba(243, 238, 238, 0.12);
+}
+
+.interval-select option {
+  background-color: #09090b;
+  color: var(--white);
+}
+
+.generate-btn {
+  padding: 8px 16px;
+  background: rgba(243, 238, 238, 0.06);
+  border: 1px solid rgba(243, 238, 238, 0.18);
+  border-radius: 6px;
+  color: rgba(243, 238, 238, 0.8);
+  font-family: "jost";
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  align-self: flex-end;
+  letter-spacing: 0.3px;
+}
+
+.generate-btn:hover {
+  background: rgba(243, 238, 238, 0.12);
+  border-color: rgba(243, 238, 238, 0.35);
+  color: var(--white);
+}
+
+.time-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.time-editor label {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.45);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.day-times-textarea {
+  padding: 14px;
+  background-color: rgba(25, 24, 24, 0.6);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: "jost";
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 110px;
+  transition: border-color 0.3s, background-color 0.3s;
+  line-height: 1.7;
+}
+
+.day-times-textarea:focus {
+  outline: none;
+  border-color: var(--white);
+  background-color: rgba(25, 24, 24, 0.8);
+}
+
+.day-times-textarea::placeholder {
+  color: rgba(243, 238, 238, 0.4);
+}
+
+/* Closed Dates */
+.closed-dates-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 2px solid rgba(243, 238, 238, 0.1);
+}
+
+.closed-dates-form {
+  margin-top: 12px;
+}
+
+.add-closed-date {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.add-closed-date input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.add-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.3) 0%, rgba(46, 125, 50, 0.2) 100%);
+  color: #90ee90;
+  border: 1px solid rgba(46, 125, 50, 0.5);
+  border-radius: 8px;
+  font-family: "jost";
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.4) 0%, rgba(46, 125, 50, 0.3) 100%);
+  border-color: rgba(46, 125, 50, 0.7);
+  transform: translateY(-2px);
+}
+
+.closed-dates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(25, 24, 24, 0.3);
+  border: 1px solid rgba(243, 238, 238, 0.1);
+  border-radius: 8px;
+  min-height: 100px;
+}
+
+.closed-date-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(243, 238, 238, 0.15);
+  border-radius: 6px;
+  gap: 16px;
+}
+
+.closed-date-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.closed-date-info .date {
+  font-family: "jost";
+  font-weight: 700;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+.closed-date-info .separator {
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+
+.closed-date-info .reason {
+  font-family: "jost";
+  color: rgba(243, 238, 238, 0.8);
+  font-size: 0.875rem;
+}
+
+.delete-btn.small {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .settings-form {
+    padding: 24px 16px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .day-schedule-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .day-toggle-btn {
+    width: 100%;
+  }
+
+  .generator-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .generator-field {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-form {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

@@ -81,6 +81,14 @@ export default {
       serverError: "Error processing reservation. Please try again",
     },
   },
+  orders: {
+    label: 'Online Orders',
+    title: 'Order from anywhere',
+    subtitle: 'Your favorite food, at your table or at your door',
+    description: 'Place your order through our delivery app. Fast, simple, and always with the same artisanal quality that sets us apart.',
+    button: 'Place order',
+    menuLabel: 'Order',
+  },
   footer: {
     rights: "Bacon love©2025 | All rights reserved",
     address: "Calle de Sofia 177 las rosas Madrid",

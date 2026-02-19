@@ -1,0 +1,676 @@
+---
+// No props needed
+---
+
+<div class="help-tab">
+
+  <!-- Page Header -->
+  <div class="help-header">
+    <h1 class="help-title">Manual de Usuario</h1>
+    <p class="help-subtitle">Guía completa para gestionar el panel de administración de Bacon Love</p>
+  </div>
+
+  <!-- Quick nav -->
+  <nav class="help-nav">
+    <a href="#section-citas" class="help-nav__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Citas
+    </a>
+    <a href="#section-config" class="help-nav__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuración
+    </a>
+    <a href="#section-fechas" class="help-nav__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      Fechas Cerradas
+    </a>
+    <a href="#section-acceso" class="help-nav__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Acceso y seguridad
+    </a>
+  </nav>
+
+  <!-- ─── SECTION: CITAS ─────────────────────────────────────── -->
+  <section class="help-section" id="section-citas">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div>
+        <h2 class="section-title">Gestión de Citas</h2>
+        <p class="section-intro">Visualiza, filtra y gestiona todas las reservas del restaurante desde una sola pantalla.</p>
+      </div>
+    </div>
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <h3 class="help-card__title">Ver las citas del día</h3>
+        <p class="help-card__text">
+          Al entrar al panel, la pestaña <strong>Citas</strong> muestra por defecto todas las reservas del día de hoy,
+          ordenadas por hora. Cada tarjeta incluye: nombre del cliente, estado de la reserva, fecha, hora,
+          número de personas, correo electrónico y teléfono.
+        </p>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Si no hay reservas para hoy, la lista aparecerá vacía. Usa los filtros para cambiar la fecha.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Filtrar citas</h3>
+        <p class="help-card__text">Hay dos filtros disponibles en la parte superior de la sección Citas:</p>
+        <ul class="help-list">
+          <li><strong>Estado</strong> — Muestra solo las citas con el estado seleccionado: <span class="badge badge--pending">Pendiente</span>, <span class="badge badge--confirmed">Confirmada</span> o <span class="badge badge--cancelled">Cancelada</span>. Dejarlo en "Todos" muestra todas.</li>
+          <li><strong>Fecha</strong> — Filtra las citas para una fecha específica. Deja el campo vacío para ver todas las fechas.</li>
+        </ul>
+        <p class="help-card__text" style="margin-top: 10px;">Los filtros se aplican inmediatamente al seleccionar un valor.</p>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Cambiar el estado de una cita</h3>
+        <p class="help-card__text">
+          Cada tarjeta de cita tiene un menú desplegable de estado. Los estados disponibles son:
+        </p>
+        <ul class="help-list">
+          <li><span class="badge badge--pending">Pendiente</span> — La reserva fue recibida pero no confirmada aún. Estado inicial de toda nueva reserva.</li>
+          <li><span class="badge badge--confirmed">Confirmada</span> — La reserva ha sido revisada y confirmada por el restaurante.</li>
+          <li><span class="badge badge--cancelled">Cancelada</span> — La reserva fue cancelada. Las sillas canceladas quedan libres para nuevas reservas.</li>
+        </ul>
+        <p class="help-card__text" style="margin-top: 10px;">
+          Al cambiar el estado, se guarda automáticamente sin necesidad de hacer clic en ningún botón adicional.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Contactar al cliente por WhatsApp</h3>
+        <p class="help-card__text">
+          Cada tarjeta tiene un botón de WhatsApp. Al hacer clic, se abre WhatsApp Web (o la app móvil)
+          con el número del cliente precargado, listo para enviar un mensaje de confirmación o notificación.
+        </p>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          El número se limpia automáticamente de espacios y guiones para que el enlace de WhatsApp funcione correctamente.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Eliminar una cita</h3>
+        <p class="help-card__text">
+          El botón con ícono de papelera en cada tarjeta permite eliminar una cita permanentemente.
+          Aparecerá una confirmación antes de proceder.
+        </p>
+        <div class="help-warning">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Esta acción es irreversible. Si solo quieres liberar las sillas, considera cambiar el estado a <strong>Cancelada</strong> en lugar de eliminar.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Notas de la reserva</h3>
+        <p class="help-card__text">
+          Si el cliente incluye notas especiales al hacer su reserva (alergias, celebraciones, solicitudes especiales),
+          aparecerán resaltadas en amarillo dentro de la tarjeta de la cita.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SECTION: CONFIGURACIÓN ────────────────────────────── -->
+  <section class="help-section" id="section-config">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </div>
+      <div>
+        <h2 class="section-title">Configuración del Sistema</h2>
+        <p class="section-intro">Controla la capacidad, los horarios y las opciones de notificación del restaurante.</p>
+      </div>
+    </div>
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <h3 class="help-card__title">Capacidad del restaurante</h3>
+        <p class="help-card__text">Dos parámetros controlan cuántas personas pueden reservar:</p>
+        <div class="help-params">
+          <div class="param">
+            <span class="param__label">Máx. comensales total</span>
+            <span class="param__desc">Número máximo de personas que pueden estar en el restaurante en un mismo horario, sumando todas las reservas. Por ejemplo: 50 significa que si hay reservas que sumen 50 comensales a las 20:00, ese slot se cerrará automáticamente.</span>
+          </div>
+          <div class="param">
+            <span class="param__label">Máx. por reserva</span>
+            <span class="param__desc">Número máximo de personas que un cliente puede reservar de una sola vez. Evita que un único cliente monopolice toda la capacidad.</span>
+          </div>
+        </div>
+        <div class="help-warning">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          El máximo por reserva no puede ser mayor que el total del restaurante.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Duración de la reserva</h3>
+        <p class="help-card__text">
+          Define cuántos minutos dura cada turno de reserva. Este valor es informativo y
+          ayuda a calcular los bloques de tiempo en el sistema. Por ejemplo:
+          <strong>120 minutos (2 horas)</strong> es el valor recomendado para una cena.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Días de antelación</h3>
+        <p class="help-card__text">
+          Controla con cuántos días de anticipación pueden reservar los clientes. Por ejemplo,
+          con un valor de <strong>30 días</strong>, los clientes podrán reservar para cualquier fecha
+          dentro del próximo mes, pero no más allá.
+        </p>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Reducir este número limita el calendario visible en el formulario de reservas del sitio público.
+        </div>
+      </div>
+
+      <div class="help-card help-card--full">
+        <h3 class="help-card__title">Horarios por día de la semana</h3>
+        <p class="help-card__text">
+          Cada día de la semana puede tener su propio conjunto de horarios disponibles, o estar deshabilitado completamente.
+        </p>
+        <div class="step-list">
+          <div class="step">
+            <span class="step__num">1</span>
+            <div class="step__content">
+              <strong>Activar o desactivar un día</strong> — Cada día tiene un interruptor (toggle) a la derecha.
+              Apágalo para cerrar el restaurante ese día de la semana de forma permanente.
+              Los días desactivados no aparecerán en el calendario de reservas.
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">2</span>
+            <div class="step__content">
+              <strong>Generador de horarios</strong> — Introduce una hora de inicio, una hora de fin y un intervalo
+              en minutos. Haz clic en <em>Generar</em> para rellenar automáticamente todos los horarios disponibles.
+              Por ejemplo: 20:00 a 22:00 con intervalo 60 genera 20:00, 21:00 y 22:00.
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">3</span>
+            <div class="step__content">
+              <strong>Edición manual</strong> — También puedes escribir los horarios directamente en el área de texto,
+              uno por línea, en formato HH:MM. La aplicación ignorará los valores mal formateados.
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">4</span>
+            <div class="step__content">
+              <strong>Guardar cambios</strong> — Cuando hayas ajustado todos los días, haz clic en el botón
+              <em>Guardar configuración</em> al final de la página. Los cambios se aplican de inmediato
+              para nuevas reservas.
+            </div>
+          </div>
+        </div>
+        <div class="help-warning">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Cambiar los horarios no afecta a las reservas ya existentes, solo al calendario para nuevas reservas.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Correo del administrador</h3>
+        <p class="help-card__text">
+          Introduce aquí la dirección de correo electrónico donde quieres recibir una notificación
+          cada vez que un cliente haga una nueva reserva. El correo incluye todos los datos del cliente
+          y un enlace directo a WhatsApp.
+        </p>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Si este campo está vacío, no se enviarán notificaciones al administrador. Los correos de confirmación
+          al cliente se siguen enviando mientras el SMTP esté configurado en el servidor.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SECTION: FECHAS CERRADAS ─────────────────────────── -->
+  <section class="help-section" id="section-fechas">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+      </div>
+      <div>
+        <h2 class="section-title">Fechas Cerradas</h2>
+        <p class="section-intro">Bloquea fechas específicas para feriados, eventos privados o cualquier cierre extraordinario.</p>
+      </div>
+    </div>
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <h3 class="help-card__title">¿Para qué sirven las fechas cerradas?</h3>
+        <p class="help-card__text">
+          Las fechas cerradas son días puntuales en los que el restaurante no acepta reservas,
+          independientemente de la configuración del calendario semanal. Por ejemplo:
+        </p>
+        <ul class="help-list">
+          <li>Feriados nacionales (Navidad, Año Nuevo, etc.)</li>
+          <li>Eventos privados donde el restaurante está reservado por completo</li>
+          <li>Cierres por mantenimiento o vacaciones especiales</li>
+        </ul>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Las fechas cerradas son diferentes a los días de la semana deshabilitados: afectan a un único día
+          específico en el calendario, no a todos los lunes o todos los domingos.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Agregar una fecha cerrada</h3>
+        <p class="help-card__text">Dentro de la pestaña <strong>Configuración</strong>, sección <em>Fechas Cerradas</em>:</p>
+        <div class="step-list">
+          <div class="step">
+            <span class="step__num">1</span>
+            <div class="step__content">Selecciona la fecha que quieres bloquear usando el selector de fecha.</div>
+          </div>
+          <div class="step">
+            <span class="step__num">2</span>
+            <div class="step__content">Escribe el motivo del cierre (ej: <em>"Feriado Nacional"</em>, <em>"Evento Privado"</em>). Este texto aparecerá en el mensaje de error si un cliente intenta reservar ese día.</div>
+          </div>
+          <div class="step">
+            <span class="step__num">3</span>
+            <div class="step__content">Haz clic en <em>Agregar fecha</em>. La fecha aparecerá en la lista inmediatamente.</div>
+          </div>
+        </div>
+        <div class="help-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          No se permiten fechas en el pasado ni duplicados para el mismo día.
+        </div>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Eliminar una fecha cerrada</h3>
+        <p class="help-card__text">
+          En la lista de fechas cerradas, cada entrada tiene un botón <strong>Eliminar</strong>.
+          Al hacer clic, esa fecha se elimina y el día vuelve a estar disponible para reservas
+          (si el día de la semana está habilitado en la configuración general).
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── SECTION: ACCESO Y SEGURIDAD ──────────────────────── -->
+  <section class="help-section" id="section-acceso">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div>
+        <h2 class="section-title">Acceso y Seguridad</h2>
+        <p class="section-intro">Información sobre el acceso al panel de administración y cómo protegerlo.</p>
+      </div>
+    </div>
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <h3 class="help-card__title">Iniciar sesión</h3>
+        <p class="help-card__text">
+          El panel de administración está protegido por usuario y contraseña. Accede en
+          <code>/admin/login</code>. Las credenciales se configuran en el servidor mediante variables
+          de entorno. La sesión dura <strong>7 días</strong> antes de expirar automáticamente.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Cerrar sesión</h3>
+        <p class="help-card__text">
+          Usa el botón <strong>Cerrar sesión</strong> en la parte inferior del menú lateral
+          para terminar tu sesión de forma segura. Esto elimina el token de autenticación
+          de tu navegador.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <h3 class="help-card__title">Cambiar la contraseña</h3>
+        <p class="help-card__text">
+          La contraseña se gestiona a través de la variable de entorno <code>ADMIN_PASSWORD</code>
+          en la configuración del servidor (Vercel o donde esté desplegada la aplicación).
+          Para cambiarla, actualiza ese valor en el panel de variables de entorno
+          y vuelve a desplegar la aplicación.
+        </p>
+        <div class="help-warning">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Usa una contraseña fuerte. El panel admin tiene acceso completo a todas las reservas y configuraciones.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<style>
+/* ─── Layout ──────────────────────────────────────────────────────────── */
+.help-tab {
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────── */
+.help-header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(243, 238, 238, 0.08);
+}
+
+.help-title {
+  margin: 0 0 8px 0;
+  font-family: "Stella", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: var(--white);
+}
+
+.help-subtitle {
+  margin: 0;
+  font-family: "jost", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(243, 238, 238, 0.45);
+  line-height: 1.6;
+}
+
+/* ─── Quick Nav ───────────────────────────────────────────────────────── */
+.help-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.help-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(243, 238, 238, 0.05);
+  border: 1px solid rgba(243, 238, 238, 0.1);
+  border-radius: 99px;
+  font-family: "jost", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(243, 238, 238, 0.55);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.help-nav__item svg {
+  fill: none;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.help-nav__item:hover {
+  background: rgba(243, 238, 238, 0.09);
+  color: rgba(243, 238, 238, 0.9);
+  border-color: rgba(243, 238, 238, 0.2);
+}
+
+/* ─── Sections ────────────────────────────────────────────────────────── */
+.help-section {
+  scroll-margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: rgba(243, 238, 238, 0.06);
+  border: 1px solid rgba(243, 238, 238, 0.1);
+  border-radius: 10px;
+  color: rgba(243, 238, 238, 0.6);
+}
+
+.section-icon svg {
+  fill: none;
+}
+
+.section-title {
+  margin: 0 0 6px 0;
+  font-family: "jost", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.3px;
+}
+
+.section-intro {
+  margin: 0;
+  font-family: "jost", sans-serif;
+  font-size: 0.875rem;
+  color: rgba(243, 238, 238, 0.45);
+  line-height: 1.6;
+}
+
+/* ─── Cards grid ──────────────────────────────────────────────────────── */
+.help-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.help-card {
+  background: rgba(243, 238, 238, 0.03);
+  border: 1px solid rgba(243, 238, 238, 0.08);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+.help-card--full {
+  grid-column: 1 / -1;
+}
+
+.help-card__title {
+  margin: 0 0 10px 0;
+  font-family: "jost", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(243, 238, 238, 0.9);
+  letter-spacing: 0.2px;
+}
+
+.help-card__text {
+  margin: 0;
+  font-family: "jost", sans-serif;
+  font-size: 0.875rem;
+  color: rgba(243, 238, 238, 0.55);
+  line-height: 1.7;
+}
+
+.help-card__text + .help-card__text {
+  margin-top: 8px;
+}
+
+/* ─── Lists ───────────────────────────────────────────────────────────── */
+.help-list {
+  margin: 10px 0 0 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.help-list li {
+  font-family: "jost", sans-serif;
+  font-size: 0.875rem;
+  color: rgba(243, 238, 238, 0.55);
+  line-height: 1.6;
+}
+
+/* ─── Steps ───────────────────────────────────────────────────────────── */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  background: rgba(243, 238, 238, 0.08);
+  border: 1px solid rgba(243, 238, 238, 0.14);
+  border-radius: 99px;
+  font-family: "jost", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(243, 238, 238, 0.6);
+}
+
+.step__content {
+  font-family: "jost", sans-serif;
+  font-size: 0.875rem;
+  color: rgba(243, 238, 238, 0.55);
+  line-height: 1.65;
+  padding-top: 2px;
+}
+
+/* ─── Params ──────────────────────────────────────────────────────────── */
+.help-params {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.param {
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  border-left: 3px solid rgba(243, 238, 238, 0.15);
+}
+
+.param__label {
+  display: block;
+  font-family: "jost", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgba(243, 238, 238, 0.75);
+  margin-bottom: 4px;
+}
+
+.param__desc {
+  display: block;
+  font-family: "jost", sans-serif;
+  font-size: 0.83rem;
+  color: rgba(243, 238, 238, 0.5);
+  line-height: 1.6;
+}
+
+/* ─── Notes / Warnings ────────────────────────────────────────────────── */
+.help-note,
+.help-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: "jost", sans-serif;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.help-note {
+  background: rgba(243, 238, 238, 0.04);
+  border: 1px solid rgba(243, 238, 238, 0.1);
+  color: rgba(243, 238, 238, 0.5);
+}
+
+.help-note svg,
+.help-warning svg {
+  fill: none;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.help-warning {
+  background: rgba(255, 152, 0, 0.06);
+  border: 1px solid rgba(255, 152, 0, 0.25);
+  color: rgba(255, 193, 7, 0.75);
+}
+
+/* ─── Badges ──────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-family: "jost", sans-serif;
+  font-weight: 700;
+}
+
+.badge--pending {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.badge--confirmed {
+  background: rgba(76, 175, 80, 0.12);
+  color: #81c784;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.badge--cancelled {
+  background: rgba(244, 67, 54, 0.1);
+  color: #ef9a9a;
+  border: 1px solid rgba(244, 67, 54, 0.25);
+}
+
+/* ─── Code ────────────────────────────────────────────────────────────── */
+code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82em;
+  padding: 2px 6px;
+  background: rgba(243, 238, 238, 0.07);
+  border-radius: 4px;
+  color: rgba(243, 238, 238, 0.75);
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .help-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .help-title {
+    font-size: 1.5rem;
+  }
+}
+</style>

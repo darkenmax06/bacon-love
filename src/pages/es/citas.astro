@@ -2,6 +2,7 @@
 export const prerender = false; // Esta página necesita SSR para las API calls
 
 import Layout from '../../components/Layout.astro';
+import DatePicker from '../../components/DatePicker.astro';
 import es from '../../translations/es.js';
 import en from '../../translations/en.js';
 
@@ -60,12 +61,12 @@ const languajes = ["es", "en"];
 
             <div class="form-group">
               <label for="date">{content.form.date} *</label>
-              <input
-                type="date"
+              <DatePicker
                 id="date"
                 name="date"
-                required
-                min={new Date().toISOString().split('T')[0]}
+                required={true}
+                lang="es"
+                placeholder="Seleccionar fecha"
               />
             </div>
 
@@ -135,8 +136,9 @@ async function loadSettings() {
 }
 
 // Cargar horarios disponibles cuando cambia la fecha
-dateInput.addEventListener('change', async () => {
-  const selectedDate = dateInput.value;
+document.addEventListener('date-selected', async (e: Event) => {
+  const customEvent = e as CustomEvent;
+  const selectedDate = customEvent.detail.date;
 
   if (!selectedDate) return;
 
@@ -200,6 +202,15 @@ form.addEventListener('submit', async (e) => {
       showMessage('¡Reserva confirmada! Te contactaremos pronto por WhatsApp', 'success');
       form.reset();
       timeSelect.innerHTML = '<option value="">Seleccionar horario</option>';
+
+      // Resetear el DatePicker visual
+      const datepickerWrapper = dateInput.closest('.datepicker-wrapper');
+      if (datepickerWrapper) {
+        const selectedDateSpan = datepickerWrapper.querySelector('.selected-date');
+        if (selectedDateSpan) {
+          selectedDateSpan.textContent = 'Seleccionar fecha';
+        }
+      }
     } else {
       showMessage(result.error || 'Error al procesar la reserva', 'error');
     }

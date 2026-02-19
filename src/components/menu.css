@@ -188,3 +188,31 @@
     top: 0;
   }
 }
+/* — Order CTA link — */
+.nav-order__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: var(--white);
+  color: var(--black) !important;
+  border-radius: 6px;
+  font-family: "jost", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.nav-order__link:hover {
+  opacity: 0.85 !important;
+  transform: translateY(-1px);
+}
+
+@media (width <= 800px) {
+  .nav-order__link {
+    padding: 10px 32px;
+    font-size: 1rem;
+  }
+}

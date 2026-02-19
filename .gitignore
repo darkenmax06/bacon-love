@@ -33,3 +33,13 @@ prisma/dev.db-journal
 
 # Temp files
 tmpclaude-*
+
+# CWD temp files
+cookies.txt
+nul
+*.tmp
+*.log
+
+# Editor temp
+.cursor/
+.vscode/settings.json

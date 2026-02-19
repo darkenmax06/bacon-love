@@ -1,0 +1,551 @@
+---
+---
+
+<div class="filters">
+  <select id="statusFilter" class="filter-select">
+    <option value="">Todos los estados</option>
+    <option value="pending">Pendiente</option>
+    <option value="confirmed">Confirmado</option>
+    <option value="cancelled">Cancelado</option>
+  </select>
+  <input type="date" id="dateFilter" class="filter-input" placeholder="Filtrar por fecha">
+</div>
+
+<div id="appointmentsList" class="appointments-list">
+  <div class="loading">Cargando citas...</div>
+</div>
+
+<script>
+async function loadAppointments() {
+  const statusFilter = (document.getElementById('statusFilter') as HTMLSelectElement).value;
+  const dateFilter = (document.getElementById('dateFilter') as HTMLInputElement).value;
+
+  let url = '/api/appointments?';
+  if (statusFilter) url += `status=${statusFilter}&`;
+  if (dateFilter) url += `date=${dateFilter}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const list = document.getElementById('appointmentsList');
+    if (!list) return;
+
+    if (data.appointments.length === 0) {
+      list.innerHTML = '<div class="no-data">No hay citas registradas</div>';
+      return;
+    }
+
+    list.innerHTML = data.appointments.map((apt: any) => `
+      <div class="appointment-card" data-id="${apt.id}">
+        <div class="apt-header">
+          <div class="apt-header-info">
+            <h3>${apt.name}</h3>
+            <span class="apt-id">#${apt.id.substring(0, 8)}</span>
+          </div>
+          <span class="status-badge status-${apt.status}">${getStatusLabel(apt.status)}</span>
+        </div>
+
+        <div class="apt-main-info">
+          <div class="info-item">
+            <div class="info-content">
+              <span class="info-label">Fecha</span>
+              <span class="info-value">${formatDate(apt.date)}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-content">
+              <span class="info-label">Hora</span>
+              <span class="info-value">${apt.time}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-content">
+              <span class="info-label">Personas</span>
+              <span class="info-value">${apt.guests}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="apt-contact">
+          <div class="contact-item">
+            <div class="contact-content">
+              <span class="contact-label">Email</span>
+              <span class="contact-value">${apt.email}</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-content">
+              <span class="contact-label">Teléfono</span>
+              <span class="contact-value">${apt.phone}</span>
+            </div>
+          </div>
+        </div>
+
+        ${apt.notes ? `
+        <div class="apt-notes">
+          <div class="notes-content">
+            <span class="notes-label">Notas</span>
+            <p class="notes-text">${apt.notes}</p>
+          </div>
+        </div>
+        ` : ''}
+
+        <div class="apt-actions">
+          <a href="https://wa.me/${apt.phone.replace(/\D/g, '')}" target="_blank" class="whatsapp-btn">
+            WhatsApp
+          </a>
+          <select class="status-select" data-id="${apt.id}">
+            <option value="pending" ${apt.status === 'pending' ? 'selected' : ''}>Pendiente</option>
+            <option value="confirmed" ${apt.status === 'confirmed' ? 'selected' : ''}>Confirmado</option>
+            <option value="cancelled" ${apt.status === 'cancelled' ? 'selected' : ''}>Cancelado</option>
+          </select>
+          <button class="delete-btn" data-id="${apt.id}">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.status-select').forEach(select => {
+      select.addEventListener('change', async (e) => {
+        const target = e.target as HTMLSelectElement;
+        const id = target.dataset.id;
+        const status = target.value;
+
+        await fetch(`/api/appointments/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status }),
+        });
+
+        loadAppointments();
+      });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const target = e.target as HTMLButtonElement;
+        const id = target.dataset.id;
+
+        if (confirm('¿Estás seguro de eliminar esta cita?')) {
+          await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+          loadAppointments();
+        }
+      });
+    });
+
+  } catch (error) {
+    console.error('Error loading appointments:', error);
+  }
+}
+
+function formatDate(dateStr: string) {
+  const date = new Date(dateStr);
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  return `${day}/${month}/${year}`;
+}
+
+function getStatusLabel(status: string) {
+  const labels: any = {
+    pending: 'Pendiente',
+    confirmed: 'Confirmado',
+    cancelled: 'Cancelado'
+  };
+  return labels[status] || status;
+}
+
+document.getElementById('statusFilter')?.addEventListener('change', loadAppointments);
+document.getElementById('dateFilter')?.addEventListener('change', loadAppointments);
+
+// Set today's date as default filter
+const dateFilter = document.getElementById('dateFilter') as HTMLInputElement;
+if (dateFilter) {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  dateFilter.value = `${yyyy}-${mm}-${dd}`;
+}
+
+loadAppointments();
+</script>
+
+<style is:global>
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-select,
+.filter-input {
+  padding: 12px;
+  background-color: rgba(25, 24, 24, 0.6);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: "jost";
+}
+
+.filter-select option {
+  background-color: var(--black);
+}
+
+.appointments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+  max-width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .appointments-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  padding: 48px;
+  color: var(--white);
+  opacity: 0.6;
+  font-family: "jost";
+}
+
+.appointment-card {
+  background: linear-gradient(135deg, rgba(8, 8, 8, 0.98) 0%, rgba(5, 5, 5, 1) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(243, 238, 238, 0.15);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  border-color: rgba(243, 238, 238, 0.3);
+}
+
+.apt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(243, 238, 238, 0.15);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.apt-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.apt-header h3 {
+  font-family: "stella";
+  font-size: 1.5rem;
+  color: var(--white);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.apt-id {
+  font-family: "jost";
+  font-size: 0.75rem;
+  color: rgba(243, 238, 238, 0.5);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-family: "jost";
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status-pending {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.25) 0%, rgba(255, 193, 7, 0.15) 100%);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.5);
+}
+
+.status-confirmed {
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.25) 0%, rgba(46, 125, 50, 0.15) 100%);
+  color: #90ee90;
+  border: 1px solid rgba(46, 125, 50, 0.5);
+}
+
+.status-cancelled {
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.25) 0%, rgba(211, 47, 47, 0.15) 100%);
+  color: #ff6b6b;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+}
+
+.apt-main-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 24px;
+  border-bottom: 1px solid rgba(243, 238, 238, 0.12);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+
+.info-value {
+  font-family: "jost";
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.apt-contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(243, 238, 238, 0.12);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact-label {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+
+.contact-value {
+  font-family: "jost";
+  font-size: 0.95rem;
+  color: var(--white);
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.apt-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  background: rgba(255, 193, 7, 0.05);
+  border-left: 3px solid rgba(255, 193, 7, 0.5);
+}
+
+.notes-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notes-label {
+  font-family: "jost";
+  font-size: 0.7rem;
+  color: rgba(243, 238, 238, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+}
+
+.notes-text {
+  font-family: "jost";
+  font-size: 0.95rem;
+  color: var(--white);
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.apt-actions {
+  display: flex;
+  gap: 12px;
+  padding: 20px 24px;
+  background: rgba(0, 0, 0, 0.5);
+  flex-wrap: wrap;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #25D366 0%, #20b358 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: "jost";
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+}
+
+.status-select {
+  padding: 12px 16px;
+  background-color: rgba(25, 24, 24, 0.7);
+  border: 1px solid rgba(243, 238, 238, 0.3);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: "jost";
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+  flex: 1;
+  min-width: 140px;
+}
+
+.status-select:hover {
+  border-color: rgba(243, 238, 238, 0.5);
+  background-color: rgba(25, 24, 24, 0.9);
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: var(--white);
+}
+
+.status-select option {
+  background-color: var(--black);
+}
+
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.2) 0%, rgba(211, 47, 47, 0.1) 100%);
+  color: #ff6b6b;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+  border-radius: 8px;
+  font-family: "jost";
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.3) 0%, rgba(211, 47, 47, 0.2) 100%);
+  border-color: rgba(211, 47, 47, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .appointments-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .appointments-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .appointment-card {
+    border-radius: 8px;
+  }
+
+  .apt-header {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .apt-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .apt-main-info {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .apt-contact {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .apt-notes {
+    padding: 20px;
+  }
+
+  .apt-actions {
+    flex-direction: column;
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .apt-actions > * {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .status-select {
+    min-width: 100%;
+  }
+}
+</style>

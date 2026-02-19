@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
+import { getAvailableTimesForDay, isDayEnabled } from '../../../lib/schedule-utils';
 
 // GET - Verificar disponibilidad para una fecha específica
 export const GET: APIRoute = async ({ url }) => {
@@ -27,10 +28,9 @@ export const GET: APIRoute = async ({ url }) => {
 
     const appointmentDate = new Date(date + 'T00:00:00.000Z');
     const dayOfWeek = appointmentDate.getUTCDay().toString();
-    const openDays = JSON.parse(settings.openDays);
 
     // Verificar si el día está disponible
-    if (!openDays.includes(dayOfWeek)) {
+    if (!isDayEnabled(dayOfWeek, settings)) {
       return new Response(
         JSON.stringify({
           available: false,
@@ -40,13 +40,54 @@ export const GET: APIRoute = async ({ url }) => {
       );
     }
 
-    // Obtener horarios disponibles
-    const openTimes = JSON.parse(settings.openTimes);
-
-    // Obtener citas existentes para esa fecha - usar UTC para comparaciones
+    // Verificar si la fecha está cerrada
     const startDate = new Date(date + 'T00:00:00.000Z');
     const endDate = new Date(date + 'T23:59:59.999Z');
 
+    const closedDate = await prisma.closedDate.findFirst({
+      where: {
+        date: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
+
+    if (closedDate) {
+      return new Response(
+        JSON.stringify({
+          available: false,
+          message: `Restaurante cerrado: ${closedDate.reason}`,
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Obtener horarios disponibles para este día específico
+    let openTimes = getAvailableTimesForDay(dayOfWeek, settings);
+
+    // Si la fecha es hoy, filtrar horarios que ya han pasado
+    const now = new Date();
+    const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    if (appointmentDate.getTime() === todayUTC.getTime()) {
+      const nowTotalMinutes = now.getHours() * 60 + now.getMinutes();
+      openTimes = openTimes.filter((t: string) => {
+        const [h, m] = t.split(':').map(Number);
+        return h * 60 + m > nowTotalMinutes;
+      });
+
+      if (openTimes.length === 0) {
+        return new Response(
+          JSON.stringify({
+            available: false,
+            message: 'No quedan horarios disponibles para hoy',
+          }),
+          { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
+    // Obtener citas existentes para esa fecha
     const existingAppointments = await prisma.appointment.findMany({
       where: {
         date: {

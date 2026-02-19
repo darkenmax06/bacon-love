@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
 import { requireAuth } from '../../../lib/middleware';
+import { getAvailableTimesForDay, isDayEnabled } from '../../../lib/schedule-utils';
+import { sendConfirmationEmail, sendAdminNotification } from '../../../lib/email';
 
 // GET - Obtener todas las citas (requiere autenticación)
 export const GET: APIRoute = async ({ cookies, url }) => {
@@ -99,16 +101,32 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Validar fecha - usar formato ISO con hora UTC para evitar problemas de zona horaria
+    // Validar fecha - comparar en UTC para evitar problemas de zona horaria
     const appointmentDate = new Date(date + 'T00:00:00.000Z');
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const now = new Date();
+    const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 
-    if (appointmentDate < today) {
+    if (appointmentDate < todayUTC) {
       return new Response(
         JSON.stringify({ error: 'No se pueden hacer reservas en fechas pasadas' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
+    }
+
+    // Si la reserva es para hoy, validar que la hora no haya pasado ya
+    if (appointmentDate.getTime() === todayUTC.getTime()) {
+      const [slotHours, slotMinutes] = time.split(':').map(Number);
+      const nowHours = now.getHours();
+      const nowMinutes = now.getMinutes();
+      const slotTotalMinutes = slotHours * 60 + slotMinutes;
+      const nowTotalMinutes = nowHours * 60 + nowMinutes;
+
+      if (slotTotalMinutes <= nowTotalMinutes) {
+        return new Response(
+          JSON.stringify({ error: 'Ese horario ya ha pasado hoy' }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
     const maxDate = new Date();
@@ -125,29 +143,45 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Validar día de la semana - usar UTC
     const dayOfWeek = appointmentDate.getUTCDay().toString();
-    const openDays = JSON.parse(settings.openDays);
 
-    if (!openDays.includes(dayOfWeek)) {
+    if (!isDayEnabled(dayOfWeek, settings)) {
       return new Response(
         JSON.stringify({ error: 'El restaurante no está disponible ese día' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Validar horario
-    const openTimes = JSON.parse(settings.openTimes);
+    // Verificar que la fecha no esté cerrada
+    const startDate = new Date(date + 'T00:00:00.000Z');
+    const endDate = new Date(date + 'T23:59:59.999Z');
 
-    if (!openTimes.includes(time)) {
+    const closedDate = await prisma.closedDate.findFirst({
+      where: {
+        date: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
+
+    if (closedDate) {
+      return new Response(
+        JSON.stringify({ error: `Restaurante cerrado: ${closedDate.reason}` }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validar horario - usar horarios específicos del día
+    const availableTimes = getAvailableTimesForDay(dayOfWeek, settings);
+
+    if (!availableTimes.includes(time)) {
       return new Response(
         JSON.stringify({ error: 'Horario no disponible' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Verificar disponibilidad de sillas - usar UTC para comparaciones
-    const startDate = new Date(date + 'T00:00:00.000Z');
-    const endDate = new Date(date + 'T23:59:59.999Z');
-
+    // Verificar disponibilidad de sillas
     const existingAppointments = await prisma.appointment.findMany({
       where: {
         date: {
@@ -189,6 +223,23 @@ export const POST: APIRoute = async ({ request }) => {
         status: 'pending',
       },
     });
+
+    // Send emails (fire-and-forget — don't block the response)
+    const aptForEmail = {
+      id: appointment.id,
+      name: appointment.name,
+      email: appointment.email,
+      phone: appointment.phone,
+      date,
+      time: appointment.time,
+      guests: appointment.guests,
+      notes: appointment.notes || undefined,
+    };
+
+    Promise.all([
+      sendConfirmationEmail(aptForEmail),
+      settings.adminEmail ? sendAdminNotification(aptForEmail, settings.adminEmail) : Promise.resolve(),
+    ]).catch(err => console.error('Error sending emails:', err));
 
     return new Response(
       JSON.stringify({ appointment }),
