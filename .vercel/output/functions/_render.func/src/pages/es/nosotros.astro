@@ -1,0 +1,45 @@
+---
+import Layout from "../../components/Layout.astro"
+import About from "../../components/About.astro"
+import Testimonials from "../../components/Testimonials.astro"
+
+import es from "../../translations/es"
+
+const content = es
+const languajes = ["es", "en"]
+
+const links = {
+  home: "/es",
+  about: "/es/nosotros",
+  menu: "/es/carta",
+  testimonials: "/es/nosotros#testimonials",
+  appointments: "/es/citas",
+  contact: "/es/contacto"
+}
+
+const alternateLinks = {
+  es: "/es/nosotros",
+  en: "/en/about"
+}
+---
+
+<Layout 
+  {...content.footer} 
+  {...content.menu} 
+  languajes={languajes}
+  title="Sobre Nosotros | Bacon Love Bar & Grill en San Blas-Canillejas"
+  description="Conoce la historia detrás de Bacon Love. Pasión por la cocina artesanal, los buenos momentos y el auténtico sabor de un buen Bar & Grill en Madrid."
+  lang="es"
+  links={links}
+  alternateLinks={alternateLinks}
+>
+  <div style="padding-top: 50px;">
+    <div style="text-align: center; margin-bottom: -40px; padding-top: 40px; position: relative; z-index: 10;">
+        <h1 style="color: white; font-family: 'stella'; font-size: 3rem;">La Historia de Bacon Love</h1>
+    </div>
+    <About {...content.about} title="" />
+    <div id="testimonials">
+      <Testimonials testimonials={content.testimonials} />
+    </div>
+  </div>
+</Layout>

@@ -1,62 +1,266 @@
 ---
 import "./footer.css"
-const size = 25
+const size = 20
 
-const {rights,address} = Astro.props
+const { brand, contact, hours, quickLinks, rights } = Astro.props
 ---
 
 <footer class="footer">
-  <div class="container">
-    <small>{rights}</small>
-    <a target="_blank" href="https://maps.app.goo.gl/62kHoXTb3MuFTTqN8"> {address} </a>
-    <ul class="footer__media">
-      <li> 
-        <a target="_blank" rel="noreferrer" href="https://www.facebook.com/profile.php?id=61584836737450">
-          <svg  width={size} height={size}>
-            <use xlink:href="/sprite.svg#facebook-icon"></use>
-          </svg> 
-        </a> 
-      </li>
+  <div class="container footer__grid">
+    
+    <!-- Column 1: Brand & SEO -->
+    <div class="footer__col brand-col">
+      <a href="/" class="footer__logo">
+        <img src="/logo.png" alt="Bacon Love Logo" width="120" height="auto" />
+      </a>
+      <p class="brand-desc">{brand?.description}</p>
+      
+      <!-- Social Media (Kept from original) -->
+      <ul class="footer__media">
+        <li> 
+          <a target="_blank" rel="noreferrer" aria-label="Facebook" href="https://www.facebook.com/profile.php?id=61584836737450">
+            <svg width={size} height={size}>
+              <use xlink:href="/sprite.svg#facebook-icon"></use>
+            </svg> 
+          </a> 
+        </li>
+        <li> 
+          <a target="_blank" rel="noreferrer" aria-label="Instagram" href="https://www.instagram.com/baconlove.es/">
+            <svg width={size} height={size}>
+              <use xlink:href="/sprite.svg#instagram-icon"></use>
+            </svg> 
+          </a> 
+        </li>
+        <li> 
+          <a target="_blank" rel="noreferrer" aria-label="X / Twitter" href="https://x.com/EsBaconLove">
+            <svg width={size} height={size}>
+              <use xlink:href="/sprite.svg#x-icon"></use>
+            </svg> 
+          </a> 
+        </li>
+        <li> 
+          <a target="_blank" rel="noreferrer" aria-label="TikTok" href="https://www.tiktok.com/@es.baconlove">
+            <svg width={size} height={size}>
+              <use xlink:href="/sprite.svg#tiktok-icon"></use>
+            </svg> 
+          </a> 
+        </li>
+        <li> 
+          <a target="_blank" rel="noreferrer" aria-label="YouTube" href="https://www.youtube.com/channel/UCYy9GuEjuek-51CRmxHPNiw">
+            <svg width={size} height={size} >
+              <use xlink:href="/sprite.svg#youtube-icon"></use>
+            </svg> 
+          </a> 
+        </li>
+      </ul>
+    </div>
 
-      <li> 
-        <a target="_blank" rel="noreferrer" href="https://www.instagram.com/baconlove.es/">
-          <svg  width={size} height={size}>
-            <use xlink:href="/sprite.svg#instagram-icon"></use>
-          </svg> 
-        </a> 
-      </li>
+    <!-- Column 2: Contact (NAP) -->
+    <div class="footer__col contact-col">
+      <h3 class="footer__title">{contact?.title}</h3>
+      <address class="footer__address">
+        <p class="address-line">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <a href="https://maps.app.goo.gl/62kHoXTb3MuFTTqN8" target="_blank" rel="noopener noreferrer">
+            {contact?.address}
+          </a>
+        </p>
+        <p class="phone-line">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <a href={contact?.phoneLink} class="phone-link">
+            {contact?.phone}
+          </a>
+        </p>
+      </address>
+    </div>
 
-      <li> 
-        <a target="_blank" rel="noreferrer" href="https://x.com/EsBaconLove">
-          <svg  width={size} height={size}>
-            <use xlink:href="/sprite.svg#x-icon"></use>
-          </svg> 
-        </a> 
-      </li>
+    <!-- Column 3: Hours -->
+    <div class="footer__col hours-col">
+      <h3 class="footer__title">{hours?.title}</h3>
+      <ul class="hours-list">
+        {hours?.schedule?.map(item => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
 
-      <li> 
-        <a target="_blank" rel="noreferrer" href="https://www.tiktok.com/@es.baconlove">
-          <svg  width={size} height={size}>
-            <use xlink:href="/sprite.svg#tiktok-icon"></use>
-          </svg> 
-        </a> 
-      </li>
+    <!-- Column 4: Links -->
+    <div class="footer__col links-col">
+      <h3 class="footer__title">{quickLinks?.title}</h3>
+      <nav class="footer__nav">
+        <ul>
+          {quickLinks?.items?.map(link => (
+            <li><a href={link.url}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
 
-      <li> 
-        <a target="_blank" rel="noreferrer" href="#">
-          <svg  width={size} height={size}>
-            <use xlink:href="/sprite.svg#whatsapp-icon"></use>
-          </svg> 
-        </a> 
-      </li>
+  </div>
 
-      <li> 
-        <a target="_blank" rel="noreferrer" href="https://www.youtube.com/channel/UCYy9GuEjuek-51CRmxHPNiw">
-          <svg  width={size} height={size} >
-            <use xlink:href="/sprite.svg#youtube-icon"></use>
-          </svg> 
-        </a> 
-      </li>
-    </ul>
+  <div class="footer__bottom">
+    <div class="container">
+      <small>{rights}</small>
+    </div>
   </div>
 </footer>
+
+<style>
+  .footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 64px 0 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'jost', sans-serif;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 0.8fr;
+    gap: 48px;
+    margin-bottom: 48px;
+    padding: 0 24px;
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer__logo img {
+    opacity: 0.9;
+    width: 80px;
+  }
+
+  .brand-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(243, 238, 238, 0.7);
+    max-width: 300px;
+  }
+
+  .footer__title {
+    font-family: 'stella', serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .footer__address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .address-line, .phone-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(243, 238, 238, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .address-line svg, .phone-line svg {
+    margin-top: 3px;
+    flex-shrink: 0;
+    color: #ffd700;
+  }
+
+  .phone-link {
+    font-weight: 700;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+
+  .phone-link:hover, .address-line a:hover {
+    color: #ffd700;
+  }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: rgba(243, 238, 238, 0.8);
+    font-size: 0.95rem;
+  }
+
+  .footer__nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer__nav a {
+    color: rgba(243, 238, 238, 0.8);
+    transition: transform 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .footer__nav a:hover {
+    color: #ffd700;
+    transform: translateX(4px);
+  }
+
+  .footer__media {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+  }
+
+  .footer__media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: all 0.3s;
+    color: var(--white);
+  }
+
+  .footer__media a:hover {
+    background: #ffd700;
+    color: var(--black);
+    transform: translateY(-2px);
+  }
+
+  .footer__bottom {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: rgba(243, 238, 238, 0.4);
+    font-size: 0.85rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .footer__logo img {
+      width: 60px;
+    }
+    .brand-col {
+      order: 4; /* Brand at bottom on mobile? Or Top? Let's keep it top for now, or match design. */
+      order: 1;
+    }
+  }
+</style>

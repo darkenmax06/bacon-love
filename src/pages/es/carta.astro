@@ -1,0 +1,39 @@
+---
+import Layout from "../../components/Layout.astro"
+import Platillos from "../../components/Platillos.astro"
+
+import es from "../../translations/es"
+
+const content = es
+const languajes = ["es", "en"]
+
+const links = {
+  home: "/es",
+  about: "/es/nosotros",
+  menu: "/es/carta",
+  testimonials: "/es/nosotros#testimonials",
+  appointments: "/es/citas",
+  contact: "/es/contacto"
+}
+
+const alternateLinks = {
+  es: "/es/carta",
+  en: "/en/menu"
+}
+---
+
+<Layout 
+  {...content.footer} 
+  {...content.menu} 
+  languajes={languajes}
+  title="Carta y Menú | Hamburguesas Artesanales y Grill en Madrid | Bacon Love"
+  description="Descubre nuestra carta. Hamburguesas artesanales, entrantes y opciones de grill preparadas al momento en San Blas-Canillejas. Mira nuestro menú."
+  lang="es"
+  links={links}
+  alternateLinks={alternateLinks}
+>
+  <div style="padding-top: 100px;">
+    <h1 style="text-align: center; color: white; font-family: 'stella'; font-size: 3rem; margin-bottom: 2rem;">Nuestra Carta: Grill y Cocina Artesanal</h1>
+    <Platillos {...content.platillos} title="" />
+  </div>
+</Layout>

@@ -1,0 +1,232 @@
+---
+export const prerender = false;
+
+import AdminLayout from '../../components/admin/AdminLayout.astro';
+---
+
+<AdminLayout title="Acceso Admin - Bacon Love" variant="login">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="/logo.png" alt="Bacon Love Logo" class="login-logo" />
+        <h1>Panel Administrativo</h1>
+        <p>Iniciar sesion</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email">Correo electronico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Correo electronico"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contrasena</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="••••••••"
+          />
+        </div>
+
+        <div id="loginMessage" class="login-message"></div>
+
+        <button type="submit" class="login-btn">
+          Iniciar sesion
+        </button>
+      </form>
+    </div>
+  </div>
+</AdminLayout>
+
+<script>
+const form = document.getElementById('loginForm') as HTMLFormElement;
+const messageDiv = document.getElementById('loginMessage') as HTMLDivElement;
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Iniciando sesion...';
+
+  const formData = new FormData(form);
+  const data = {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showMessage('Inicio de sesion exitoso. Redirigiendo...', 'success');
+      setTimeout(() => {
+        window.location.href = '/admin/dashboard';
+      }, 1000);
+    } else {
+      showMessage(result.error || 'Credenciales invalidas', 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showMessage('Error al iniciar sesion. Intenta nuevamente', 'error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+});
+
+function showMessage(message: string, type: 'success' | 'error') {
+  messageDiv.textContent = message;
+  messageDiv.className = `login-message ${type}`;
+  messageDiv.style.display = 'block';
+}
+</script>
+
+<style>
+.login-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card {
+  background-color: var(--white-transparent);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 48px;
+  border: 1px solid rgba(243, 238, 238, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: invert(1);
+}
+
+.login-header h1 {
+  font-family: "stella";
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  color: var(--white);
+  opacity: 0.5;
+  font-family: "jost";
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: "jost";
+  font-weight: 600;
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  padding: 14px;
+  background-color: rgba(25, 24, 24, 0.6);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "jost";
+  color: var(--white);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-group input::placeholder {
+  color: rgba(243, 238, 238, 0.4);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--white);
+  background-color: rgba(25, 24, 24, 0.8);
+}
+
+.login-message {
+  padding: 14px;
+  border-radius: 8px;
+  display: none;
+  text-align: center;
+  font-family: "jost";
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.login-message.success {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #90ee90;
+  border: 1px solid rgba(46, 125, 50, 0.4);
+}
+
+.login-message.error {
+  background-color: rgba(211, 47, 47, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(211, 47, 47, 0.4);
+}
+
+.login-btn {
+  padding: 15px 32px;
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "jost";
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+  margin-top: 4px;
+}
+
+.login-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+}
+</style>
