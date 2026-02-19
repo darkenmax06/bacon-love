@@ -13,7 +13,7 @@ const {testimonials} = Astro.props
           return (
             <article class="testimonial" >
               <div class="testimonial__info" >
-                <img src={res.avatar} />
+                <img src={res.avatar} alt={`Avatar de cliente satisfecho: ${res.name}`} />
                 <h4 class="testimonial__name">
                   {res.name}
                 </h4>

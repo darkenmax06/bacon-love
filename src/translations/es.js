@@ -90,7 +90,33 @@ export default {
     menuLabel: 'Pedir',
   },
   footer: {
-    rights: "Bacon love | Todos los derechos reservados",
-    address: "Calle de Sofia 177 las rosas Madrid",
+    brand: {
+      title: "Bacon Love",
+      description: "Bacon Love - Tu Bar & Grill y referente en cocina artesanal en San Blas-Canillejas, Madrid."
+    },
+    contact: {
+      title: "Contacto",
+      address: "C. de Sofía, 177i, San Blas-Canillejas, 28022 Madrid",
+      phone: "677 06 30 60",
+      phoneLink: "tel:+34677063060"
+    },
+    hours: {
+      title: "Horarios",
+      schedule: [
+        "Lunes - Viernes: 07:30 - 23:30",
+        "Sábados: 11:30 - 23:30",
+        "Domingos: 11:30 - 20:30"
+      ]
+    },
+    quickLinks: {
+      title: "Enlaces",
+      items: [
+        { label: "Inicio", url: "/es" },
+        { label: "Carta", url: "/es/carta" },
+        { label: "Nosotros", url: "/es/nosotros" },
+        { label: "Contacto", url: "/es/contacto" }
+      ]
+    },
+    rights: "Bacon Love © 2025 | Todos los derechos reservados"
   },
 };
