@@ -8,20 +8,6 @@ import es from '../../translations/es.js';
 
 const content = en.appointments;
 const languajes = ["es", "en"];
-
-const links = {
-  home: "/en",
-  about: "/en/about",
-  menu: "/en/menu",
-  testimonials: "/en/about#testimonials",
-  appointments: "/en/appointments",
-  contact: "/en/contact"
-}
-
-const alternateLinks = {
-  es: "/es/citas",
-  en: "/en/appointments"
-}
 ---
 
 <Layout
@@ -31,8 +17,6 @@ const alternateLinks = {
   {...en.menu}
   {...en.footer}
   languajes={languajes}
-  links={links}
-  alternateLinks={alternateLinks}
 >
   <main class="appointments-page">
     <div class="appointments-hero">

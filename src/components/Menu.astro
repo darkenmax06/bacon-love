@@ -1,51 +1,27 @@
 ---
 import "./menu.css"
 
-const {
-  home, 
-  about, 
-  testimonials, 
-  menu, 
-  appointments, 
-  orderLink, 
-  languajes,
-  links,
-  lang,
-  alternateLinks
-} = Astro.props
+const defaultLang = Astro.params.lang
+const base = `/${defaultLang}`
 
-const currentLang = lang || Astro.params.lang || 'es';
+const {home,about,testimonials,menu,appointments,orderLink,languajes} = Astro.props
 
-// Fallback logic if links are not provided (legacy support)
-const getLink = (key) => {
-  if (links && links[key]) return links[key];
-  // Fallback to single-page anchors
-  const base = `/${currentLang}`;
-  if (key === 'home') return `${base}/#hero`;
-  if (key === 'about') return `${base}/#about`;
-  if (key === 'menu') return `${base}/#platillos`;
-  if (key === 'testimonials') return `${base}/#testimonials`;
-  if (key === 'appointments') return `${base}/citas`; // Or check lang for appointments slug
-  return `${base}/#`;
-}
 ---
 
 <header class="menu">
   <div class="container">
-    <a href={getLink('home')} class="menu__logo">
-      <img src="/logo.png" alt="Bacon Love Logo - Bar & Grill en Madrid">
+    <a href="/" class="menu__logo">
+      <img src="/logo.png" alt="">
     </a>
 
     <div class="menu__right">
       <nav>
         <ul class="menu__list" >
-          <li><a href={getLink('home')}> {home} </a></li>
-          <li><a href={getLink('about')}> {about} </a></li>
-          <li><a href={getLink('menu')}> {menu} </a></li>
-          <li><a href={getLink('testimonials')}> {testimonials} </a></li>
-          <li><a href={getLink('appointments')}> {appointments} </a></li>
-          {links?.contact && <li><a href={links.contact}> Contacto </a></li>} <!-- Add Contact if available -->
-          
+          <li><a href={`${base}/#hero`}> {home} </a></li>
+          <li><a href={`${base}/#about`}> {about} </a></li>
+          <li><a href={`${base}/#platillos`}> {menu} </a></li>
+          <li><a href={`${base}/#testimonials`}> {testimonials} </a></li>
+          <li><a href={`${base}${defaultLang === 'es' ? '/citas' : '/appointments'}`}> {appointments} </a></li>
           {orderLink && (
             <li>
               <a
@@ -68,19 +44,13 @@ const getLink = (key) => {
 
       <div class="menu__actions">
         <div class="menu__languajes">
-          <span class="menu__languaje">{currentLang}</span>
+          <span class="menu__languaje">{defaultLang}</span>
           <ul>
-            {languajes.map(res => (
-              <li class="languajes__selectors">
-                <a href={alternateLinks && alternateLinks[res] ? alternateLinks[res] : `/${res}/`}>
-                  {res}
-                </a>
-              </li>
-            ))}
+            {languajes.map(res => <li data-lang={res} class="languajes__selectors" >{res}</li>)}
           </ul>
         </div>
 
-        <button class="menu__btn" aria-label="Toggle Menu">
+        <button class="menu__btn">
           <span></span>
           <span></span>
           <span></span>
@@ -89,12 +59,16 @@ const getLink = (key) => {
     </div>
   </div>
 </header>
+
 <script>
-  // Mobile Menu Logic
+  const $menuLanguaje = document.querySelector(".menu__languajes")
   const $menuBtn = document.querySelector(".menu__btn")
   const $menuList = document.querySelector(".menu__list")
   const $menuListItems = document.querySelectorAll(".menu__list li")
-  
+  const $toggleLanguajes = $menuLanguaje?.lastElementChild
+  const $showLanguaje = $menuLanguaje?.firstElementChild
+
+  // GESTION DEL MENU RESPONSIVE
   const toggleMenu = () => {
     $menuList?.classList.toggle("active")
     $menuBtn?.classList.toggle("active")
@@ -102,13 +76,38 @@ const getLink = (key) => {
 
   $menuBtn?.addEventListener("click", toggleMenu)
 
-  // Lang Switcher Logic (Dropdown)
-  const $menuLanguaje = document.querySelector(".menu__languajes")
-  const $showLanguaje = $menuLanguaje?.firstElementChild
-  const $toggleLanguajes = $menuLanguaje?.lastElementChild
+  $menuListItems.forEach($element => {
+    $element.addEventListener("click", toggleMenu)
+  })
 
-  const toggleLanguajes = () => $toggleLanguajes?.classList.toggle("active")
+  // GESTION DE LOS IDIOMAS 
+
+  const toggleLanguajes = () =>  $toggleLanguajes?.classList.toggle("active")
   $showLanguaje?.addEventListener("click", toggleLanguajes)
 
-  // Remove old JS redirect logic since we use direct links now
+
+</script>
+
+<script>
+  const $lis = document.querySelectorAll(".languajes__selectors")
+
+  $lis.forEach($li => {
+    $li.addEventListener("click", () => {
+        const selectedLang = $li.getAttribute("data-lang"); // "en" o "es"
+        const currentPath = window.location.pathname;
+
+        // 1. Cambiamos el prefijo del idioma: /es/contacto -> /en/contacto
+        let newPath = currentPath.replace(/^\/(es|en)(\/|$)/, `/${selectedLang}/`);
+
+        // 2. Cambiamos el sufijo del slug: /en/contacto-es -> /en/contacto-en
+        // Esta regex busca "-es" o "-en" justo antes del final de la cadena
+        newPath = newPath.replace(/(-(es|en)\/$)|(-(es|en)$)/, `-${selectedLang}`);
+
+        // Limpieza: Eliminar barras duplicadas al final si las hubiera
+        newPath = newPath.replace(/\/$/, "");
+
+        // Redirección
+        window.location.pathname = newPath;
+      });
+  })
 </script>

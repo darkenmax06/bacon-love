@@ -7,11 +7,8 @@ import Footer from "./Footer.astro"
 const {
   title = "Bacon Love - Amor al bacon",
   home, about, testimonials, menu, appointments, orderLink, languajes, rights, address,
-  brand, contact, hours, quickLinks, // Receives footer quickLinks
   description = "Somos un restaurante emergente que fusiona la alta cocina con platos cotidianos. Descubre una experiencia gastronómica artesanal única.",
-  lang = "es", // Recibimos el idioma por prop o lo detectamos
-  links, // Receives the navigation links object
-  alternateLinks // { es: "/es/...", en: "/en/..." }
+  lang = "es" // Recibimos el idioma por prop o lo detectamos
 } = Astro.props
 
 // Generamos la URL canonical dinámica
@@ -32,9 +29,9 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index,follow" >
 
-    <link rel="alternate" hreflang="es" href={alternateLinks?.es ? `https://baconlove.es${alternateLinks.es}` : `${baseUrl}/es${path}`} />
-    <link rel="alternate" hreflang="en" href={alternateLinks?.en ? `https://baconlove.es${alternateLinks.en}` : `${baseUrl}/en${path}`} />
-    <link rel="alternate" hreflang="x-default" href={alternateLinks?.es ? `https://baconlove.es${alternateLinks.es}` : `${baseUrl}/es${path}`} />
+    <link rel="alternate" hreflang="es" href={`${baseUrl}/es${path}`} />
+    <link rel="alternate" hreflang="en" href={`${baseUrl}/en${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`${baseUrl}/es${path}`} />
 
     <meta property="og:type" content="website">
     <meta property="og:url" content={canonicalURL}>
@@ -50,10 +47,10 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
 
   </head>
   <body>
-    <Menu languajes={languajes} home={home} about={about} testimonials={testimonials} menu={menu} appointments={appointments} orderLink={orderLink} links={links} lang={lang} alternateLinks={alternateLinks} />
+    <Menu languajes={languajes} home={home} about={about} testimonials={testimonials} menu={menu} appointments={appointments} orderLink={orderLink} />
     <main>
       <slot/>
     </main>
-    <Footer rights={rights} address={address} brand={brand} contact={contact} hours={hours} quickLinks={quickLinks} />
+    <Footer rights={rights} address={address} />
   </body>
 </html>
