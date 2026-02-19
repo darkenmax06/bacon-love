@@ -10,8 +10,8 @@ export default defineConfig({
     defaultLocale: "es",
     locales: ["es", "en"],
     routing: {
-      prefixDefaultLocale: false, // Esto obliga a que siempre aparezca /es/
-      fallbackType: "rewrite", // Esto es lo que está creando la página que ves
+      prefixDefaultLocale: true, // Esto nos permite tener rutas explícitas como /es/ y /en/ sin conflictos
+      fallbackType: "redirect", // Cambiamos a redirect para que / redirija a /es/ si es necesario
     },
   },
 });
