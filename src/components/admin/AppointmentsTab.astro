@@ -12,7 +12,7 @@
 </div>
 
 <div id="appointmentsList" class="appointments-list">
-  <div class="loading">Cargando citas...</div>
+  <div class="loading">Cargando reservas...</div>
 </div>
 
 <script>
@@ -32,7 +32,7 @@ async function loadAppointments() {
     if (!list) return;
 
     if (data.appointments.length === 0) {
-      list.innerHTML = '<div class="no-data">No hay citas registradas</div>';
+      list.innerHTML = '<div class="no-data">No hay reservas registradas</div>';
       return;
     }
 
@@ -128,7 +128,7 @@ async function loadAppointments() {
         const target = e.target as HTMLButtonElement;
         const id = target.dataset.id;
 
-        if (confirm('¿Estás seguro de eliminar esta cita?')) {
+        if (confirm('¿Estás seguro de eliminar esta reserva?')) {
           await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
           loadAppointments();
         }

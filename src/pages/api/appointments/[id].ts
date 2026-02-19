@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
 import { requireAuth } from '../../../lib/middleware';
 
-// GET - Obtener una cita específica
+// GET - Obtener una reserva específica
 export const GET: APIRoute = async ({ params, cookies }) => {
   const auth = await requireAuth(cookies);
 
@@ -22,7 +22,7 @@ export const GET: APIRoute = async ({ params, cookies }) => {
 
     if (!appointment) {
       return new Response(
-        JSON.stringify({ error: 'Cita no encontrada' }),
+        JSON.stringify({ error: 'Reserva no encontrada' }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ params, cookies }) => {
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error obteniendo cita:', error);
+    console.error('Error obteniendo reserva:', error);
     return new Response(
       JSON.stringify({ error: 'Error en el servidor' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
@@ -40,7 +40,7 @@ export const GET: APIRoute = async ({ params, cookies }) => {
   }
 };
 
-// PATCH - Actualizar una cita (requiere autenticación)
+// PATCH - Actualizar una reserva (requiere autenticación)
 export const PATCH: APIRoute = async ({ params, request, cookies }) => {
   const auth = await requireAuth(cookies);
 
@@ -61,7 +61,7 @@ export const PATCH: APIRoute = async ({ params, request, cookies }) => {
 
     if (!appointment) {
       return new Response(
-        JSON.stringify({ error: 'Cita no encontrada' }),
+        JSON.stringify({ error: 'Reserva no encontrada' }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -76,7 +76,7 @@ export const PATCH: APIRoute = async ({ params, request, cookies }) => {
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error actualizando cita:', error);
+    console.error('Error actualizando reserva:', error);
     return new Response(
       JSON.stringify({ error: 'Error en el servidor' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
@@ -84,7 +84,7 @@ export const PATCH: APIRoute = async ({ params, request, cookies }) => {
   }
 };
 
-// DELETE - Eliminar una cita (requiere autenticación)
+// DELETE - Eliminar una reserva (requiere autenticación)
 export const DELETE: APIRoute = async ({ params, cookies }) => {
   const auth = await requireAuth(cookies);
 
@@ -104,7 +104,7 @@ export const DELETE: APIRoute = async ({ params, cookies }) => {
 
     if (!appointment) {
       return new Response(
-        JSON.stringify({ error: 'Cita no encontrada' }),
+        JSON.stringify({ error: 'Reserva no encontrada' }),
         { status: 404, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -114,11 +114,11 @@ export const DELETE: APIRoute = async ({ params, cookies }) => {
     });
 
     return new Response(
-      JSON.stringify({ message: 'Cita eliminada exitosamente' }),
+      JSON.stringify({ message: 'Reserva eliminada exitosamente' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error eliminando cita:', error);
+    console.error('Error eliminando reserva:', error);
     return new Response(
       JSON.stringify({ error: 'Error en el servidor' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }

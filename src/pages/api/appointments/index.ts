@@ -4,7 +4,7 @@ import { requireAuth } from '../../../lib/middleware';
 import { getAvailableTimesForDay, isDayEnabled } from '../../../lib/schedule-utils';
 import { sendConfirmationEmail, sendAdminNotification } from '../../../lib/email';
 
-// GET - Obtener todas las citas (requiere autenticación)
+// GET - Obtener todas las reservas (requiere autenticación)
 export const GET: APIRoute = async ({ cookies, url }) => {
   const auth = await requireAuth(cookies);
 
@@ -49,7 +49,7 @@ export const GET: APIRoute = async ({ cookies, url }) => {
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error obteniendo citas:', error);
+    console.error('Error obteniendo reservas:', error);
     return new Response(
       JSON.stringify({ error: 'Error en el servidor' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
@@ -57,7 +57,7 @@ export const GET: APIRoute = async ({ cookies, url }) => {
   }
 };
 
-// POST - Crear nueva cita (público)
+// POST - Crear nueva reserva (público)
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
@@ -210,7 +210,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Crear la cita
+    // Crear la reserva
     const appointment = await prisma.appointment.create({
       data: {
         name,
@@ -246,7 +246,7 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error creando cita:', error);
+    console.error('Error creando reserva:', error);
     return new Response(
       JSON.stringify({ error: 'Error en el servidor' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }

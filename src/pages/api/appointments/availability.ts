@@ -87,7 +87,7 @@ export const GET: APIRoute = async ({ url }) => {
       }
     }
 
-    // Obtener citas existentes para esa fecha
+    // Obtener reservas existentes para esa fecha
     const existingAppointments = await prisma.appointment.findMany({
       where: {
         date: {
