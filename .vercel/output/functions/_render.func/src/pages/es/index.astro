@@ -1,0 +1,51 @@
+---
+import Layout from "../../components/Layout.astro"
+import Hero from "../../components/Hero.astro"
+import Orders from "../../components/Orders.astro"
+
+import es from "../../translations/es"
+
+const content = es
+const languajes = ["es", "en"]
+
+const links = {
+  home: "/es",
+  about: "/es/nosotros",
+  menu: "/es/carta",
+  testimonials: "/es/nosotros#testimonials",
+  appointments: "/es/citas",
+  contact: "/es/contacto"
+}
+
+// Assuming alternateLinks needs to be defined for the Layout component.
+// The instruction did not provide its definition, so a placeholder is used.
+// Please define `alternateLinks` as needed, e.g.,
+const alternateLinks = {
+  en: "/en",
+  es: "/es"
+};
+---
+
+<Layout 
+  {...content.footer} 
+  {...content.menu} 
+  languajes={languajes} 
+  title="Bacon Love | Bar & Grill y Cocina Artesanal en Las Rosas, Madrid"
+  description="Disfruta de la mejor cocina artesanal y hamburguesas en Bacon Love, tu Bar & Grill en San Blas-Canillejas (Las Rosas). ¡Reserva tu mesa hoy!"
+  lang="es"
+  links={links}
+  alternateLinks={alternateLinks}
+>
+  <Hero 
+    {...content.hero} 
+    title1="Bacon Love" 
+    title2="Bar & Grill y Cocina Artesanal en Madrid"
+  />
+  <div style="display:none">
+    <h1>Bacon Love: Bar & Grill y Cocina Artesanal en Madrid</h1>
+    <h2>Nuestras Hamburguesas Artesanales</h2>
+    <h2>Ambiente Bar & Grill</h2>
+  </div>
+  <Orders {...content.orders} />
+</Layout>
+```

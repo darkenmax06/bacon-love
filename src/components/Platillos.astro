@@ -4,13 +4,15 @@ import { getCollection } from "astro:content"
 const platos = await getCollection("platos")
 
 
-const {lang} = Astro.params 
+const {lang: langProp} = Astro.props
+const lang = Astro.params.lang || langProp || 'es'
+
 const {title} = Astro.props
 const parsedPlatos = platos.filter(res => res.slug.endsWith(lang))
 const platosCategories = Object.groupBy(parsedPlatos, res => res.data.type)
 const categoriesNames =  Object.keys(platosCategories)
 
-const currentType = platosCategories[categoriesNames[0]]
+const currentType = categoriesNames.length > 0 ? platosCategories[categoriesNames[0]] : []
 
 
 ---
@@ -31,7 +33,7 @@ const currentType = platosCategories[categoriesNames[0]]
     <div class="platillos__container">
       {currentType.map(plato => (
         <a class="card" href={`/${lang}/plato/${plato.slug}`} >
-          <img  loading="lazy" src={`/content/${plato.data.img}`} alt={plato.data.title}>
+          <img  loading="lazy" src={`/content/${plato.data.img}`} alt={`${plato.data.title} - Plato artesanal en Bacon Love`}>
           <div class="card__textbox">
             <h4>EUR {plato.data.price}</h4>
             <h3>{plato.data.title}</h3>
@@ -47,7 +49,9 @@ const currentType = platosCategories[categoriesNames[0]]
   const $inputs = document.querySelectorAll(".platillos__type input")  
   const $platillosContainer = document.querySelector(".platillos__container")
 
-  $inputs[0].setAttribute("checked",true)
+  if ($inputs.length > 0) {
+    $inputs[0].setAttribute("checked",true)
+  }
 
   const renderElements = (target) => {
     const {value} = target
