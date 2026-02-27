@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ES — Primary (Spanish) -->
+  <url>
+    <loc>https://baconlove.es/es</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/es/carta</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/carta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/carta"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/es/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/contacto"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/es/nosotros</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/nosotros"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/nosotros"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/es/citas</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/citas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/appointments"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/citas"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- EN — Secondary (English) -->
+  <url>
+    <loc>https://baconlove.es/en</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/en/menu</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/carta"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/menu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/carta"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/nosotros"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/nosotros"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/contacto"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/contacto"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://baconlove.es/en/appointments</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://baconlove.es/es/citas"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://baconlove.es/en/appointments"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baconlove.es/es/citas"/>
+    <lastmod>2026-02-27</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
