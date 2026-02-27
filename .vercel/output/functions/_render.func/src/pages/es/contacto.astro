@@ -1,0 +1,166 @@
+---
+import Layout from "../../components/Layout.astro"
+import es from "../../translations/es"
+
+const content = es
+const languajes = ["es", "en"]
+
+const links = {
+  home: "/es",
+  about: "/es/nosotros",
+  menu: "/es/carta",
+  testimonials: "/es/nosotros#testimonials",
+  appointments: "/es/citas",
+  contact: "/es/contacto"
+}
+
+const alternateLinks = {
+  es: "/es/contacto",
+  en: "/en/contact"
+}
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Bacon Love",
+  "image": "https://baconlove.es/og.png",
+  "description": "Bacon Love: Alta cocina y sabores artesanales en Madrid.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. de Sofía, 177i",
+    "addressLocality": "Madrid",
+    "addressRegion": "Madrid",
+    "postalCode": "28022",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.4237379,
+    "longitude": -3.6006177
+  },
+  "url": "https://baconlove.es/",
+  "telephone": "+34677063060",
+  "servesCuisine": "Hamburguesas, Americana, Grill",
+  "priceRange": "$$"
+}
+---
+
+<Layout 
+  {...content.footer} 
+  {...content.menu} 
+  languajes={languajes}
+  title="Ubicación y Contacto | Bacon Love Madrid (Las Rosas)"
+  description="Visita Bacon Love en C. de Sofía, 177i, San Blas-Canillejas, Madrid. Encuentra nuestros horarios, teléfono de contacto y mapa para llegar fácilmente."
+  lang="es"
+  links={links}
+  alternateLinks={alternateLinks}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <main class="contact-page">
+    <div class="container">
+      <h1>Ubicación y Contacto</h1>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Información</h2>
+          <p><strong>Dirección:</strong> <br/> C. de Sofía, 177i, San Blas-Canillejas, 28022 Madrid</p>
+          <p><strong>Teléfono:</strong> <br/> <a href="tel:+34677063060">677 06 30 60</a></p>
+          <p><strong>Email:</strong> <br/> <a href="mailto:hola@baconlove.es">hola@baconlove.es</a></p>
+          
+          <div class="hours">
+            <h3>Horario</h3>
+            <p>Lunes - Domingo: 13:00 - 23:00</p>
+          </div>
+        </div>
+
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.5772477383066!2d-3.603192623966567!3d40.42373797143896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422f9ec6c35b8b%3A0x1c8b3f8f1a8e1b0!2sC.%20de%20Sof%C3%ADa%2C%20177%2C%20San%20Blas-Canillejas%2C%2028022%20Madrid!5e0!3m2!1ses!2ses!4v1709220000000!5m2!1ses!2ses" 
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa de ubicación de Bacon Love en Madrid">
+          </iframe>
+          
+          <div class="location-details" style="margin-top: 20px; color: rgba(243, 238, 238, 0.8);">
+            <h2 style="font-family: 'jost', sans-serif; color: #ffd700; font-size: 1.5rem; margin-bottom: 10px; font-weight: 700;">Cómo Llegar</h2>
+            <p style="font-family: 'jost'; line-height: 1.6;">
+              Estamos ubicados en el corazón de Las Rosas, perfectamente comunicados para que vengas a disfrutar. 
+              Si vienes desde <strong>Moratalaz</strong>, <strong>Vicálvaro</strong> o <strong>Coslada</strong>, llegarás en pocos minutos en coche o transporte público. 
+              ¡Te esperamos para ofrecerte la mejor experiencia Bar & Grill de la zona!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-page {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    min-height: 80vh;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  h1 {
+    color: #fff;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: 'jost', sans-serif; /* Switched to Jost for accent support */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+  .contact-info {
+    color: #fff;
+    font-family: 'jost', sans-serif;
+  }
+  .contact-info h2 {
+    font-family: 'jost', sans-serif; /* Switched to Jost for accent support */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+  }
+  .contact-info p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .contact-info a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .hours {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .map-container iframe {
+    border-radius: 10px;
+    filter: invert(90%) hue-rotate(180deg);
+  }
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

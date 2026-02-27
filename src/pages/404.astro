@@ -16,8 +16,11 @@ const languajes = ["es", "en"];
   <section class="not-found">
     <p class="error-code">404</p>
     <h1>Página no encontrada</h1>
-    <p class="message">La página que buscas no existe o fue movida.</p>
-    <a href="/es/" class="back-btn">Volver al inicio</a>
+    <p class="message">La página que buscas no existe o ha sido movida. Vuelve al inicio o echa un vistazo a nuestra carta.</p>
+    <div class="not-found__actions">
+      <a href="/es/" class="back-btn">Volver al inicio</a>
+      <a href="/es/carta" class="back-btn back-btn--secondary">Ver nuestra carta</a>
+    </div>
   </section>
 </Layout>
 
@@ -59,7 +62,6 @@ h1 {
 }
 
 .back-btn {
-  margin-top: 16px;
   padding: 14px 32px;
   background-color: var(--white);
   color: var(--black);
@@ -69,6 +71,20 @@ h1 {
   font-size: 1rem;
   text-decoration: none;
   transition: transform 0.2s, opacity 0.3s;
+}
+
+.back-btn--secondary {
+  background-color: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.not-found__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 .back-btn:hover {

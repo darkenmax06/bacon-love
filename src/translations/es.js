@@ -103,9 +103,9 @@ export default {
     hours: {
       title: "Horarios",
       schedule: [
-        "Lunes - Viernes: 07:30 - 23:30",
-        "Sábados: 11:30 - 23:30",
-        "Domingos: 11:30 - 20:30"
+        "Lunes - Viernes: 07:30 - 23:45",
+        "Sábados: 10:30 - 23:00",
+        "Domingos: 10:00 - 23:00"
       ]
     },
     quickLinks: {

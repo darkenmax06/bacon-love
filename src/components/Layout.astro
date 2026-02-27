@@ -36,11 +36,13 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
     <link rel="alternate" hreflang="en" href={alternateLinks?.en ? `https://baconlove.es${alternateLinks.en}` : `${baseUrl}/en${path}`} />
     <link rel="alternate" hreflang="x-default" href={alternateLinks?.es ? `https://baconlove.es${alternateLinks.es}` : `${baseUrl}/es${path}`} />
 
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="restaurant">
     <meta property="og:url" content={canonicalURL}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
-    <meta property="og:image" content="https://baconlove.es/og.png"> 
+    <meta property="og:image" content="https://baconlove.es/og.png">
+    <meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'es_ES'}>
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_GB'}>
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content={canonicalURL}>

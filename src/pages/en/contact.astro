@@ -24,12 +24,12 @@ const schema = {
   "@type": "Restaurant",
   "name": "Bacon Love",
   "image": "https://baconlove.es/og.png",
-  "description": "Bacon Love: High cuisine and artisanal flavors in Madrid.",
+  "url": "https://baconlove.es/es",
+  "telephone": "+34677063060",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "C. de Sofía, 177i",
-    "addressLocality": "Madrid",
-    "addressRegion": "Madrid",
+    "streetAddress": "Calle de Sofía, 177i",
+    "addressLocality": "San Blas-Canillejas",
     "postalCode": "28022",
     "addressCountry": "ES"
   },
@@ -38,10 +38,45 @@ const schema = {
     "latitude": 40.4237379,
     "longitude": -3.6006177
   },
-  "url": "https://baconlove.es/",
-  "telephone": "+34677063060",
-  "servesCuisine": "Burgers, American, Grill",
-  "priceRange": "$$"
+  "servesCuisine": [
+    "Hamburguesería",
+    "Parrilla y asados",
+    "Bar & Grill",
+    "Arroces",
+    "Mariscos"
+  ],
+  "priceRange": "€€",
+  "menu": "https://baconlove.es/es/carta",
+  "hasMap": "https://maps.google.com/maps?q=Bacon+Love+Calle+de+Sofía+177i+Madrid",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "07:30",
+      "closes": "23:45"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "10:30",
+      "closes": "23:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday"],
+      "opens": "10:00",
+      "closes": "23:00"
+    }
+  ],
+  "reservationUrl": "https://baconlove.es/es/citas",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, NFC",
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Takeaway", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Delivery", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Wheelchair Accessible", "value": true}
+  ]
 }
 ---
 
@@ -49,8 +84,8 @@ const schema = {
   {...content.footer} 
   {...content.menu} 
   languajes={languajes}
-  title="Location & Contact | Bacon Love Madrid (Las Rosas)"
-  description="Visit Bacon Love at C. de Sofía, 177i, San Blas-Canillejas, Madrid. Find our opening hours, contact number, and map for easy directions."
+  title="Contact | Bacon Love Burger Restaurant San Blas Madrid"
+  description="Contact Bacon Love. Calle de Sofía 177i, San Blas-Canillejas, 28022 Madrid. Phone: +34 677 06 30 60."
   lang="en"
   links={links}
   alternateLinks={alternateLinks}
@@ -70,7 +105,9 @@ const schema = {
           
           <div class="hours">
             <h3>Hours</h3>
-            <p>Monday - Sunday: 13:00 - 23:00</p>
+            <p>Monday - Friday: 07:30 - 23:45</p>
+            <p>Saturday: 10:30 - 23:00</p>
+            <p>Sunday: 10:00 - 23:00</p>
           </div>
         </div>
 

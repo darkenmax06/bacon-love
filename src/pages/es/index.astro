@@ -24,28 +24,85 @@ const alternateLinks = {
   en: "/en",
   es: "/es"
 };
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Bacon Love",
+  "image": "https://baconlove.es/og.png",
+  "url": "https://baconlove.es/es",
+  "telephone": "+34677063060",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle de Sofía, 177i",
+    "addressLocality": "San Blas-Canillejas",
+    "postalCode": "28022",
+    "addressCountry": "ES"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.4237379,
+    "longitude": -3.6006177
+  },
+  "servesCuisine": [
+    "Hamburguesería",
+    "Parrilla y asados",
+    "Bar & Grill",
+    "Arroces",
+    "Mariscos"
+  ],
+  "priceRange": "€€",
+  "menu": "https://baconlove.es/es/carta",
+  "hasMap": "https://maps.google.com/maps?q=Bacon+Love+Calle+de+Sofía+177i+Madrid",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "07:30",
+      "closes": "23:45"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "10:30",
+      "closes": "23:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday"],
+      "opens": "10:00",
+      "closes": "23:00"
+    }
+  ],
+  "reservationUrl": "https://baconlove.es/es/citas",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, NFC",
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Takeaway", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Delivery", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Wheelchair Accessible", "value": true}
+  ]
+}
 ---
 
 <Layout 
   {...content.footer} 
   {...content.menu} 
   languajes={languajes} 
-  title="Bacon Love | Bar & Grill y Cocina Artesanal en Las Rosas, Madrid"
-  description="Disfruta de la mejor cocina artesanal y hamburguesas en Bacon Love, tu Bar & Grill en San Blas-Canillejas (Las Rosas). ¡Reserva tu mesa hoy!"
+  title="Bacon Love | Hamburguesería y Parrilla en San Blas-Canillejas, Madrid"
+  description="Hamburguesería artesanal en San Blas-Canillejas. Especialistas en hamburguesas premium, carnes a la brasa, arroces y mariscos. Bar & Grill con aparcamiento gratuito. Reservas disponibles."
   lang="es"
   links={links}
   alternateLinks={alternateLinks}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero 
-    {...content.hero} 
-    title1="Bacon Love" 
-    title2="Bar & Grill y Cocina Artesanal en Madrid"
+    {...content.hero}
+    title1="Bacon Love"
+    title2="Hamburguesería artesanal y Bar & Grill en San Blas-Canillejas, Madrid"
+    text1="En Bacon Love somos especialistas en hamburguesas artesanales, parrilla y asados, arroces frescos y mariscos. Cocina de mercado bajo la supervisión del chef Raúl Doñe. Aparcamiento gratuito. Reservas disponibles. Encuéntranos en Calle de Sofía 177i, Las Rosas, San Blas-Canillejas, 28022 Madrid."
+    text2=""
+    name=""
   />
-  <div style="display:none">
-    <h1>Bacon Love: Bar & Grill y Cocina Artesanal en Madrid</h1>
-    <h2>Nuestras Hamburguesas Artesanales</h2>
-    <h2>Ambiente Bar & Grill</h2>
-  </div>
   <Orders {...content.orders} />
 </Layout>
-```

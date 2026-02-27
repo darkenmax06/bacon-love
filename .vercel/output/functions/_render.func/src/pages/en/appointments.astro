@@ -1,0 +1,412 @@
+---
+export const prerender = false; // This page needs SSR for API calls
+
+import Layout from '../../components/Layout.astro';
+import DatePicker from '../../components/DatePicker.astro';
+import en from '../../translations/en.js';
+import es from '../../translations/es.js';
+
+const content = en.appointments;
+const languajes = ["es", "en"];
+
+const links = {
+  home: "/en",
+  about: "/en/about",
+  menu: "/en/menu",
+  testimonials: "/en/about#testimonials",
+  appointments: "/en/appointments",
+  contact: "/en/contact"
+}
+
+const alternateLinks = {
+  es: "/es/citas",
+  en: "/en/appointments"
+}
+---
+
+<Layout
+  title="Reservations - Bacon Love"
+  description={content.description}
+  lang="en"
+  {...en.menu}
+  {...en.footer}
+  languajes={languajes}
+  links={links}
+  alternateLinks={alternateLinks}
+>
+  <main class="appointments-page">
+    <div class="appointments-hero">
+      <h1>{content.title}</h1>
+      <p class="subtitle">{content.subtitle}</p>
+    </div>
+
+    <div class="form-wrapper">
+      <form id="appointmentForm" class="appointment-form">
+            <div class="form-group">
+              <label for="name">{content.form.name} *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">{content.form.email} *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">{content.form.phone} *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder={content.form.phonePlaceholder}
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="date">{content.form.date} *</label>
+              <DatePicker
+                id="date"
+                name="date"
+                required={true}
+                lang="en"
+                placeholder="Select date"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="time">{content.form.time} *</label>
+              <select id="time" name="time" required>
+                <option value="">Select time</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="guests">{content.form.guests} *</label>
+              <input
+                type="number"
+                id="guests"
+                name="guests"
+                required
+                min="1"
+                max="10"
+                value="2"
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="notes">{content.form.notes}</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                placeholder={content.form.notesPlaceholder}
+              ></textarea>
+            </div>
+
+            <div id="formMessage" class="form-message"></div>
+
+        <button type="submit" class="submit-btn">
+          {content.form.submit}
+        </button>
+      </form>
+    </div>
+  </main>
+</Layout>
+
+<script>
+const form = document.getElementById('appointmentForm') as HTMLFormElement;
+const dateInput = document.getElementById('date') as HTMLInputElement;
+const timeSelect = document.getElementById('time') as HTMLSelectElement;
+const guestsInput = document.getElementById('guests') as HTMLInputElement;
+const formMessage = document.getElementById('formMessage') as HTMLDivElement;
+
+let settings: any = null;
+
+// Load settings
+async function loadSettings() {
+  try {
+    const response = await fetch('/api/settings');
+    const data = await response.json();
+    settings = data.settings;
+
+    // Set max guests
+    if (settings) {
+      guestsInput.max = settings.maxSeatsPerReservation.toString();
+    }
+  } catch (error) {
+    console.error('Error loading settings:', error);
+  }
+}
+
+// Load available times when date changes
+document.addEventListener('date-selected', async (e: Event) => {
+  const customEvent = e as CustomEvent;
+  const selectedDate = customEvent.detail.date;
+
+  if (!selectedDate) return;
+
+  try {
+    const response = await fetch(`/api/appointments/availability?date=${selectedDate}`);
+    const data = await response.json();
+
+    // Clear previous options
+    timeSelect.innerHTML = '<option value="">Select time</option>';
+
+    if (data.available && data.availability) {
+      data.availability.forEach((slot: any) => {
+        if (slot.isAvailable) {
+          const option = document.createElement('option');
+          option.value = slot.time;
+          option.textContent = `${slot.time} (${slot.availableSeats} seats available)`;
+          timeSelect.appendChild(option);
+        }
+      });
+    } else {
+      showMessage(data.message || 'No times available for this date', 'error');
+    }
+  } catch (error) {
+    console.error('Error loading availability:', error);
+    showMessage('Error loading available times', 'error');
+  }
+});
+
+// Handle form submission
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Reserving...';
+
+  const formData = new FormData(form);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    date: formData.get('date'),
+    time: formData.get('time'),
+    guests: parseInt(formData.get('guests') as string),
+    notes: formData.get('notes') || '',
+  };
+
+  try {
+    const response = await fetch('/api/appointments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showMessage('Reservation confirmed! We will contact you soon via WhatsApp', 'success');
+      form.reset();
+      timeSelect.innerHTML = '<option value="">Select time</option>';
+
+      // Reset DatePicker visual
+      const datepickerWrapper = dateInput.closest('.datepicker-wrapper');
+      if (datepickerWrapper) {
+        const selectedDateSpan = datepickerWrapper.querySelector('.selected-date');
+        if (selectedDateSpan) {
+          selectedDateSpan.textContent = 'Select date';
+        }
+      }
+    } else {
+      showMessage(result.error || 'Error processing reservation', 'error');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showMessage('Error processing reservation. Please try again', 'error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+});
+
+function showMessage(message: string, type: 'success' | 'error') {
+  formMessage.textContent = message;
+  formMessage.className = `form-message ${type}`;
+  formMessage.style.display = 'block';
+
+  setTimeout(() => {
+    formMessage.style.display = 'none';
+  }, 5000);
+}
+
+// Initialize
+loadSettings();
+</script>
+
+<style>
+.appointments-page {
+  width: 100%;
+  min-height: calc(100dvh - 60px);
+  padding: 64px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.appointments-hero {
+  width: 100%;
+  max-width: 1400px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.appointments-hero h1 {
+  font-family: "stella";
+  font-size: clamp(3.5rem, 8vw, 5rem);
+  margin-bottom: 16px;
+  color: var(--white);
+}
+
+.subtitle {
+  font-family: "stella";
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--white);
+  opacity: 0.6;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--white-transparent);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba(243, 238, 238, 0.1);
+}
+
+.appointment-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-family: "jost";
+  font-weight: 600;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 14px;
+  background-color: rgba(25, 24, 24, 0.6);
+  border: 1px solid rgba(243, 238, 238, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "jost";
+  color: var(--white);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(243, 238, 238, 0.4);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--white);
+  background-color: rgba(25, 24, 24, 0.8);
+}
+
+.form-group select option {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.form-message {
+  grid-column: 1 / -1;
+  padding: 14px;
+  border-radius: 8px;
+  display: none;
+  text-align: center;
+  font-family: "jost";
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-message.success {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #90ee90;
+  border: 1px solid rgba(46, 125, 50, 0.4);
+}
+
+.form-message.error {
+  background-color: rgba(211, 47, 47, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(211, 47, 47, 0.4);
+}
+
+.submit-btn {
+  grid-column: 1 / -1;
+  padding: 16px 32px;
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "jost";
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .appointment-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-wrapper {
+    padding: 24px;
+  }
+
+  .appointments-page {
+    padding: 32px 16px;
+  }
+}
+</style>
