@@ -15,7 +15,10 @@ vi.mock('../../src/lib/email', () => ({
 }));
 
 import { prisma } from '../../src/lib/prisma';
+import { sendConfirmationEmail, sendAdminNotification } from '../../src/lib/email';
 const mockPrisma = prisma as any;
+const mockSendConfirmation = sendConfirmationEmail as ReturnType<typeof vi.fn>;
+const mockSendAdminNotification = sendAdminNotification as ReturnType<typeof vi.fn>;
 
 // ─── Fixtures ─────────────────────────────────────────────────────────────────
 
@@ -135,6 +138,38 @@ describe('POST /api/appointments', () => {
     const data = await res.json();
     expect(data.appointment).toBeDefined();
     expect(data.appointment.name).toBe('Juan Pérez');
+  });
+
+  it('llama a sendConfirmationEmail al crear una reserva', async () => {
+    const { POST } = await import('../../src/pages/api/appointments/index');
+    await POST({ request: makeRequest(validBody) } as any);
+    // Allow fire-and-forget promises to settle
+    await Promise.resolve();
+    expect(mockSendConfirmation).toHaveBeenCalledOnce();
+    expect(mockSendConfirmation).toHaveBeenCalledWith(
+      expect.objectContaining({ email: validBody.email, name: validBody.name })
+    );
+  });
+
+  it('llama a sendAdminNotification con CLIENT_EMAIL cuando está configurado', async () => {
+    process.env.CLIENT_EMAIL = 'ramsesgonzalez20066@gmail.com';
+    const { POST } = await import('../../src/pages/api/appointments/index');
+    await POST({ request: makeRequest(validBody) } as any);
+    await Promise.resolve();
+    expect(mockSendAdminNotification).toHaveBeenCalledOnce();
+    expect(mockSendAdminNotification).toHaveBeenCalledWith(
+      expect.objectContaining({ name: validBody.name }),
+      'ramsesgonzalez20066@gmail.com'
+    );
+    delete process.env.CLIENT_EMAIL;
+  });
+
+  it('no llama a sendAdminNotification si CLIENT_EMAIL no está configurado', async () => {
+    delete process.env.CLIENT_EMAIL;
+    const { POST } = await import('../../src/pages/api/appointments/index');
+    await POST({ request: makeRequest(validBody) } as any);
+    await Promise.resolve();
+    expect(mockSendAdminNotification).not.toHaveBeenCalled();
   });
 
   it('retorna 400 si faltan campos requeridos', async () => {

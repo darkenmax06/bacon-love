@@ -1,18 +1,23 @@
 import nodemailer from 'nodemailer';
 
-// Nodemailer transporter — configured via env vars
+// Nodemailer transporter — configured via Google OAuth2 env vars
 function createTransporter() {
-  const host = import.meta.env.SMTP_HOST;
-  const user = import.meta.env.SMTP_USER;
-  const pass = import.meta.env.SMTP_PASS;
+  const user = import.meta.env.GMAIL_USER;
+  const clientId = import.meta.env.GOOGLE_CLIENT_ID;
+  const clientSecret = import.meta.env.GOOGLE_CLIENT_SECRET;
+  const refreshToken = import.meta.env.GOOGLE_REFRESH_TOKEN;
 
-  if (!host || !user || !pass) return null;
+  if (!user || !clientId || !clientSecret || !refreshToken) return null;
 
   return nodemailer.createTransport({
-    host,
-    port: parseInt(import.meta.env.SMTP_PORT || '587'),
-    secure: import.meta.env.SMTP_SECURE === 'true',
-    auth: { user, pass },
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user,
+      clientId,
+      clientSecret,
+      refreshToken,
+    },
   });
 }
 
@@ -339,9 +344,9 @@ export async function sendConfirmationEmail(apt: {
   notes?: string;
 }): Promise<void> {
   const transporter = createTransporter();
-  if (!transporter) return; // SMTP not configured — skip silently
+  if (!transporter) return; // OAuth2 credentials not configured — skip silently
 
-  const from = import.meta.env.SMTP_FROM || import.meta.env.SMTP_USER;
+  const from = import.meta.env.GMAIL_USER;
 
   await transporter.sendMail({
     from: `Bacon Love <${from}>`,
@@ -369,7 +374,7 @@ export async function sendAdminNotification(
   const transporter = createTransporter();
   if (!transporter) return;
 
-  const from = import.meta.env.SMTP_FROM || import.meta.env.SMTP_USER;
+  const from = import.meta.env.GMAIL_USER;
 
   await transporter.sendMail({
     from: `Bacon Love <${from}>`,

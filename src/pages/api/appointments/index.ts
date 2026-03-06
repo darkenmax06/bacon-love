@@ -236,9 +236,11 @@ export const POST: APIRoute = async ({ request }) => {
       notes: appointment.notes || undefined,
     };
 
+    const clientEmail = import.meta.env.CLIENT_EMAIL;
+
     Promise.all([
       sendConfirmationEmail(aptForEmail),
-      settings.adminEmail ? sendAdminNotification(aptForEmail, settings.adminEmail) : Promise.resolve(),
+      clientEmail ? sendAdminNotification(aptForEmail, clientEmail) : Promise.resolve(),
     ]).catch(err => console.error('Error sending emails:', err));
 
     return new Response(
