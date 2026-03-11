@@ -356,6 +356,18 @@ export async function sendConfirmationEmail(apt: {
   });
 }
 
+// Helper to send mail and log result/errors for debugging
+async function safeSend(mailOptions: any, transporter: any, description = 'email') {
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`✅ Sent ${description}:`, info.messageId || info.response || info);
+    return info;
+  } catch (err) {
+    console.error(`❌ Error sending ${description}:`, err);
+    throw err;
+  }
+}
+
 export async function sendAdminNotification(
   apt: {
     id: string;
@@ -376,10 +388,10 @@ export async function sendAdminNotification(
 
   const from = import.meta.env.GMAIL_USER;
 
-  await transporter.sendMail({
+  await safeSend({
     from: `Bacon Love <${from}>`,
     to: adminEmail,
     subject: `Nueva reserva — ${apt.name} · ${apt.date} ${apt.time}`,
     html: adminNotificationTemplate(apt),
-  });
+  }, transporter, `admin notification to ${adminEmail}`);
 }
