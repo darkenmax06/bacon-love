@@ -395,3 +395,292 @@ export async function sendAdminNotification(
     html: adminNotificationTemplate(apt),
   }, transporter, `admin notification to ${adminEmail}`);
 }
+
+// ─── Status update templates ──────────────────────────────────────────────────
+
+function statusConfirmedTemplate(apt: {
+  name: string;
+  date: string;
+  time: string;
+  guests: number;
+  phone: string;
+}): string {
+  const formattedDate = formatDateForEmail(apt.date);
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva Confirmada - Bacon Love</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:Georgia,serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0a;padding:40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding:0 0 32px 0;text-align:center;">
+              <p style="margin:0;font-family:Georgia,serif;font-size:36px;letter-spacing:4px;color:#f3eeee;font-weight:400;">BACON LOVE</p>
+              <p style="margin:8px 0 0 0;font-size:12px;letter-spacing:3px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Restaurante</p>
+            </td>
+          </tr>
+
+          <!-- Status Banner -->
+          <tr>
+            <td style="padding:0 0 20px 0;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(46,125,50,0.15);border:1px solid rgba(46,125,50,0.45);border-radius:8px;">
+                <tr>
+                  <td style="padding:16px 24px;">
+                    <p style="margin:0;font-size:15px;color:#90ee90;font-weight:700;font-family:Arial,sans-serif;letter-spacing:0.5px;">✓ Tu reserva ha sido confirmada</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#111 0%,#0a0a0a 100%);border:1px solid rgba(243,238,238,0.12);border-radius:12px;overflow:hidden;">
+
+              <!-- Card Header -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:28px 32px;background:rgba(0,0,0,0.5);border-bottom:1px solid rgba(243,238,238,0.1);">
+                    <p style="margin:0 0 6px 0;font-size:11px;letter-spacing:2px;color:rgba(243,238,238,0.45);text-transform:uppercase;font-family:Arial,sans-serif;">Reserva confirmada</p>
+                    <p style="margin:0;font-family:Georgia,serif;font-size:26px;color:#f3eeee;font-weight:400;">¡Hola, ${apt.name}!</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Message -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:24px 32px 0 32px;">
+                    <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;color:rgba(243,238,238,0.75);line-height:1.7;">
+                      Nos alegramos de confirmar tu reserva en Bacon Love. ¡Te esperamos con los brazos abiertos!
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Details Grid -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:24px 32px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(0,0,0,0.35);border-radius:10px;overflow:hidden;">
+                      <tr>
+                        <td width="50%" style="padding:18px 20px;border-bottom:1px solid rgba(243,238,238,0.08);border-right:1px solid rgba(243,238,238,0.08);">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Fecha</p>
+                          <p style="margin:0;font-size:17px;color:#f3eeee;font-family:Arial,sans-serif;font-weight:700;">${formattedDate}</p>
+                        </td>
+                        <td width="50%" style="padding:18px 20px;border-bottom:1px solid rgba(243,238,238,0.08);">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Hora</p>
+                          <p style="margin:0;font-size:17px;color:#f3eeee;font-family:Arial,sans-serif;font-weight:700;">${apt.time}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%" style="padding:18px 20px;border-right:1px solid rgba(243,238,238,0.08);">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Personas</p>
+                          <p style="margin:0;font-size:17px;color:#f3eeee;font-family:Arial,sans-serif;font-weight:700;">${apt.guests}</p>
+                        </td>
+                        <td width="50%" style="padding:18px 20px;">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Teléfono</p>
+                          <p style="margin:0;font-size:17px;color:#f3eeee;font-family:Arial,sans-serif;font-weight:700;">${apt.phone}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Footer message -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:0 32px 32px 32px;">
+                    <p style="margin:0;font-size:13px;color:rgba(243,238,238,0.4);font-family:Arial,sans-serif;line-height:1.6;">
+                      Si necesitas modificar o cancelar tu reserva, contáctanos por WhatsApp al número que nos proporcionaste.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:28px 0 0 0;text-align:center;">
+              <p style="margin:0;font-size:12px;color:rgba(243,238,238,0.25);font-family:Arial,sans-serif;letter-spacing:1px;">BACON LOVE · Este correo fue generado automáticamente</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+function statusCancelledTemplate(apt: {
+  name: string;
+  date: string;
+  time: string;
+  guests: number;
+}): string {
+  const formattedDate = formatDateForEmail(apt.date);
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva Cancelada - Bacon Love</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:Georgia,serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0a0a;padding:40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding:0 0 32px 0;text-align:center;">
+              <p style="margin:0;font-family:Georgia,serif;font-size:36px;letter-spacing:4px;color:#f3eeee;font-weight:400;">BACON LOVE</p>
+              <p style="margin:8px 0 0 0;font-size:12px;letter-spacing:3px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Restaurante</p>
+            </td>
+          </tr>
+
+          <!-- Status Banner -->
+          <tr>
+            <td style="padding:0 0 20px 0;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(183,28,28,0.15);border:1px solid rgba(183,28,28,0.45);border-radius:8px;">
+                <tr>
+                  <td style="padding:16px 24px;">
+                    <p style="margin:0;font-size:15px;color:#ff6b6b;font-weight:700;font-family:Arial,sans-serif;letter-spacing:0.5px;">✕ Tu reserva ha sido cancelada</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background:linear-gradient(135deg,#111 0%,#0a0a0a 100%);border:1px solid rgba(243,238,238,0.12);border-radius:12px;overflow:hidden;">
+
+              <!-- Card Header -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:28px 32px;background:rgba(0,0,0,0.5);border-bottom:1px solid rgba(243,238,238,0.1);">
+                    <p style="margin:0 0 6px 0;font-size:11px;letter-spacing:2px;color:rgba(243,238,238,0.45);text-transform:uppercase;font-family:Arial,sans-serif;">Reserva cancelada</p>
+                    <p style="margin:0;font-family:Georgia,serif;font-size:26px;color:#f3eeee;font-weight:400;">Hola, ${apt.name}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Message -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:24px 32px 0 32px;">
+                    <p style="margin:0;font-family:Arial,sans-serif;font-size:15px;color:rgba(243,238,238,0.75);line-height:1.7;">
+                      Lamentamos informarte que tu reserva ha sido cancelada. Si crees que es un error o deseas hacer una nueva reserva, no dudes en contactarnos.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Details Grid -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:24px 32px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" style="background:rgba(0,0,0,0.35);border-radius:10px;overflow:hidden;">
+                      <tr>
+                        <td width="50%" style="padding:18px 20px;border-bottom:1px solid rgba(243,238,238,0.08);border-right:1px solid rgba(243,238,238,0.08);">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Fecha</p>
+                          <p style="margin:0;font-size:17px;color:rgba(243,238,238,0.5);font-family:Arial,sans-serif;font-weight:700;text-decoration:line-through;">${formattedDate}</p>
+                        </td>
+                        <td width="50%" style="padding:18px 20px;border-bottom:1px solid rgba(243,238,238,0.08);">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Hora</p>
+                          <p style="margin:0;font-size:17px;color:rgba(243,238,238,0.5);font-family:Arial,sans-serif;font-weight:700;text-decoration:line-through;">${apt.time}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="50%" style="padding:18px 20px;">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Personas</p>
+                          <p style="margin:0;font-size:17px;color:rgba(243,238,238,0.5);font-family:Arial,sans-serif;font-weight:700;">${apt.guests}</p>
+                        </td>
+                        <td width="50%" style="padding:18px 20px;">
+                          <p style="margin:0 0 4px 0;font-size:10px;letter-spacing:1.5px;color:rgba(243,238,238,0.4);text-transform:uppercase;font-family:Arial,sans-serif;">Estado</p>
+                          <p style="margin:0;font-size:17px;color:#ff6b6b;font-family:Arial,sans-serif;font-weight:700;">Cancelada</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA nueva reserva -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:0 32px 32px 32px;">
+                    <p style="margin:0 0 16px 0;font-size:13px;color:rgba(243,238,238,0.4);font-family:Arial,sans-serif;line-height:1.6;">
+                      Si deseas hacer una nueva reserva, visita nuestra web.
+                    </p>
+                    <a href="https://baconlove.es/es/citas"
+                       style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#333 0%,#1a1a1a 100%);border:1px solid rgba(243,238,238,0.2);color:#f3eeee;text-decoration:none;border-radius:8px;font-weight:700;font-size:14px;letter-spacing:0.3px;font-family:Arial,sans-serif;">
+                      Hacer nueva reserva
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:28px 0 0 0;text-align:center;">
+              <p style="margin:0;font-size:12px;color:rgba(243,238,238,0.25);font-family:Arial,sans-serif;letter-spacing:1px;">BACON LOVE · Este correo fue generado automáticamente</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+// ─── Public API: status update ────────────────────────────────────────────────
+
+export async function sendStatusUpdateEmail(apt: {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  guests: number;
+}, status: 'confirmed' | 'cancelled'): Promise<void> {
+  const transporter = createTransporter();
+  if (!transporter) return;
+
+  const from = import.meta.env.GMAIL_USER;
+
+  if (status === 'confirmed') {
+    await safeSend({
+      from: `Bacon Love <${from}>`,
+      to: apt.email,
+      subject: `Tu reserva ha sido confirmada — ${apt.date}`,
+      html: statusConfirmedTemplate(apt),
+    }, transporter, `status confirmed to ${apt.email}`);
+  } else if (status === 'cancelled') {
+    await safeSend({
+      from: `Bacon Love <${from}>`,
+      to: apt.email,
+      subject: `Tu reserva ha sido cancelada — ${apt.date}`,
+      html: statusCancelledTemplate(apt),
+    }, transporter, `status cancelled to ${apt.email}`);
+  }
+}

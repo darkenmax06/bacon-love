@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { prisma } from '../../../lib/prisma';
 import { requireAuth } from '../../../lib/middleware';
+import { sendStatusUpdateEmail } from '../../../lib/email';
 
 // GET - Obtener una reserva específica
 export const GET: APIRoute = async ({ params, cookies }) => {
@@ -70,6 +71,26 @@ export const PATCH: APIRoute = async ({ params, request, cookies }) => {
       where: { id },
       data: body,
     });
+
+    // Send status-change email to the client (fire-and-forget)
+    const newStatus = body.status;
+    if (
+      (newStatus === 'confirmed' || newStatus === 'cancelled') &&
+      appointment.status !== newStatus
+    ) {
+      const dateStr = updatedAppointment.date.toISOString().split('T')[0];
+      sendStatusUpdateEmail(
+        {
+          name: updatedAppointment.name,
+          email: updatedAppointment.email,
+          phone: updatedAppointment.phone,
+          date: dateStr,
+          time: updatedAppointment.time,
+          guests: updatedAppointment.guests,
+        },
+        newStatus
+      ).catch(err => console.error('Error sending status update email:', err));
+    }
 
     return new Response(
       JSON.stringify({ appointment: updatedAppointment }),
