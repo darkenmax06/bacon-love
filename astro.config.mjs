@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://baconlove.es",
+  trailingSlash: 'always',
   output: 'server', // Para soportar API endpoints y SSR
   adapter: vercel(),
   integrations: [
