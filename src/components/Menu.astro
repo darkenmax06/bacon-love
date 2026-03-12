@@ -20,13 +20,15 @@ const currentLang = lang || Astro.params.lang || 'es';
 const getLink = (key) => {
   if (links && links[key]) return links[key];
   // Fallback to single-page anchors
-  const base = `/${currentLang}`;
-  if (key === 'home') return `${base}/#hero`;
-  if (key === 'about') return `${base}/#about`;
-  if (key === 'menu') return `${base}/#platillos`;
-  if (key === 'testimonials') return `${base}/#testimonials`;
-  if (key === 'appointments') return `${base}/citas`; // Or check lang for appointments slug
-  return `${base}/#`;
+  const base = `/${currentLang}/`;
+  if (key === 'home') return `${base}#hero`;
+  if (key === 'about') return `${base}#about`;
+  if (key === 'menu') return `${base}#platillos`;
+  if (key === 'testimonials') return `${base}#testimonials`;
+  if (key === 'appointments') {
+    return currentLang === 'es' ? `${base}citas/` : `${base}appointments/`;
+  }
+  return `${base}#`;
 }
 ---
 

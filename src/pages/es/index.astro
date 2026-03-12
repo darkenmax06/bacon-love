@@ -9,27 +9,24 @@ const content = es
 const languajes = ["es", "en"]
 
 const links = {
-  home: "/es",
-  about: "/es/nosotros",
-  menu: "/es/carta",
-  testimonials: "/es/nosotros#testimonials",
-  appointments: "/es/citas",
-  contact: "/es/contacto"
+  home: "/es/",
+  about: "/es/nosotros/",
+  menu: "/es/carta/",
+  testimonials: "/es/nosotros/#testimonials",
+  appointments: "/es/citas/",
+  contact: "/es/contacto/"
 }
 
-// Assuming alternateLinks needs to be defined for the Layout component.
-// The instruction did not provide its definition, so a placeholder is used.
-// Please define `alternateLinks` as needed, e.g.,
 const alternateLinks = {
-  en: "/en",
-  es: "/es"
+  en: "/en/",
+  es: "/es/"
 };
 const schema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "Bacon Love",
   "image": "https://baconlove.es/og.png",
-  "url": "https://baconlove.es/es",
+  "url": "https://baconlove.es/es/",
   "telephone": "+34677063060",
   "address": {
     "@type": "PostalAddress",
@@ -51,7 +48,7 @@ const schema = {
     "Mariscos"
   ],
   "priceRange": "€€",
-  "menu": "https://baconlove.es/es/carta",
+  "menu": "https://baconlove.es/es/carta/",
   "hasMap": "https://maps.google.com/maps?q=Bacon+Love+Calle+de+Sofía+177i+Madrid",
   "openingHoursSpecification": [
     {
@@ -73,7 +70,7 @@ const schema = {
       "closes": "23:00"
     }
   ],
-  "reservationUrl": "https://baconlove.es/es/citas",
+  "reservationUrl": "https://baconlove.es/es/citas/",
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Cash, Credit Card, Debit Card, NFC",
   "amenityFeature": [

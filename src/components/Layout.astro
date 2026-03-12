@@ -18,7 +18,24 @@ const {
 const baseUrl = "https://baconlove.es"
 const canonicalURL = new URL(Astro.url.pathname, baseUrl );
 
-const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
+const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
+
+    const getAlternatePath = (targetLang) => {
+      if (alternateLinks?.[targetLang]) return `https://baconlove.es${alternateLinks[targetLang]}`;
+      
+      let targetPath = path;
+      // Handle page-specific slug translation in fallback
+      if (path.includes('citas') && targetLang === 'en') targetPath = path.replace('citas', 'appointments');
+      if (path.includes('appointments') && targetLang === 'es') targetPath = path.replace('appointments', 'citas');
+      if (path.includes('carta') && targetLang === 'en') targetPath = path.replace('carta', 'menu');
+      if (path.includes('menu') && targetLang === 'es') targetPath = path.replace('menu', 'carta');
+      if (path.includes('nosotros') && targetLang === 'en') targetPath = path.replace('nosotros', 'about');
+      if (path.includes('about') && targetLang === 'es') targetPath = path.replace('about', 'nosotros');
+      if (path.includes('contacto') && targetLang === 'en') targetPath = path.replace('contacto', 'contact');
+      if (path.includes('contact') && targetLang === 'es') targetPath = path.replace('contact', 'contacto');
+
+      return `https://baconlove.es/${targetLang}${targetPath}`;
+    }
 ---
 
 <html lang={lang}>
@@ -33,9 +50,9 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '');
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index,follow" >
 
-    <link rel="alternate" hreflang="es" href={alternateLinks?.es ? `https://baconlove.es${alternateLinks.es}` : `${baseUrl}/es${path}`} />
-    <link rel="alternate" hreflang="en" href={alternateLinks?.en ? `https://baconlove.es${alternateLinks.en}` : `${baseUrl}/en${path}`} />
-    <link rel="alternate" hreflang="x-default" href={alternateLinks?.es ? `https://baconlove.es${alternateLinks.es}` : `${baseUrl}/es${path}`} />
+    <link rel="alternate" hreflang="es" href={getAlternatePath('es')} />
+    <link rel="alternate" hreflang="en" href={getAlternatePath('en')} />
+    <link rel="alternate" hreflang="x-default" href={getAlternatePath('es')} />
 
     <meta property="og:type" content="restaurant">
     <meta property="og:url" content={canonicalURL}>

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://baconlove.es/sitemap.xml
+Sitemap: https://baconlove.es/sitemap-index.xml
