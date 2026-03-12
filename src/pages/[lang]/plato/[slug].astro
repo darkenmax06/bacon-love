@@ -17,19 +17,18 @@ export async function getStaticPaths (){
 
   for (let i = 0; i< langs.length; i++){
     const currentLang = langs[i]
+    // Filter platos that belong to this language
+    const langPlatos = platos.filter(p => p.slug.endsWith(currentLang))
 
-    for (let j = 0; j < platos.length; j++){
-
-      const plato = platos[j]
-
+    for (let j = 0; j < langPlatos.length; j++){
+      const plato = langPlatos[j]
       const params = {lang: currentLang, slug: plato.slug}
       const props = {plato}
       arr.push({params,props})
     }
   }
 
-	return arr
-
+	return arr;
 }
 
 
