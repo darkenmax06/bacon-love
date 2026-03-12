@@ -2,7 +2,7 @@
 title: "Caesar Salad"
 type: "Salads"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.50
 
 ---

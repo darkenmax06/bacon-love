@@ -2,7 +2,7 @@
 title: "Mussels in Cava Broth"
 type: "Appetizers"
 img: "Mejillones-en-Jugo-de-Cava.webp"
-lang : "en"
+lang: "en"
 price: 12.95
 
 ---

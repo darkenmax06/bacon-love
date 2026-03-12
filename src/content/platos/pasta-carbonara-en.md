@@ -2,7 +2,7 @@
 title: "Pumpkin Carbonara Pasta"
 type: "Pastas"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 details: "(Pumpkin Carbonara)"
 

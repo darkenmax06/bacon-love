@@ -2,7 +2,7 @@
 title: "Picanha"
 type: "Grill and Roasts"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 17.00
 details: "(300g)"
 

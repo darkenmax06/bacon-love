@@ -2,7 +2,7 @@
 title: "Carpaccio de Pulpo"
 type: "Carpaccio"
 img: "Carpaccio-de-Pulpo.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

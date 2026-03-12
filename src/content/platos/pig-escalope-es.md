@@ -2,7 +2,7 @@
 title: "Escalope de Cerdo Gratinado"
 type: "Escalopes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.50
 
 ---

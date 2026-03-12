@@ -2,7 +2,7 @@
 title: "Granada"
 type: "Hamburguesas"
 img: "Granada.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

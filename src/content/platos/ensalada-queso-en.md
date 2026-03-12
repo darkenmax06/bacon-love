@@ -2,7 +2,7 @@
 title: "Goat Cheese Salad"
 type: "Salads"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

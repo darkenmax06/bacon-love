@@ -2,7 +2,7 @@
 title: "Mixed Grill"
 type: "Grill and Roasts"
 img: "Parrillada-Mixta.webp"
-lang : "en"
+lang: "en"
 price: 17.00
 details: "(Price per person)"
 

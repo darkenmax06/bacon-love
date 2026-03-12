@@ -2,7 +2,7 @@
 title: "Carbonara Beef Cachopo"
 type: "Escalopes"
 img: "Cachopo-de-Ternera-Carbonara.webp"
-lang : "en"
+lang: "en"
 price: 17.00
 
 ---

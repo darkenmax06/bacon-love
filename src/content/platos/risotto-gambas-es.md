@@ -2,7 +2,7 @@
 title: "Risotto de Gambas"
 type: "Risottos"
 img: "Risotto-de-Gambas.webp"
-lang : "es"
+lang: "es"
 price: 21.00
 
 ---

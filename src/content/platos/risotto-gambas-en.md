@@ -2,7 +2,7 @@
 title: "Prawn Risotto"
 type: "Risottos"
 img: "Risotto-de-Gambas.webp"
-lang : "en"
+lang: "en"
 price: 21.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Brownie Blanco con Helado a Elegir"
 type: "Postres"
 img: "Brownie-Blanco-con-Helado-a-Elegir.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

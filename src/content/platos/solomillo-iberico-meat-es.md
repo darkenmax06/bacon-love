@@ -2,7 +2,7 @@
 title: "Solomillo Ibérico"
 type: "Parrilla y Asados"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

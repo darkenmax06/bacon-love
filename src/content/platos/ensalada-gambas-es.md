@@ -2,7 +2,7 @@
 title: "Ensalada Gambas y Salmón Ahumado"
 type: "Ensaladas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

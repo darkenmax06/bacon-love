@@ -2,7 +2,7 @@
 title: "Chicken Fingers"
 type: "Appetizers"
 img: "Fingers-de-Pollo-al-Limón.webp"
-lang : "en"
+lang: "en"
 price: 9.95
 
 ---

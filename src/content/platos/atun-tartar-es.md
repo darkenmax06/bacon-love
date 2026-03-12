@@ -2,7 +2,7 @@
 title: "Tartar de Atún"
 type: "Tartar"
 img: "Tartar-de-Atún.webp"
-lang : "es"
+lang: "es"
 price: 19.00
 
 ---

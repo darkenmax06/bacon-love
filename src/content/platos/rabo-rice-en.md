@@ -2,7 +2,7 @@
 title: "Oxtail Rice"
 type: "Rice Dishes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 19.00
 details: "(Creamy or Dry)"
 

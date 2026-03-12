@@ -2,7 +2,7 @@
 title: "Battered Squid Rings"
 type: "Appetizers"
 img: "Calamar-a-la-Romana.webp"
-lang : "en"
+lang: "en"
 price: 8.95
 
 ---

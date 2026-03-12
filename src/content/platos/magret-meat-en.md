@@ -2,7 +2,7 @@
 title: "Duck Magret"
 type: "Grill and Roasts"
 img: "Magret-de-Pato.webp"
-lang : "en"
+lang: "en"
 price: 21.00
 
 ---

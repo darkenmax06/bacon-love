@@ -2,7 +2,7 @@
 title: "Black Rice"
 type: "Rice Dishes"
 img: "Arroz-Negro.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

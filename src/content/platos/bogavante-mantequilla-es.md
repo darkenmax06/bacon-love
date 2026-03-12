@@ -2,7 +2,7 @@
 title: "Bogavante a la Mantequilla"
 type: "Mariscos"
 img: "Bogavante-a-la-Mantequilla.webp"
-lang : "es"
+lang: "es"
 price: 24.00
 
 ---

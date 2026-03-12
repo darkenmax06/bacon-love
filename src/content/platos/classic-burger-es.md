@@ -2,7 +2,7 @@
 title: "Clásica Burger"
 type: "Hamburguesas"
 img: "Clásica-Burger.webp"
-lang : "es"
+lang: "es"
 price: 12.00
 
 ---

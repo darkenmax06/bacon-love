@@ -2,7 +2,7 @@
 title: "Ham, Cheese & Egg Sandwich"
 type: "Sandwiches"
 img: "Sándwich-Mixto-con-Huevo.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

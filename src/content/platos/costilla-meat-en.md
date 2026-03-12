@@ -2,7 +2,7 @@
 title: "Beef Ribs"
 type: "Grill and Roasts"
 img: "Costilla-de-Ternera.webp"
-lang : "en"
+lang: "en"
 price: 22.00
 
 ---

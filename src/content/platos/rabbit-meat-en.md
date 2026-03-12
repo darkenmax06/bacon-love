@@ -2,7 +2,7 @@
 title: "Rabbit with Potato Mille-feuille"
 type: "Grill and Roasts"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

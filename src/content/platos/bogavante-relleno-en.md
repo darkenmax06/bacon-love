@@ -2,7 +2,7 @@
 title: "Stuffed Lobster"
 type: "seafood"
 img: "Bogavante-Relleno.webp"
-lang : "en"
+lang: "en"
 price: 32.00
 
 ---

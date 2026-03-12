@@ -2,7 +2,7 @@
 title: "Burrata Salad"
 type: "Salads"
 img: "Ensalada-Burrata.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

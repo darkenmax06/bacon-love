@@ -2,7 +2,7 @@
 title: "Vegan Burger"
 type: "Burgers"
 img: "Vegana.webp"
-lang : "en"
+lang: "en"
 price: 12.50
 
 ---

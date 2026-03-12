@@ -2,7 +2,7 @@
 title: "Parrillada Mixta"
 type: "Parrilla y Asados"
 img: "Parrillada-Mixta.webp"
-lang : "es"
+lang: "es"
 price: 17.00
 details: "(Precio por persona)"
 

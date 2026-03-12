@@ -2,7 +2,7 @@
 title: "Ensalada Queso de Cabra"
 type: "Ensaladas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

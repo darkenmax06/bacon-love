@@ -2,7 +2,7 @@
 title: "Tartar de Salmón"
 type: "Tartar"
 img: "Tartar-de-Salmón.webp"
-lang : "es"
+lang: "es"
 price: 19.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Chicken and Rabbit Rice"
 type: "Rice Dishes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 17.00
 
 ---

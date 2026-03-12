@@ -2,7 +2,7 @@
 title: "Entraña"
 type: "Parrilla y Asados"
 img: "Entraña.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 details: "(300 gr.)"
 

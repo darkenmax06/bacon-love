@@ -2,7 +2,7 @@
 title: "Tuna Tartare"
 type: "Tartare"
 img: "Tartar-de-Atún.webp"
-lang : "en"
+lang: "en"
 price: 19.00
 
 ---

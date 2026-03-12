@@ -2,7 +2,7 @@
 title: "Almejas al Ajo Mojo"
 type: "Entrantes"
 img: "Almejas-al-Ajo-Mojo.webp"
-lang : "es"
+lang: "es"
 price: 12.95
 
 ---

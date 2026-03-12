@@ -2,7 +2,7 @@
 title: "Butter-Poached Lobster"
 type: "seafood"
 img: "Bogavante-a-la-Mantequilla.webp"
-lang : "en"
+lang: "en"
 price: 24.00
 
 ---

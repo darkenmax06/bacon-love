@@ -2,7 +2,7 @@
 title: "Chicken and Vegetable Rice"
 type: "Rice Dishes"
 img: "Arroz-de-Pollo-y-Verduras.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

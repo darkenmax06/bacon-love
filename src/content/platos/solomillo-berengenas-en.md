@@ -2,7 +2,7 @@
 title: "Roasted Eggplant 'Sirloin'"
 type: "Appetizers"
 img: "Solomillo-de-Berenjenas-Asadas.webp"
-lang : "en"
+lang: "en"
 price: 12.00
 
 ---

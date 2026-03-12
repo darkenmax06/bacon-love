@@ -2,7 +2,7 @@
 title: "Chuletilla Lechal"
 type: "Parrilla y Asados"
 img: "Chuletilla-Lechal.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

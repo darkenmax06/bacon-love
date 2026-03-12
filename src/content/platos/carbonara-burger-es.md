@@ -2,7 +2,7 @@
 title: "Carbonara"
 type: "Hamburguesas"
 img: "Carbonara.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

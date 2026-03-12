@@ -2,7 +2,7 @@
 title: "Vegetable Rice"
 type: "Rice Dishes"
 img: "Arroz-de-Verduras.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

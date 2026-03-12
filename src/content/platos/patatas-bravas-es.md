@@ -2,7 +2,7 @@
 title: "Patatas Bravas"
 type: "Entrantes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 7.95
 
 ---

@@ -2,7 +2,7 @@
 title: "Solomillo de Buey con Foie"
 type: "Parrilla y Asados"
 img: "Solomillo-de-Buey-con-Foie.webp"
-lang : "es"
+lang: "es"
 price: 29.00
 
 ---

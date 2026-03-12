@@ -2,7 +2,7 @@
 title: "Nachos"
 type: "Mexican Favorites"
 img: "Nachos.webp"
-lang : "en"
+lang: "en"
 price: 13.00
 
 ---

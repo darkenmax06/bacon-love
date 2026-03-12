@@ -2,7 +2,7 @@
 title: "Sepia Salteada"
 type: "Mariscos"
 img: "Sepia-Salteada.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

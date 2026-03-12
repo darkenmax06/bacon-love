@@ -2,7 +2,7 @@
 title: "Apple Pie"
 type: "Desserts"
 img: "Tarta-de-Manzana.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

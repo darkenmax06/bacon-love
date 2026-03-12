@@ -2,7 +2,7 @@
 title: "Alitas de Pollo"
 type: "Entrantes"
 img: "Alitas-de-Pollo.webp"
-lang : "es"
+lang: "es"
 price: 12.95
 details: "(Crujientes, BBQ o Picantes)"
 

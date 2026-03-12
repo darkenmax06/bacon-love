@@ -2,7 +2,7 @@
 title: "Octopus Carpaccio"
 type: "Carpaccio"
 img: "Carpaccio-de-Pulpo.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

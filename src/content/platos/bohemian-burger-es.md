@@ -2,7 +2,7 @@
 title: "La Bohemia"
 type: "Hamburguesas"
 img: "La-Bohemia.webp"
-lang : "es"
+lang: "es"
 price: 16.50
 
 ---

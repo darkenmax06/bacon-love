@@ -2,7 +2,7 @@
 title: "Chile Fried Egg"
 type: "Mexican Favorites"
 img: "Chile-Fríe-Egg.webp"
-lang : "en"
+lang: "en"
 price: 13.00
 
 ---

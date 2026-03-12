@@ -2,7 +2,7 @@
 title: "Pasta al Pesto"
 type: "Pastas"
 img: "Pasta-al-Pesto.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Full Cheese"
 type: "Burgers"
 img: "Full-Cheese.webp"
-lang : "en"
+lang: "en"
 price: 14.50
 
 ---

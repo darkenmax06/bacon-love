@@ -2,7 +2,7 @@
 title: "Fingers de Pollo"
 type: "Entrantes"
 img: "Fingers-de-Pollo-al-Limón.webp"
-lang : "es"
+lang: "es"
 price: 9.95
 
 ---

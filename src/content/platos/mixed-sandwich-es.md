@@ -2,7 +2,7 @@
 title: "Sándwich Mixto"
 type: "Sándwiches"
 img: "Sándwich-Mixto.webp"
-lang : "es"
+lang: "es"
 price: 4.50
 
 ---

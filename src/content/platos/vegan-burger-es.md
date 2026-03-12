@@ -2,7 +2,7 @@
 title: "Vegana"
 type: "Hamburguesas"
 img: "Vegana.webp"
-lang : "es"
+lang: "es"
 price: 12.50
 
 ---

@@ -2,7 +2,7 @@
 title: "Picaña"
 type: "Parrilla y Asados"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 17.00
 details: "(300 gr.)"
 

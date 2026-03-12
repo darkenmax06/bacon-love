@@ -2,7 +2,7 @@
 title: "Stuffed Sea Bream"
 type: "seafood"
 img: "dorada.webp"
-lang : "en"
+lang: "en"
 price: 25.00
 
 ---

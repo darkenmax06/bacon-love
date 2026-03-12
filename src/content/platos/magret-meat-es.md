@@ -2,7 +2,7 @@
 title: "Magret de Pato"
 type: "Parrilla y Asados"
 img: "Magret-de-Pato.webp"
-lang : "es"
+lang: "es"
 price: 21.00
 
 ---

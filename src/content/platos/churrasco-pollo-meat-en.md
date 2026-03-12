@@ -2,7 +2,7 @@
 title: "Chicken Churrasquito"
 type: "Grill and Roasts"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 13.50
 
 ---

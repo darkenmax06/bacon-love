@@ -2,7 +2,7 @@
 title: "Patatas Bravas"
 type: "Appetizer"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 7.95
 
 ---

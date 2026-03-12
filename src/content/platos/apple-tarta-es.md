@@ -2,7 +2,7 @@
 title: "Tarta de Manzana"
 type: "Postres"
 img: "Tarta-de-Manzana.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

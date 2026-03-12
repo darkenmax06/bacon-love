@@ -2,7 +2,7 @@
 title: "Braised Salmon"
 type: "seafood"
 img: "Salmón-Braseado.webp"
-lang : "en"
+lang: "en"
 price: 22.00
 
 ---

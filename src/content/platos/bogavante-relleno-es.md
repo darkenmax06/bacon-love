@@ -2,7 +2,7 @@
 title: "Bogavante Relleno"
 type: "Mariscos"
 img: "Bogavante-Relleno.webp"
-lang : "es"
+lang: "es"
 price: 32.00
 
 ---

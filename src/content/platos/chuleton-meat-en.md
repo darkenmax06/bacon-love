@@ -2,7 +2,7 @@
 title: "Dry-Aged Beef Ribeye"
 type: "Grill and Roasts"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 39.00
 details: "(1 kg)"
 

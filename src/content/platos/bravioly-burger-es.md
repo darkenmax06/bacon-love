@@ -2,7 +2,7 @@
 title: "Bravioly"
 type: "Hamburguesas"
 img: "Bravioly.webp"
-lang : "es"
+lang: "es"
 price: 14.95
 
 ---

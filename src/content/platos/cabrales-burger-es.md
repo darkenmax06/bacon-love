@@ -2,7 +2,7 @@
 title: "Cabrales"
 type: "Hamburguesas"
 img: "Cabrales.webp"
-lang : "es"
+lang: "es"
 price: 13.50
 
 ---

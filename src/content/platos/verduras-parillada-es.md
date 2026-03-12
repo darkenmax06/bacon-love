@@ -2,7 +2,7 @@
 title: "Parrillada de Verduras"
 type: "Parrilla y Asados"
 img: "Parrillada-de-Verduras.webp"
-lang : "es"
+lang: "es"
 price: 12.50
 
 ---

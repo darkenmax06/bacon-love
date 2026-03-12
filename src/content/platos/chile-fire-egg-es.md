@@ -2,7 +2,7 @@
 title: "Chile Fríe Egg"
 type: "Mexicanadas"
 img: "Chile-Fríe-Egg.webp"
-lang : "es"
+lang: "es"
 price: 13.00
 
 ---

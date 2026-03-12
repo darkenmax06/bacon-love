@@ -2,7 +2,7 @@
 title: "Arroz al Señoret"
 type: "Arroces"
 img: "Arroz-al-Señoret.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

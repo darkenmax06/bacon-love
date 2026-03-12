@@ -2,7 +2,7 @@
 title: "Iberian Rice"
 type: "Rice Dishes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

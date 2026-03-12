@@ -2,7 +2,7 @@
 title: "Arroz de Verduras"
 type: "Arroces"
 img: "Arroz-de-Verduras.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

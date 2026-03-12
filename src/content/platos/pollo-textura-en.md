@@ -2,7 +2,7 @@
 title: "Crispy and Roasted Chicken"
 type: "Chicken"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 9.50
 details: "From €9.50"
 

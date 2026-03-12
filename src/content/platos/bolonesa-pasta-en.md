@@ -2,7 +2,7 @@
 title: "Bolognese Pasta"
 type: "Pastas"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 12.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Tacos"
 type: "Mexicanadas"
 img: "Tacos.webp"
-lang : "es"
+lang: "es"
 price: 17.00
 details: "(3 unidades)"
 

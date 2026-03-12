@@ -2,7 +2,7 @@
 title: "Arroz de Secreto y Entraña"
 type: "Arroces"
 img: "Arroz-de-Secreto-y-Entraña.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 details: "(Meloso o Seco)"
 

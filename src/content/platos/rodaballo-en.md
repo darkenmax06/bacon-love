@@ -2,7 +2,7 @@
 title: "Grilled Turbot"
 type: "seafood"
 img: "Rodaballo-a-la-Brasa.webp"
-lang : "en"
+lang: "en"
 price: 25.00
 
 ---

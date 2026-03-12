@@ -2,7 +2,7 @@
 title: "Corvina a la Brasa"
 type: "Mariscos"
 img: "Corvina-a-la-Brasa.webp"
-lang : "es"
+lang: "es"
 price: 21.00
 
 ---

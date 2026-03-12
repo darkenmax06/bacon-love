@@ -2,7 +2,7 @@
 title: "Garlic Prawns"
 type: "seafood"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

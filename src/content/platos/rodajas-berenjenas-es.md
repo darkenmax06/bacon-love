@@ -2,7 +2,7 @@
 title: "Rodajas de Berenjenas"
 type: "Entrantes"
 img: "Rodajas-de-Berenjenas.webp"
-lang : "es"
+lang: "es"
 price: 8.95
 
 ---

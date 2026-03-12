@@ -2,7 +2,7 @@
 title: "Trufada"
 type: "Burgers"
 img: "Trufada.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

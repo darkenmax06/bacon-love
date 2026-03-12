@@ -2,7 +2,7 @@
 title: "Sautéed Cuttlefish"
 type: "seafood"
 img: "Sepia-Salteada.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

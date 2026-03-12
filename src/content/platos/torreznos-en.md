@@ -2,7 +2,7 @@
 title: "Homemade Torreznos"
 type: "Appetizers"
 img: "Torreznos-Caseros.webp"
-lang : "en"
+lang: "en"
 price: 13.50
 
 ---

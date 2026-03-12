@@ -2,7 +2,7 @@
 title: "Chuletón de Vaca Madurada"
 type: "Parrilla y Asados"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 39.00
 details: "(1 kg)"
 

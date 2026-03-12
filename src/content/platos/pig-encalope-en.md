@@ -2,7 +2,7 @@
 title: "Gratinated Pork Escalope"
 type: "Escalopes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.50
 
 ---

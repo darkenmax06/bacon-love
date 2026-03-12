@@ -2,7 +2,7 @@
 title: "Steak Tartare"
 type: "Tartare"
 img: "Steak-Tartar.webp"
-lang : "en"
+lang: "en"
 price: 18.50
 
 ---

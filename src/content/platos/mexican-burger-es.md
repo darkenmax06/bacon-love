@@ -2,7 +2,7 @@
 title: "Mexicana"
 type: "Hamburguesas"
 img: "Mexicana.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

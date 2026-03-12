@@ -2,7 +2,7 @@
 title: "Ensalada Ventresca"
 type: "Ensaladas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 13.00
 
 ---

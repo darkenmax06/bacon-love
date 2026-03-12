@@ -2,7 +2,7 @@
 title: "Brownie con Helado de Vainilla"
 type: "Postres"
 img: "Brownie-con-Helado-de-Vainilla.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

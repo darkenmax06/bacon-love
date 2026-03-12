@@ -2,7 +2,7 @@
 title: "Clams in Garlic Mojo"
 type: "Appetizers"
 img: "Almejas-al-Ajo-Mojo.webp"
-lang : "en"
+lang: "en"
 price: 12.95
 
 ---

@@ -2,7 +2,7 @@
 title: "Classic Burger"
 type: "Burgers"
 img: "Clásica-Burger.webp"
-lang : "en"
+lang: "en"
 price: 12.00
 
 ---

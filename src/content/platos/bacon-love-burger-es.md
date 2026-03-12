@@ -2,7 +2,7 @@
 title: "Bacon Love"
 type: "Hamburguesas"
 img: "Bacon-Love.webp"
-lang : "es"
+lang: "es"
 price: 20.00
 
 ---

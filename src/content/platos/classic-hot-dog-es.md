@@ -2,7 +2,7 @@
 title: "Hot Dog Clásico"
 type: "Hot Dogs"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 5.95
 
 ---

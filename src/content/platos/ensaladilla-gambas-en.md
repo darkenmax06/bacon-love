@@ -2,7 +2,7 @@
 title: "Prawn Salad"
 type: "Appetizer"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

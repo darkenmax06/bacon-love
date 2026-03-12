@@ -2,7 +2,7 @@
 title: "Prawn and Smoked Salmon Salad"
 type: "Salads"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Preñada"
 type: "Burgers"
 img: "Preñada.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

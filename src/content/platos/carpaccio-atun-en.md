@@ -2,7 +2,7 @@
 title: "Tuna Carpaccio"
 type: "Carpaccio"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Rabbit in Wine Sauce"
 type: "Stews and Braises"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

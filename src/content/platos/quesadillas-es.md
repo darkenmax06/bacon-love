@@ -2,7 +2,7 @@
 title: "Quesadillas"
 type: "Mexicanadas"
 img: "Quesadillas.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

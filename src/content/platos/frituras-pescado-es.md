@@ -2,7 +2,7 @@
 title: "Fritura de Pescado"
 type: "Entrantes"
 img: "Fritura-de-Pescado.webp"
-lang : "es"
+lang: "es"
 price: 13.50
 
 ---

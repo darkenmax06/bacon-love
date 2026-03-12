@@ -2,7 +2,7 @@
 title: "American Cheese Burger"
 type: "Hamburguesas"
 img: "American-Cheese-Burger.webp"
-lang : "es"
+lang: "es"
 price: 13.50
 
 ---

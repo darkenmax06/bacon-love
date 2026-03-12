@@ -2,7 +2,7 @@
 title: "Croquetas Caseras"
 type: "Entrantes"
 img: "Croquetas-Caseras.webp"
-lang : "es"
+lang: "es"
 price: 8.95
 details: "(Jamón, seafood o Rabo)"
 

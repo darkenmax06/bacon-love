@@ -2,7 +2,7 @@
 title: "Chori Burger"
 type: "Burgers"
 img: "Chori-Burger.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

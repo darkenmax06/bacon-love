@@ -2,7 +2,7 @@
 title: "Escalope de Pollo Gratinado"
 type: "Escalopes"
 img: "Escalope-de-Pollo-Gratinado.webp"
-lang : "es"
+lang: "es"
 price: 15.50
 
 ---

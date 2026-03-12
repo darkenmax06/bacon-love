@@ -2,7 +2,7 @@
 title: "Texana"
 type: "Hamburguesas"
 img: "Texana.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

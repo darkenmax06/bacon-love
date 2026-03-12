@@ -2,7 +2,7 @@
 title: "Triple Smash"
 type: "Burgers"
 img: "Triple-Smash.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

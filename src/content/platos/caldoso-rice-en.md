@@ -2,7 +2,7 @@
 title: "Creamy Lobster Rice"
 type: "Rice Dishes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 24.00
 
 ---

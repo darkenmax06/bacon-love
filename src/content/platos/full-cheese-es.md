@@ -2,7 +2,7 @@
 title: "Full Cheese"
 type: "Hamburguesas"
 img: "Full-Cheese.webp"
-lang : "es"
+lang: "es"
 price: 14.50
 
 ---

@@ -2,7 +2,7 @@
 title: "Calamar a la Romana"
 type: "Entrantes"
 img: "Calamar-a-la-Romana.webp"
-lang : "es"
+lang: "es"
 price: 8.95
 
 ---

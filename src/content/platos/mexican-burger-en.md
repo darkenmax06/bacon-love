@@ -2,7 +2,7 @@
 title: "Mexican Burger"
 type: "Burgers"
 img: "Mexicana.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

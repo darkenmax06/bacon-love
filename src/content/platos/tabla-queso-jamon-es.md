@@ -2,7 +2,7 @@
 title: "Tabla de Queso y Jamón"
 type: "Entrantes"
 img: "Tabla-de-Queso-y-Jamón.webp"
-lang : "es"
+lang: "es"
 price: 16.50
 
 ---

@@ -2,7 +2,7 @@
 title: "Ox Sirloin with Foie Gras"
 type: "Grill and Roasts"
 img: "Solomillo-de-Buey-con-Foie.webp"
-lang : "en"
+lang: "en"
 price: 29.00
 
 ---

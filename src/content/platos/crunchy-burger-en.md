@@ -2,7 +2,7 @@
 title: "La Cronchy"
 type: "Burgers"
 img: "La-Cronchy.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

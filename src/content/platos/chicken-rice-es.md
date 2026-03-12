@@ -2,7 +2,7 @@
 title: "Arroz de Pollo y Verduras"
 type: "Arroces"
 img: "Arroz-de-Pollo-y-Verduras.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

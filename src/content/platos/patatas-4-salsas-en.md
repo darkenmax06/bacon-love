@@ -2,7 +2,7 @@
 title: "4-Sauce Fries"
 type: "Appetizer"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 9.95
 
 ---

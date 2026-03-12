@@ -2,7 +2,7 @@
 title: "Arroz Negro"
 type: "Arroces"
 img: "Arroz-Negro.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

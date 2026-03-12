@@ -2,7 +2,7 @@
 title: "Chicken Meat"
 type: "Hamburguesas"
 img: "Chicken-Meat.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

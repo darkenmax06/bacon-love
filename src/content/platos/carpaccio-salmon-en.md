@@ -2,7 +2,7 @@
 title: "Salmon Carpaccio"
 type: "Carpaccio"
 img: "Carpaccio-de-Salmón.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

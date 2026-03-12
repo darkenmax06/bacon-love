@@ -2,7 +2,7 @@
 title: "Pasta de Setas y Trufas"
 type: "Pastas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Conejo al Vino"
 type: "Guisos y Estofados"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

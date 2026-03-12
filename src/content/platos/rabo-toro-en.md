@@ -2,7 +2,7 @@
 title: "Oxtail Stew"
 type: "Stews"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

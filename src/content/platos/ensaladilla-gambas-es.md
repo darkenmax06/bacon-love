@@ -2,7 +2,7 @@
 title: "Ensaladilla de Gambas"
 type: "Entrantes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

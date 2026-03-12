@@ -2,7 +2,7 @@
 title: "Ice Cream"
 type: "Desserts"
 img: "Helados.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

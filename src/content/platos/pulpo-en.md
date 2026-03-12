@@ -2,7 +2,7 @@
 title: "Grilled Octopus"
 type: "seafood"
 img: "Pulpo-a-la-Brasa.webp"
-lang : "en"
+lang: "en"
 price: 22.50
 
 ---

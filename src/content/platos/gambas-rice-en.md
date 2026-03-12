@@ -2,7 +2,7 @@
 title: "Prawn and Lobster Rice"
 type: "Rice Dishes"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 25.00
 
 ---

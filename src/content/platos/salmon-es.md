@@ -2,7 +2,7 @@
 title: "Salmón Braseado"
 type: "Mariscos"
 img: "Salmón-Braseado.webp"
-lang : "es"
+lang: "es"
 price: 22.00
 
 ---

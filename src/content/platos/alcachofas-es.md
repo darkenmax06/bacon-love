@@ -2,7 +2,7 @@
 title: "Alcachofas a la Brasa"
 type: "Entrantes"
 img: "Alcachofas-a-la-Brasa.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

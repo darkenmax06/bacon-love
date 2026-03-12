@@ -2,7 +2,7 @@
 title: "Big Hot Dog"
 type: "Hot Dogs"
 img: "Big-Hot-Dog.webp"
-lang : "en"
+lang: "en"
 price: 13.35
 
 ---

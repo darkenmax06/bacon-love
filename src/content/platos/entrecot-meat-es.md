@@ -2,7 +2,7 @@
 title: "Entrecot de Vaca Madurada"
 type: "Parrilla y Asados"
 img: "Entrecot-de-Vaca-Madurada.webp"
-lang : "es"
+lang: "es"
 price: 21.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Cheese Plate"
 type: "Burgers"
 img: "Cheese-Plate.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

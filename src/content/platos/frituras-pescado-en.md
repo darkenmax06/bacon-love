@@ -2,7 +2,7 @@
 title: "Fried Fish Platter"
 type: "Appetizers"
 img: "Fritura-de-Pescado.webp"
-lang : "en"
+lang: "en"
 price: 13.50
 
 ---

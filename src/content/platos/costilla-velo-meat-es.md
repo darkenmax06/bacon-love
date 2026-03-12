@@ -2,7 +2,7 @@
 title: "Costilla con Velo de Cheddar"
 type: "Parrilla y Asados"
 img: "Costilla-con-Velo-de-Cheddar.webp"
-lang : "es"
+lang: "es"
 price: 26.00
 
 ---

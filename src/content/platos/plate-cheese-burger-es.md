@@ -2,7 +2,7 @@
 title: "Cheese Plate"
 type: "Hamburguesas"
 img: "Cheese-Plate.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

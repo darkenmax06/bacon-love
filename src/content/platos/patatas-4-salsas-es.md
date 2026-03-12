@@ -2,7 +2,7 @@
 title: "Patatas 4 Salsas"
 type: "Entrantes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 9.95
 
 ---

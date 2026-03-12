@@ -2,7 +2,7 @@
 title: "Pulpo a la Brasa"
 type: "Mariscos"
 img: "Pulpo-a-la-Brasa.webp"
-lang : "es"
+lang: "es"
 price: 22.50
 
 ---

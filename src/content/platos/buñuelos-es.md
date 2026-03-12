@@ -2,7 +2,7 @@
 title: "Buñuelos de Bacalao"
 type: "Entrantes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 8.95
 
 ---

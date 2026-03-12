@@ -2,7 +2,7 @@
 title: "Costilla de Ternera"
 type: "Parrilla y Asados"
 img: "Costilla-de-Ternera.webp"
-lang : "es"
+lang: "es"
 price: 22.00
 
 ---

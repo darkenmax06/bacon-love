@@ -2,7 +2,7 @@
 title: "Mushroom and Truffle Risotto"
 type: "Risottos"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

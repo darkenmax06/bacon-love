@@ -2,7 +2,7 @@
 title: "Eggplant Slices"
 type: "Appetizers"
 img: "Rodajas-de-Berenjenas.webp"
-lang : "en"
+lang: "en"
 price: 8.95
 
 ---

@@ -2,7 +2,7 @@
 title: "Grilled Vegetable Platter"
 type: "Grill and Roasts"
 img: "Parrillada-de-Verduras.webp"
-lang : "en"
+lang: "en"
 price: 12.50
 
 ---

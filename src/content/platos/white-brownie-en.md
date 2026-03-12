@@ -2,7 +2,7 @@
 title: "White Brownie with Choice of Ice Cream"
 type: "Desserts"
 img: "Brownie-Blanco-con-Helado-a-Elegir.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

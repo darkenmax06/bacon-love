@@ -2,7 +2,7 @@
 title: "Costilla BBQ"
 type: "Parrilla y Asados"
 img: "Costilla-BBQ.webp"
-lang : "es"
+lang: "es"
 price: 22.00
 
 ---

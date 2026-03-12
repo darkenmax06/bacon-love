@@ -2,7 +2,7 @@
 title: "Ham and Cheese Sandwich"
 type: "Sandwiches"
 img: "Sándwich-Mixto.webp"
-lang : "en"
+lang: "en"
 price: 4.50
 
 ---

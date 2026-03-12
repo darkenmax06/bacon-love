@@ -2,7 +2,7 @@
 title: "Pulpo a la Gallega"
 type: "Mariscos"
 img: "Pulpo-a-la-Gallega.webp"
-lang : "es"
+lang: "es"
 price: 18.50
 
 ---

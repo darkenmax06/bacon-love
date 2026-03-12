@@ -2,7 +2,7 @@
 title: "Burritos"
 type: "Mexican Favorites"
 img: "Burritos.webp"
-lang : "en"
+lang: "en"
 price: 12.00
 
 ---

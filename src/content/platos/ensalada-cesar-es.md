@@ -2,7 +2,7 @@
 title: "Ensalada César"
 type: "Ensaladas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.50
 
 ---

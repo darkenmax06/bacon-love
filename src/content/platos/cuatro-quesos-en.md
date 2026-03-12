@@ -2,7 +2,7 @@
 title: "Four Cheese Pasta"
 type: "Pastas"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 13.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Suckling Lamb Chops"
 type: "Grill and Roasts"
 img: "Chuletilla-Lechal.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

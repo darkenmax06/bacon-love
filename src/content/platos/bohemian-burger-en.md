@@ -2,7 +2,7 @@
 title: "La Bohemia"
 type: "Burgers"
 img: "La-Bohemia.webp"
-lang : "en"
+lang: "en"
 price: 16.50
 
 ---

@@ -2,7 +2,7 @@
 title: "Arroz de Pollo y Conejo"
 type: "Arroces"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 17.00
 
 ---

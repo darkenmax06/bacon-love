@@ -2,7 +2,7 @@
 title: "Nachos"
 type: "Mexicanadas"
 img: "Nachos.webp"
-lang : "es"
+lang: "es"
 price: 13.00
 
 ---

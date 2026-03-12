@@ -2,7 +2,7 @@
 title: "Homemade Croquettes"
 type: "Appetizers"
 img: "Croquetas-Caseras.webp"
-lang : "en"
+lang: "en"
 price: 8.95
 details: "(Ham, Seafood, or Oxtail)"
 

@@ -2,7 +2,7 @@
 title: "Solomillo de Berenjenas Asadas"
 type: "Entrantes"
 img: "Solomillo-de-Berenjenas-Asadas.webp"
-lang : "es"
+lang: "es"
 price: 12.00
 
 ---

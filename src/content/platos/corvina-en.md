@@ -2,7 +2,7 @@
 title: "Grilled Sea Bass"
 type: "seafood"
 img: "Corvina-a-la-Brasa.webp"
-lang : "en"
+lang: "en"
 price: 21.00
 
 ---

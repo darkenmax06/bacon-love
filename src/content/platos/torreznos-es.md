@@ -2,7 +2,7 @@
 title: "Torreznos Caseros"
 type: "Entrantes"
 img: "Torreznos-Caseros.webp"
-lang : "es"
+lang: "es"
 price: 13.50
 
 ---

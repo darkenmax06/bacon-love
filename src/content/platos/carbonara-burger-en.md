@@ -2,7 +2,7 @@
 title: "Carbonara"
 type: "Burgers"
 img: "Carbonara.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

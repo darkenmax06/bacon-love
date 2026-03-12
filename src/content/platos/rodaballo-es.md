@@ -2,7 +2,7 @@
 title: "Rodaballo a la Brasa"
 type: "Mariscos"
 img: "Rodaballo-a-la-Brasa.webp"
-lang : "es"
+lang: "es"
 price: 25.00
 
 ---

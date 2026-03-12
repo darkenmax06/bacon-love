@@ -2,7 +2,7 @@
 title: "Pollo Crujiente y Asado"
 type: "Pollos"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 9.50
 details: "Desde 9,50€"
 

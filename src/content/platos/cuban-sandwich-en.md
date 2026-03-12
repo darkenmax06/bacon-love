@@ -2,7 +2,7 @@
 title: "Cuban Sandwich"
 type: "Sandwiches"
 img: "Sándwich-Cubano.webp"
-lang : "en"
+lang: "en"
 price: 13.50
 
 ---

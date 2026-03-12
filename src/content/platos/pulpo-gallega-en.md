@@ -2,7 +2,7 @@
 title: "Galician-Style Octopus"
 type: "seafood"
 img: "Pulpo-a-la-Gallega.webp"
-lang : "en"
+lang: "en"
 price: 18.50
 
 ---

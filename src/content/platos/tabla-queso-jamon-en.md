@@ -2,7 +2,7 @@
 title: "Cheese and Ham Board"
 type: "Appetizers"
 img: "Tabla-de-Queso-y-Jamón.webp"
-lang : "en"
+lang: "en"
 price: 16.50
 
 ---

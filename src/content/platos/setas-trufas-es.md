@@ -2,7 +2,7 @@
 title: "Risotto de Setas y Trufas"
 type: "Risottos"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

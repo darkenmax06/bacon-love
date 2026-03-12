@@ -2,7 +2,7 @@
 title: "Sándwich Mixto con Huevo"
 type: "Sándwiches"
 img: "Sándwich-Mixto-con-Huevo.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

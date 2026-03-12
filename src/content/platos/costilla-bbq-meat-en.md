@@ -2,7 +2,7 @@
 title: "BBQ Ribs"
 type: "Grill and Roasts"
 img: "Costilla-BBQ.webp"
-lang : "en"
+lang: "en"
 price: 22.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Chicken Meat"
 type: "Burgers"
 img: "Chicken-Meat.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Ribs with Cheddar Veil"
 type: "Grill and Roasts"
 img: "Costilla-con-Velo-de-Cheddar.webp"
-lang : "en"
+lang: "en"
 price: 26.00
 
 ---

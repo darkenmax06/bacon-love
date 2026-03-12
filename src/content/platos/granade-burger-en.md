@@ -2,7 +2,7 @@
 title: "Granada"
 type: "Burgers"
 img: "Granada.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

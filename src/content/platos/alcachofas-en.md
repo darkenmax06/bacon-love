@@ -2,7 +2,7 @@
 title: "Grilled Artichokes"
 type: "Appetizers"
 img: "Alcachofas-a-la-Brasa.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

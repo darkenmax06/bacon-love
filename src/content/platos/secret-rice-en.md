@@ -2,7 +2,7 @@
 title: "Secreto and Skirt Steak Rice"
 type: "Rice Dishes"
 img: "Arroz-de-Secreto-y-Entraña.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 details: "(Creamy or Dry)"
 

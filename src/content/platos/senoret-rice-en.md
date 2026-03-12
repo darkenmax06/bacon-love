@@ -2,7 +2,7 @@
 title: "Señoret Rice"
 type: "Rice Dishes"
 img: "Arroz-al-Señoret.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

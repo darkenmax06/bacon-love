@@ -2,7 +2,7 @@
 title: "Arroz Ibérico"
 type: "Arroces"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

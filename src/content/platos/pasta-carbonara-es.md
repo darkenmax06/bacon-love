@@ -2,7 +2,7 @@
 title: "Pasta a la Carbonara"
 type: "Pastas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 details: "(Carbonara de Calabaza)"
 

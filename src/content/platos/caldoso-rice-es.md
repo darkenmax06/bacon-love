@@ -2,7 +2,7 @@
 title: "Arroz Caldoso de Bogavantes"
 type: "Arroces"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 24.00
 
 ---

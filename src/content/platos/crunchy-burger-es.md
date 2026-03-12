@@ -2,7 +2,7 @@
 title: "La Cronchy"
 type: "Hamburguesas"
 img: "La-Cronchy.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

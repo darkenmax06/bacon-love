@@ -2,7 +2,7 @@
 title: "Chicken Wings"
 type: "Appetizers"
 img: "Alitas-de-Pollo.webp"
-lang : "en"
+lang: "en"
 price: 12.95
 details: "(Crispy, BBQ or Spicy)"
 

@@ -2,7 +2,7 @@
 title: "Quesadillas"
 type: "Mexican Favorites"
 img: "Quesadillas.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Cheesecake"
 type: "Desserts"
 img: "Tarta-de-Queso.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

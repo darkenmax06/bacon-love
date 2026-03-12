@@ -2,7 +2,7 @@
 title: "Tacos"
 type: "Mexican Favorites"
 img: "Tacos.webp"
-lang : "en"
+lang: "en"
 price: 17.00
 details: "(3 units)"
 

@@ -2,7 +2,7 @@
 title: "Garden Salad"
 type: "Salads"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 12.00
 
 ---

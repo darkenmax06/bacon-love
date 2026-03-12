@@ -2,7 +2,7 @@
 title: "Pasta a la Boloñesa"
 type: "Pastas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 12.00
 
 ---

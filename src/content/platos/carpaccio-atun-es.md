@@ -2,7 +2,7 @@
 title: "Carpaccio de Atún"
 type: "Carpaccio"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

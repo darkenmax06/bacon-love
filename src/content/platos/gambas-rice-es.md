@@ -2,7 +2,7 @@
 title: "Arroz de Gambas y Bogavante"
 type: "Arroces"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 25.00
 
 ---

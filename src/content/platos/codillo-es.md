@@ -2,7 +2,7 @@
 title: "Codillo a la Cerveza Negra"
 type: "Guisos y Estofados"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

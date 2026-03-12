@@ -2,7 +2,7 @@
 title: "Classic Hot Dog"
 type: "Hot Dogs"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 5.95
 
 ---

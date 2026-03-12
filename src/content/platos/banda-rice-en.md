@@ -2,7 +2,7 @@
 title: "Arroz a Banda"
 type: "Rice Dishes"
 img: "Arroz-a-Banda.webp"
-lang : "en"
+lang: "en"
 price: 18.00
 
 ---

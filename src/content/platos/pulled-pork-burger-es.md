@@ -2,7 +2,7 @@
 title: "Pulled Pork"
 type: "Hamburguesas"
 img: "Pulled-Pork.webp"
-lang : "es"
+lang: "es"
 price: 14.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Beef Carpaccio"
 type: "Carpaccio"
 img: "Carpaccio-de-Ternera.webp"
-lang : "en"
+lang: "en"
 price: 16.00
 
 ---

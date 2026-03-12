@@ -2,7 +2,7 @@
 title: "Langostinos en Tempura"
 type: "Entrantes"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 14.50
 
 ---

@@ -17,11 +17,9 @@ export async function getStaticPaths (){
 
   for (let i = 0; i< langs.length; i++){
     const currentLang = langs[i]
-    // Filter platos that belong to this language
-    const langPlatos = platos.filter(p => p.slug.endsWith(currentLang))
 
-    for (let j = 0; j < langPlatos.length; j++){
-      const plato = langPlatos[j]
+    for (let j = 0; j < platos.length; j++){
+      const plato = platos[j]
       const params = {lang: currentLang, slug: plato.slug}
       const props = {plato}
       arr.push({params,props})
@@ -36,12 +34,13 @@ const {plato} = Astro.props
 const currentLang = Astro.params.lang
 const {data: {lang,img,title}} = plato
 
-// if (currentLang !== lang) {
-//   const splittedName = plato.slug.split("-")
-//   splittedName.pop()
-//   const platoName = splittedName.join("-")
-//   return Astro.redirect(`/${currentLang}/plato/${platoName}-${currentLang}`, 302)
-// }
+if (currentLang !== lang) {
+  const splittedName = plato.slug.split("-")
+  splittedName.pop()
+  const baseName = splittedName.join("-")
+  // Redirect to the same dish in the current requested language
+  return Astro.redirect(`/${currentLang}/plato/${baseName}-${currentLang}/`, 301)
+}
 
 const {Content} = await render(plato)
 

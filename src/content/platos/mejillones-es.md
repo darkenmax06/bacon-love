@@ -2,7 +2,7 @@
 title: "Mejillones en Jugo de Cava"
 type: "Entrantes"
 img: "Mejillones-en-Jugo-de-Cava.webp"
-lang : "es"
+lang: "es"
 price: 12.95
 
 ---

@@ -2,7 +2,7 @@
 title: "Bravioly"
 type: "Burgers"
 img: "Bravioly.webp"
-lang : "en"
+lang: "en"
 price: 14.95
 
 ---

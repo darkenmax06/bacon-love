@@ -2,7 +2,7 @@
 title: "Cod Fritters"
 type: "Appetizer"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 8.95
 
 ---

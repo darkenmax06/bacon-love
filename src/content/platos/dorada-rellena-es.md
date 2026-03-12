@@ -2,7 +2,7 @@
 title: "Dorada Rellena"
 type: "Mariscos"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 25.00
 
 ---

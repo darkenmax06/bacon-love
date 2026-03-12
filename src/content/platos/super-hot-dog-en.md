@@ -2,7 +2,7 @@
 title: "Super Hot Dog"
 type: "Hot Dogs"
 img: "Super-Hot-Dog.webp"
-lang : "es"
+lang: "es"
 price: 11.95
 
 ---

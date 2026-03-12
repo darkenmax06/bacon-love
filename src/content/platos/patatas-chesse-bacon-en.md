@@ -2,7 +2,7 @@
 title: "Cheese Bacon Fries"
 type: "Appetizer"
 img: "cheese-bacon-fries.webp"
-lang : "en"
+lang: "en"
 price: 11.95
 
 ---

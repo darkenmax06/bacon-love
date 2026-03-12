@@ -2,7 +2,7 @@
 title: "Patatas Cheese Bacon"
 type: "Entrantes"
 img: "patatas-cheese-bacon.webp"
-lang : "es"
+lang: "es"
 price: 11.95
 
 ---

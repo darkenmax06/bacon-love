@@ -2,7 +2,7 @@
 title: "Pulled Pork"
 type: "Burgers"
 img: "Pulled-Pork.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---

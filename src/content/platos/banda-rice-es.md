@@ -2,7 +2,7 @@
 title: "Arroz a Banda"
 type: "Arroces"
 img: "Arroz-a-Banda.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Carpaccio de Ternera"
 type: "Carpaccio"
 img: "Carpaccio-de-Ternera.webp"
-lang : "es"
+lang: "es"
 price: 16.00
 
 ---

@@ -2,7 +2,7 @@
 title: "Pasta a la Marinera"
 type: "Pastas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 15.00
 
 ---

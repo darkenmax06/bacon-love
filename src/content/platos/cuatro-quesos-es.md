@@ -2,7 +2,7 @@
 title: "Pasta Cuatro Quesos"
 type: "Pastas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 13.00
 
 ---

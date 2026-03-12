@@ -2,7 +2,7 @@
 title: "Confit Cod"
 type: "seafood"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 21.00
 
 ---

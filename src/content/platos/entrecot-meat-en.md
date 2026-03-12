@@ -2,7 +2,7 @@
 title: "Dry-Aged Beef Entrecôte"
 type: "Grill and Roasts"
 img: "Entrecot-de-Vaca-Madurada.webp"
-lang : "en"
+lang: "en"
 price: 21.00
 
 ---

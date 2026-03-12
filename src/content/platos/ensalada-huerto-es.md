@@ -2,7 +2,7 @@
 title: "Ensalada Del Huerto"
 type: "Ensaladas"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 12.00
 
 ---

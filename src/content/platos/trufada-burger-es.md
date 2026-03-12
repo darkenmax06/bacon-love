@@ -2,7 +2,7 @@
 title: "Trufada"
 type: "Hamburguesas"
 img: "Trufada.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

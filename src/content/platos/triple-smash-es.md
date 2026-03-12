@@ -2,7 +2,7 @@
 title: "Triple Smash"
 type: "Hamburguesas"
 img: "Triple-Smash.webp"
-lang : "es"
+lang: "es"
 price: 18.00
 
 ---

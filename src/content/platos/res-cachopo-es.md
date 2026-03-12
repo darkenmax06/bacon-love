@@ -2,7 +2,7 @@
 title: "Cachopo de Ternera Carbonara"
 type: "Escalopes"
 img: "Cachopo-de-Ternera-Carbonara.webp"
-lang : "es"
+lang: "es"
 price: 17.00
 
 ---

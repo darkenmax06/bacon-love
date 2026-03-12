@@ -2,7 +2,7 @@
 title: "Tarta de Queso"
 type: "Postres"
 img: "Tarta-de-Queso.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

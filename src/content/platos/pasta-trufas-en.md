@@ -2,7 +2,7 @@
 title: "Mushroom and Truffle Pasta"
 type: "Pastas"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

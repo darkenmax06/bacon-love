@@ -2,7 +2,7 @@
 title: "Helados"
 type: "Postres"
 img: "Helados.webp"
-lang : "es"
+lang: "es"
 price: 7.50
 
 ---

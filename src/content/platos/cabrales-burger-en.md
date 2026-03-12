@@ -2,7 +2,7 @@
 title: "Cabrales"
 type: "Burgers"
 img: "Cabrales.webp"
-lang : "en"
+lang: "en"
 price: 13.50
 
 ---

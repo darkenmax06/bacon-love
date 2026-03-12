@@ -2,7 +2,7 @@
 title: "Brownie with Vanilla Ice Cream"
 type: "Desserts"
 img: "Brownie-con-Helado-de-Vainilla.webp"
-lang : "en"
+lang: "en"
 price: 7.50
 
 ---

@@ -2,7 +2,7 @@
 title: "Skirt Steak"
 type: "Grill and Roasts"
 img: "Entraña.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 details: "(300g)"
 

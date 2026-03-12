@@ -2,7 +2,7 @@
 title: "Arroz de Rabo de Toro"
 type: "Arroces"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 19.00
 details: "(Meloso o Seco)"
 

@@ -2,7 +2,7 @@
 title: "Smash Burger"
 type: "Burgers"
 img: "Smash-Burger.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

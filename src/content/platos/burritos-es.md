@@ -2,7 +2,7 @@
 title: "Burritos"
 type: "Mexicanadas"
 img: "Burritos.webp"
-lang : "es"
+lang: "es"
 price: 12.00
 
 ---

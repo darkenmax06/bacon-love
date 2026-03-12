@@ -2,7 +2,7 @@
 title: "Beef Cheek"
 type: "Stews and Braises"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 15.00
 
 ---

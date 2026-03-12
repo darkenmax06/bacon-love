@@ -2,7 +2,7 @@
 title: "Tempura Prawns"
 type: "Appetizer"
 img: "default.webp"
-lang : "en"
+lang: "en"
 price: 14.50
 
 ---

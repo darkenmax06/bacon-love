@@ -2,7 +2,7 @@
 title: "Bacalao Confitado"
 type: "Mariscos"
 img: "default.webp"
-lang : "es"
+lang: "es"
 price: 21.00
 
 ---

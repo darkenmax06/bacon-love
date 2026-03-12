@@ -2,7 +2,7 @@
 title: "Texana"
 type: "Burgers"
 img: "Texana.webp"
-lang : "en"
+lang: "en"
 price: 14.00
 
 ---
