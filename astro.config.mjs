@@ -31,6 +31,15 @@ export default defineConfig({
         if (item.url === "https://baconlove.es/en/about/") return { ...item, priority: 0.3 };
         if (item.url === "https://baconlove.es/en/contact/") return { ...item, priority: 0.3 };
         if (item.url === "https://baconlove.es/en/appointments/") return { ...item, priority: 0.3 };
+        // Filter out redirecting plato URLs from sitemap
+        if (item.url.includes('/plato/')) {
+          const parts = item.url.split('/');
+          const lang = parts[3];
+          const slug = parts[5];
+          if (lang === 'en' && slug.endsWith('-es')) return undefined;
+          if (lang === 'es' && slug.endsWith('-en')) return undefined;
+        }
+
         return item;
       },
     }),
@@ -48,5 +57,13 @@ export default defineConfig({
     '/es/appointments': '/es/citas/',
     '/en/citas/': '/en/appointments/',
     '/es/appointments/': '/es/citas/',
+    '/en/plato/chicken-encalope-en': '/en/plato/chicken-escalope-en/',
+    '/en/plato/chicken-encalope-en/': '/en/plato/chicken-escalope-en/',
+    '/es/plato/chicken-encalope-en': '/en/plato/chicken-escalope-en/',
+    '/es/plato/chicken-encalope-en/': '/en/plato/chicken-escalope-en/',
+    '/en/plato/pig-encalope-en': '/en/plato/pig-escalope-en/',
+    '/en/plato/pig-encalope-en/': '/en/plato/pig-escalope-en/',
+    '/es/plato/pig-encalope-en': '/en/plato/pig-escalope-en/',
+    '/es/plato/pig-encalope-en/': '/en/plato/pig-escalope-en/',
   },
 });

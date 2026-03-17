@@ -111,10 +111,10 @@ export default {
     quickLinks: {
       title: "Enlaces",
       items: [
-        { label: "Inicio", url: "/es" },
-        { label: "Carta", url: "/es/carta" },
-        { label: "Nosotros", url: "/es/nosotros" },
-        { label: "Contacto", url: "/es/contacto" }
+        { label: "Inicio", url: "/es/" },
+        { label: "Carta", url: "/es/carta/" },
+        { label: "Nosotros", url: "/es/nosotros/" },
+        { label: "Contacto", url: "/es/contacto/" }
       ]
     },
     rights: "Bacon Love © 2025 | Todos los derechos reservados"

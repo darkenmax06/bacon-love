@@ -11,12 +11,14 @@ const {
   description = "Somos un restaurante emergente que fusiona la alta cocina con platos cotidianos. Descubre una experiencia gastronómica artesanal única.",
   lang = "es", // Recibimos el idioma por prop o lo detectamos
   links, // Receives the navigation links object
-  alternateLinks // { es: "/es/...", en: "/en/..." }
+  alternateLinks, // { es: "/es/...", en: "/en/..." }
+  robots = "index,follow",
+  canonical // Optional canonical override
 } = Astro.props
 
 // Generamos la URL canonical dinámica
 const baseUrl = "https://baconlove.es"
-const canonicalURL = new URL(Astro.url.pathname, baseUrl );
+const canonicalURL = canonical || new URL(Astro.url.pathname, baseUrl );
 
 const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
 
@@ -48,7 +50,7 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
     <title>{title}</title>
     <meta name="description" content={description} >
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="index,follow" >
+    <meta name="robots" content={robots} >
 
     <link rel="alternate" hreflang="es" href={getAlternatePath('es')} />
     <link rel="alternate" hreflang="en" href={getAlternatePath('en')} />

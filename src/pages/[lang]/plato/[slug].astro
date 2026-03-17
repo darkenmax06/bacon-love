@@ -34,13 +34,20 @@ const {plato} = Astro.props
 const currentLang = Astro.params.lang
 const {data: {lang,img,title}} = plato
 
+const splittedName = plato.slug.split("-")
+splittedName.pop()
+const baseName = splittedName.join("-")
+
 if (currentLang !== lang) {
-  const splittedName = plato.slug.split("-")
-  splittedName.pop()
-  const baseName = splittedName.join("-")
-  // Redirect to the same dish in the current requested language
   return Astro.redirect(`/${currentLang}/plato/${baseName}-${currentLang}/`, 301)
 }
+
+const alternateLinks = {
+  es: `/es/plato/${baseName}-es/`,
+  en: `/en/plato/${baseName}-en/`
+}
+
+const isMismatch = currentLang !== lang;
 
 const {Content} = await render(plato)
 
@@ -50,7 +57,15 @@ const content = translations[lang]
 const languajes = Object.keys(translations)
 ---
 
-<Layout languajes={languajes} {...content.footer} title={title}  {...content.menu}>
+<Layout 
+  languajes={languajes} 
+  {...content.footer} 
+  title={title}  
+  {...content.menu} 
+  alternateLinks={alternateLinks}
+  robots={isMismatch ? "noindex, follow" : "index, follow"}
+  canonical={isMismatch ? `https://baconlove.es/${currentLang}/plato/${baseName}-${currentLang}/` : undefined}
+>
   <section class="plato">
     <div class="plato__price">
      EUR {plato.data.price} €
