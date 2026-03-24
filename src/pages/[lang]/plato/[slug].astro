@@ -1,6 +1,4 @@
 ---
-export const prerender = true;
-
 import { getCollection, render } from 'astro:content';
 import Layout from '../../../components/Layout.astro';
 import "./plato.css"
@@ -8,38 +6,24 @@ import "./plato.css"
 import es from "../../../translations/es"
 import en from "../../../translations/en"
 
-export async function getStaticPaths (){
-  const langs = ["es","en"]
-  const platos = await getCollection("platos")
+const { lang, slug } = Astro.params;
+const currentLang = lang as string;
 
+const platos = await getCollection("platos");
+const plato = platos.find(p => p.slug === slug);
 
-  let arr = []
-
-  for (let i = 0; i< langs.length; i++){
-    const currentLang = langs[i]
-
-    for (let j = 0; j < platos.length; j++){
-      const plato = platos[j]
-      const params = {lang: currentLang, slug: plato.slug}
-      const props = {plato}
-      arr.push({params,props})
-    }
-  }
-
-	return arr;
+if (!plato) {
+  return Astro.redirect('/404');
 }
 
+const {data: {lang: platoLang, img, title}} = plato;
 
-const {plato} = Astro.props
-const currentLang = Astro.params.lang
-const {data: {lang,img,title}} = plato
+const splittedName = plato.slug.split("-");
+splittedName.pop();
+const baseName = splittedName.join("-");
 
-const splittedName = plato.slug.split("-")
-splittedName.pop()
-const baseName = splittedName.join("-")
-
-if (currentLang !== lang) {
-  return Astro.redirect(`/${currentLang}/plato/${baseName}-${currentLang}/`, 301)
+if (currentLang !== platoLang) {
+  return Astro.redirect(`/${currentLang}/plato/${baseName}-${currentLang}/`, 301);
 }
 
 const alternateLinks = {
@@ -47,24 +31,21 @@ const alternateLinks = {
   en: `/en/plato/${baseName}-en/`
 }
 
-const isMismatch = currentLang !== lang;
-
 const {Content} = await render(plato)
 
-const translations = {en,es}
-const content = translations[lang]
+const translations = {en, es}
+const content = translations[platoLang as keyof typeof translations]
 
 const languajes = Object.keys(translations)
 ---
 
-<Layout 
-  languajes={languajes} 
-  {...content.footer} 
-  title={title}  
-  {...content.menu} 
+<Layout
+  languajes={languajes}
+  {...content.footer}
+  title={title}
+  {...content.menu}
   alternateLinks={alternateLinks}
-  robots={isMismatch ? "noindex, follow" : "index, follow"}
-  canonical={isMismatch ? `https://baconlove.es/${currentLang}/plato/${baseName}-${currentLang}/` : undefined}
+  robots="index, follow"
 >
   <section class="plato">
     <div class="plato__price">
