@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /c/Users/admin/Apps/baconlove/bacon-love/src/pages/[lang]/)",
+      "Bash(grep \"\\\\-es$\")"
+    ]
+  }
+}

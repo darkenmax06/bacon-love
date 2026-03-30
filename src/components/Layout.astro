@@ -13,7 +13,8 @@ const {
   links, // Receives the navigation links object
   alternateLinks, // { es: "/es/...", en: "/en/..." }
   robots = "index,follow",
-  canonical // Optional canonical override
+  canonical, // Optional canonical override
+  jsonLd // Optional JSON-LD structured data string
 } = Astro.props
 
 // Generamos la URL canonical dinámica
@@ -70,6 +71,8 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
     <meta property="twitter:description" content={description}>
     <meta property="twitter:image" content="https://baconlove.es/og.png">
 
+    <slot name="head" />
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
     <Menu languajes={languajes} home={home} about={about} testimonials={testimonials} menu={menu} appointments={appointments} orderLink={orderLink} links={links} lang={lang} alternateLinks={alternateLinks} />

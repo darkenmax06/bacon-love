@@ -16,7 +16,7 @@ if (!plato) {
   return Astro.redirect('/404');
 }
 
-const {data: {lang: platoLang, img, title}} = plato;
+const {data: {lang: platoLang, img, title, price, type}} = plato;
 
 const splittedName = plato.slug.split("-");
 splittedName.pop();
@@ -37,15 +37,85 @@ const translations = {en, es}
 const content = translations[platoLang as keyof typeof translations]
 
 const languajes = Object.keys(translations)
+
+const baseUrl = "https://baconlove.es";
+const pageUrl = `${baseUrl}/${platoLang}/plato/${slug}/`;
+const imageUrl = `${baseUrl}/content/${img}`;
+
+const menuSectionLabel = platoLang === "es" ? "Carta" : "Menu";
+const menuPageUrl = platoLang === "es" ? `${baseUrl}/es/carta/` : `${baseUrl}/en/menu/`;
+const restaurantName = "Bacon Love";
+const restaurantUrl = platoLang === "es" ? `${baseUrl}/es/` : `${baseUrl}/en/`;
+
+const seoDescription = platoLang === "es"
+  ? `${title} - ${type} artesanal en Bacon Love, hamburguesería en San Blas-Canillejas, Madrid. Precio: ${price}€.`
+  : `${title} - Artisan ${type} at Bacon Love, burger restaurant in San Blas-Canillejas, Madrid. Price: €${price}.`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MenuItem",
+      "@id": pageUrl,
+      "name": title,
+      "url": pageUrl,
+      "image": imageUrl,
+      "offers": {
+        "@type": "Offer",
+        "price": price,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      },
+      "suitableForDiet": "https://schema.org/GlutenFreeDiet",
+      "menuAddOn": [],
+      "inMenu": {
+        "@type": "Menu",
+        "name": menuSectionLabel,
+        "url": menuPageUrl
+      },
+      "hasMenuSection": {
+        "@type": "MenuSection",
+        "name": type
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": restaurantName,
+          "item": restaurantUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": menuSectionLabel,
+          "item": menuPageUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": title,
+          "item": pageUrl
+        }
+      ]
+    }
+  ]
+};
+const jsonLdString = JSON.stringify(jsonLd);
 ---
 
 <Layout
   languajes={languajes}
   {...content.footer}
-  title={title}
+  title={`${title} | Bacon Love`}
+  description={seoDescription}
+  lang={platoLang}
   {...content.menu}
   alternateLinks={alternateLinks}
   robots="index, follow"
+  jsonLd={jsonLdString}
 >
   <section class="plato">
     <div class="plato__price">
