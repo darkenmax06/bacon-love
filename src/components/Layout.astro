@@ -43,6 +43,13 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
 
 <html lang={lang}>
   <head>
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVFXR6KT');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="google-site-verification" content="WvUW7Ealv0_Rn8c9YND0br__baaWpClH9qji_lSo5lo" />
     <link rel="icon" type="image/svg+xml" href="/a.png" />
@@ -75,6 +82,10 @@ const path = Astro.url.pathname.replace(/^\/(es|en)/, '') || '/';
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVFXR6KT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <Menu languajes={languajes} home={home} about={about} testimonials={testimonials} menu={menu} appointments={appointments} orderLink={orderLink} links={links} lang={lang} alternateLinks={alternateLinks} />
     <main>
       <slot/>
