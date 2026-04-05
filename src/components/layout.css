@@ -112,3 +112,86 @@ textarea{
     font-size: 1rem;
     transition: border-color 0.3s, background-color 0.3s;
 }
+
+/* Sticky Directions Top Bar */
+.sticky-directions {
+  position: sticky;
+  top: 0;
+  background-color: #ffd700;
+  color: #191818;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  z-index: 1001; /* Above Menu */
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+.sticky-directions svg {
+  fill: none;
+  stroke: #191818;
+}
+.sticky-directions:hover {
+  background-color: #e6c200;
+}
+
+/* Floating WhatsApp Button (Left) */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background-color: #25D366;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+  z-index: 1000;
+}
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+}
+
+/* Floating Call Button (Right) */
+.floating-call {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--white);
+  color: var(--black);
+  height: 60px;
+  padding: 0 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+  font-weight: 700;
+  z-index: 1000;
+}
+.floating-call svg {
+  stroke: var(--black);
+  fill: none;
+}
+.floating-call:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .floating-call span {
+    display: none; /* Only show icon on mobile */
+  }
+  .floating-call {
+    width: 60px;
+    padding: 0;
+  }
+}

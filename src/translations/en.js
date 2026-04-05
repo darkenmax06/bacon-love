@@ -17,6 +17,11 @@ export default {
     name: "Raul Doñe",
     subtitle: `Artisanal is our secret`,
     button: `View Menu`,
+    button2: `Call Us`,
+  },
+  ctas: {
+    directions: "Get Directions",
+    callNow: "Call Now",
   },
   about: {
     subtitle: "About Us",

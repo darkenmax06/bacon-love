@@ -18,6 +18,11 @@ export default {
     name: "Raul doñe",
     subtitle: `Lo artesanal es nuestro secreto`,
     button: `Ver carta`,
+    button2: `Llámanos`,
+  },
+  ctas: {
+    directions: "Cómo llegar",
+    callNow: "Llamar ahora",
   },
   about: {
     subtitle: "Sobre nosotros",

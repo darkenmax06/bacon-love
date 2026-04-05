@@ -70,12 +70,38 @@
 }
 
 
-.hero__btn{
+.hero__buttons {
+  display: flex;
+  gap: 16px;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+
+.hero__btn {
   padding: 16px 32px;
   background-color: var(--white);
   border-radius: 8px;
-  align-self: flex-start;
   color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.hero__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.hero__btn--outline {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 14px 30px; /* Adjust for border */
+}
+
+.hero__btn--outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
 }
 
 @media (width <= 800px) {
@@ -87,8 +113,13 @@
     order: 2;
   }
 
-  .hero__btn{
+  .hero__buttons {
     align-self: stretch;
+    flex-direction: column;
+  }
+
+  .hero__btn {
+    width: 100%;
     text-align: center;
   }
 }

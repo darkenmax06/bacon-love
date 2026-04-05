@@ -1,6 +1,6 @@
 ---
 import './hero.css'
-const {subtitle,title1,title2,text1,text2,name, button} = Astro.props
+const {subtitle,title1,title2,text1,text2,name, button, button2} = Astro.props
 ---
 
 
@@ -15,7 +15,10 @@ const {subtitle,title1,title2,text1,text2,name, button} = Astro.props
         </h1>
       </div>
       <p>{text1} <span>{name}</span> {text2}</p>
-      <a class="hero__btn" role="button"  href="#platillos"> {button} </a>
+      <div class="hero__buttons">
+        <a class="hero__btn" role="button" href="#platillos"> {button} </a>
+        {button2 && <a class="hero__btn hero__btn--outline" role="button" href="tel:+34677063060"> {button2} </a>}
+      </div>
     </div>
 
      <picture class="hero__imgbox">
