@@ -3,6 +3,15 @@ import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 
+import fs from 'node:fs';
+
+const platosFiles = fs.readdirSync('./src/content/platos').filter(file => file.endsWith('.md'));
+const platoUrls = platosFiles.map(file => {
+  const slug = file.replace('.md', '');
+  const lang = slug.endsWith('-en') ? 'en' : 'es';
+  return `https://baconlove.es/${lang}/plato/${slug}/`;
+});
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://baconlove.es",
@@ -16,6 +25,7 @@ export default defineConfig({
       customPages: [
         "https://baconlove.es/es/citas/",
         "https://baconlove.es/en/appointments/",
+        ...platoUrls
       ],
       // Priority mapping for all routes
       serialize(item) {
